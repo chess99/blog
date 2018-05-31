@@ -1,0 +1,23 @@
+language: node_js
+node_js: stable
+
+before_install:
+- npm install -g hexo-cli
+
+install: 
+- npm install
+
+script: 
+- hexo clean
+- hexo generate
+
+notifications:
+  email: false
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local-dir: public
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
