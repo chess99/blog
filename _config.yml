@@ -3,18 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: kamisama の space
-subtitle:
-description:
+title: CS.Z's BLOG
+subtitle: 
+description: 我是要当海贼王的男人,怎么会轻易地死在这里!
 keywords:
 author: cs.z
-language:
+language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://kamisama.space
-root: /
+url: https://chess99.github.io/blog
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -36,7 +36,7 @@ external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
-relative_link: true
+relative_link: false
 future: true
 highlight:
   enable: true
@@ -75,11 +75,26 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# Algolia
+# https://theme-next.iissnan.com/third-party-services.html#algolia-search
+algolia:
+  applicationID: WIU7T2267J
+  apiKey: 149f1eff6b2a1895c3c541c22eec2540
+  indexName: chess99_blog
+  chunkSize: 5000
+
+# for local search
+# search:
+#   path: search.xml
+#   field: post
+#   format: html
+#   limit: 10000
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   deploy:
   type: git
-  repo: git@github.com:chess99/chess99.github.io.git
-  branch: master
+  repo: git@github.com:chess99/blog.git
+  branch: gh-pages
   message: update
