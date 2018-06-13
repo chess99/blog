@@ -9,8 +9,7 @@ categories:
   - 搭建
 ---
 
-使用Hexo搭建博客  
-并部署到github pages  
+使用Hexo搭建博客, 并部署到github pages  
 
 <!-- more -->
 
@@ -39,6 +38,7 @@ categories:
 也可以选择其他喜欢主题  
 
 *ps : 若搜索服务选用的是`algolia`, 照[官方文档](https://theme-next.iissnan.com/third-party-services.html#algolia-search)配置的不行, apiKey也要加上:*  
+
 ```bash
 algolia:
   applicationID: your appID
@@ -100,8 +100,3 @@ hexo g -d          # 生成静态文件并部署
 
 *附生成`GITHUB_TOKEN`的的链接:*  
 [https://github.com/settings/tokens](https://github.com/settings/tokens)  
-
-# TODO
-
--[ ]图床  
--[ ]界面美化  
