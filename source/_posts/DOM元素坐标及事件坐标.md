@@ -8,10 +8,6 @@ categories:
   - 前端
 ---
 
-DOM元素坐标; 事件坐标; 获取网页元素的绝对位置的方法
-
-<!-- more -->
-
 # DOM元素坐标
 
 1. `clientHeight` 和 `clientWidth` 用于描述元素内尺寸，是指 元素内容+内边距 大小，不包括边框（IE下实际包括）、外边距、滚动条部分
@@ -25,6 +21,8 @@ DOM元素坐标; 事件坐标; 获取网页元素的绝对位置的方法
 - pageX/Y：从`<html>`原点到事件触发点的CSS的 pixels
 - clientX/Y：从viewport原点（浏览器窗口）到事件触发点的CSS的 pixels
 - screenX/Y：从用户显示器窗口原点到事件触发点的设备 的 pixels。
+
+<!-- more -->
 
 # 获取网页元素的绝对位置
 
