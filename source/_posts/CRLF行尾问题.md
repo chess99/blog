@@ -85,6 +85,18 @@ git config --global core.autocrlf input
 把`core.autocrlf`设置成`input`来告诉 Git 在提交时把CRLF转换成LF，签出时不转换
 其他选项参见 [文档](https://git-scm.com/book/zh/v1/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-%E9%85%8D%E7%BD%AE-Git#格式化与空白)
 
+# VSCode默认行尾配置
+
+`Ctrl + Shift + P`, 搜索'首选项'或者'preferences'
+在`USER SETTINGS`里增加:
+
+```json
+"files.eol": "\n",
+```
+
+说明:
+> The default end of line character. Use \n for LF and \r\n for CRLF.
+
 # 其他
 
 ## 使用sed
