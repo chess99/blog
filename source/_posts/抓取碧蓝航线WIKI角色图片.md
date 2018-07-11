@@ -1,5 +1,5 @@
 ---
-title: 碧蓝航线新玩法
+title: 抓取碧蓝航线WIKI角色图片
 date: 2018-07-07 23:55:32
 tags:
   - 爬虫
@@ -13,6 +13,8 @@ categories:
 用到`superagent`, `cheerio`, `request`等库
 
 <!-- more -->
+
+先上代码地址 : [Github](https://github.com/chess99/blhx-spider)
 
 # 实现步骤
 
@@ -100,10 +102,6 @@ categories:
 
 使用了`async`控制并发数
 `async`用法参照[文档](https://caolan.github.io/async/docs.html)
-
-# 完整代码
-
-[Github](https://github.com/chess99/blhx-spider)
 
 # 后续优化
 
