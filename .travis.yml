@@ -10,7 +10,7 @@ install:
 script: 
 - hexo clean
 - hexo generate
-- export HEXO_ALGOLIA_INDEXING_KEY=149f1eff6b2a1895c3c541c22eec2540
+- export HEXO_ALGOLIA_INDEXING_KEY=c03c3e48aba6173babf268d96301559d
 - hexo algolia
 
 notifications:

@@ -78,8 +78,8 @@ theme: next
 # Algolia
 # https://theme-next.iissnan.com/third-party-services.html#algolia-search
 algolia:
-  applicationID: WIU7T2267J
-  apiKey: 149f1eff6b2a1895c3c541c22eec2540
+  applicationID: C4FU6LKEMJ
+  apiKey: c03c3e48aba6173babf268d96301559d
   indexName: chess99_blog
   chunkSize: 5000
 
@@ -95,6 +95,6 @@ algolia:
 deploy:
   deploy:
   type: git
-  repo: git@github.com:chess99/blog.git
+  repo: https://github.com/chess99/blog.git
   branch: gh-pages
   message: update
