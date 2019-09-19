@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="爬虫,Node,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="试玩一下JS爬虫从碧蓝WIKI抓取角色图片用到superagent, cheerio, request等库">
+<meta name="keywords" content="爬虫,Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抓取碧蓝航线WIKI角色图片">
+<meta property="og:url" content="https://chess99.github.io/blog/2018/07/07/抓取碧蓝航线WIKI角色图片/index.html">
+<meta property="og:site_name" content="CS.Z&#39;s BLOG">
+<meta property="og:description" content="试玩一下JS爬虫从碧蓝WIKI抓取角色图片用到superagent, cheerio, request等库">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://chess99.github.io/blog/2018/07/07/抓取碧蓝航线WIKI角色图片/FlourPackage.png">
+<meta property="og:updated_time" content="2019-09-19T03:24:16.916Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抓取碧蓝航线WIKI角色图片">
+<meta name="twitter:description" content="试玩一下JS爬虫从碧蓝WIKI抓取角色图片用到superagent, cheerio, request等库">
+<meta name="twitter:image" content="https://chess99.github.io/blog/2018/07/07/抓取碧蓝航线WIKI角色图片/FlourPackage.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'C4FU6LKEMJ',
+      apiKey: 'c03c3e48aba6173babf268d96301559d',
+      indexName: 'chess99_blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chess99.github.io/blog/2018/07/07/抓取碧蓝航线WIKI角色图片/">
+
+
+
+
+
+  <title>抓取碧蓝航线WIKI角色图片 | CS.Z's BLOG</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-119344558-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3985caca7018e283757684913b68503";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CS.Z's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-draw">
+          <a href="https://chess99.github.io/draw-something/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-paint-brush"></i> <br>
+            
+            涂鸦
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chess99.github.io/blog/blog/2018/07/07/抓取碧蓝航线WIKI角色图片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cs.z">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CS.Z's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">抓取碧蓝航线WIKI角色图片</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T23:55:32+00:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>试玩一下JS爬虫<br>从碧蓝WIKI抓取角色图片<br>用到<code>superagent</code>, <code>cheerio</code>, <code>request</code>等库</p>
+<a id="more"></a>
+<p>先上代码地址 : <a href="https://github.com/chess99/blhx-spider" target="_blank" rel="noopener">Github</a></p>
+<h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><h2 id="步骤1-获取角色首页"><a href="#步骤1-获取角色首页" class="headerlink" title="步骤1 : 获取角色首页"></a>步骤1 : 获取角色首页</h2><p><a href="http://wiki.joyme.com/blhx/%E8%88%B0%E5%A8%98" target="_blank" rel="noopener">舰娘首页</a>有全部角色的列表</p>
+<p>用<code>superagent</code>获取该页</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">superagent</span><br><span class="line">  .get(jianniangHomeUrl)</span><br><span class="line">  .end(<span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p><code>superagent</code>用法参照<a href="https://visionmedia.github.io/superagent/" target="_blank" rel="noopener">文档</a></p>
+<h2 id="步骤2-分析角色首页"><a href="#步骤2-分析角色首页" class="headerlink" title="步骤2 : 分析角色首页"></a>步骤2 : 分析角色首页</h2><p>在一个<code>id=&quot;FlourPackage&quot;</code>的<code>div</code>下面,<br>有一系列<code>class=&quot;Flour&quot;</code>的<code>div</code>, 分别各为一个角色的小图框,<br>再下面, <code>a</code>标签中有角色名和链接</p>
+<p><img src="FlourPackage.png" alt="FlourPackage.png"></p>
+<p>用<code>cheerio</code>取出这些信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $ = cheerio.load(data)  <span class="comment">// 此处data为上一步读取回来的整个页面</span></span><br><span class="line"><span class="keyword">let</span> characterList = []</span><br><span class="line">$(<span class="string">'#FlourPackage'</span>).find(<span class="string">'.Flour'</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> title = $(<span class="keyword">this</span>).find(<span class="string">'a'</span>).attr(<span class="string">'title'</span>)  <span class="comment">// 角色名</span></span><br><span class="line">  <span class="keyword">let</span> href = $(<span class="keyword">this</span>).find(<span class="string">'a'</span>).attr(<span class="string">'href'</span>) <span class="comment">// 角色链接</span></span><br><span class="line">  characterList.push([title, href])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>cheerio</code>用法参照<a href="https://visionmedia.github.io/superagent/" target="_blank" rel="noopener">文档</a>, 基本和JQuery一致</p>
+<h2 id="步骤3-获取各角色图片链接"><a href="#步骤3-获取各角色图片链接" class="headerlink" title="步骤3 : 获取各角色图片链接"></a>步骤3 : 获取各角色图片链接</h2><p>一个角色页的<a href="http://wiki.joyme.com/blhx/%E6%AC%A7%E6%A0%B9%E4%BA%B2%E7%8E%8B" target="_blank" rel="noopener">栗子</a></p>
+<p>图片链接在各类似如下的元素里</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">alt</span>=<span class="string">"欧根亲王立绘.jpg"</span> <span class="attr">src</span>=<span class="string">"http://p9.qhimg.com/dr/350__/t012066ae5fe5a20298.jpg"</span> <span class="attr">...</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>图片链接无明显规律, 参照步骤1的方法, 获取每个角色页, 然后用<code>cheerio</code>取出图片链接</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> imgLinks = []</span><br><span class="line"><span class="keyword">let</span> imgTypes = [<span class="string">'立绘'</span>, <span class="string">'换装'</span>, <span class="string">'换装2'</span>, <span class="string">'改造'</span>, <span class="string">'誓约'</span>]</span><br><span class="line">imgTypes.forEach(<span class="function"><span class="params">type</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> selector = <span class="string">`img[alt*="<span class="subst">$&#123;type&#125;</span>"]`</span></span><br><span class="line">  <span class="keyword">let</span> element = $(selector)</span><br><span class="line">  <span class="keyword">let</span> src = element.attr(<span class="string">'src'</span>)</span><br><span class="line">  <span class="keyword">let</span> imgName = element.attr(<span class="string">'alt'</span>)</span><br><span class="line">  <span class="keyword">if</span> (imgName &amp;&amp; src) &#123;</span><br><span class="line">    imgLinks.push([imgName, src])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里用了正则形式的属性选择器<code>img[alt*=&quot;xxxx&quot;]</code>, 选出 有alt属性且alt属性含有xxxx子串的img标签<br>参考<a href="https://www.zhangxinxu.com/wordpress/2016/08/regular-expression-in-css-selector/" target="_blank" rel="noopener">CSS选择器中的正则表达式</a></p>
+<h2 id="步骤4-下载保存图片"><a href="#步骤4-下载保存图片" class="headerlink" title="步骤4 : 下载保存图片"></a>步骤4 : 下载保存图片</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">request(url)</span><br><span class="line">  .on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    callback(<span class="literal">null</span>, err)</span><br><span class="line">  &#125;)</span><br><span class="line">  .pipe(fs.createWriteStream(savePath))</span><br><span class="line">  .on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback(<span class="literal">null</span>, url);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p><code>request</code>用法参照<a href="https://github.com/request/request" target="_blank" rel="noopener">文档</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>使用了<code>async</code>控制并发数<br><code>async</code>用法参照<a href="https://caolan.github.io/async/docs.html" target="_blank" rel="noopener">文档</a></p>
+<h1 id="后续优化"><a href="#后续优化" class="headerlink" title="后续优化"></a>后续优化</h1><p>添加抓取间隔等 ( 现在连续抓取后会被暂时屏蔽 )</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>然而这些图片图像质量并不好..</p>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p><a href="https://visionmedia.github.io/superagent/" target="_blank" rel="noopener">superagent</a><br><a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener">cheerio</a><br><a href="https://github.com/request/request" target="_blank" rel="noopener">request</a><br><a href="https://caolan.github.io/async/docs.html" target="_blank" rel="noopener">async</a><br><a href="http://nodejs.cn/api/fs.html#fs_fs_createwritestream_path_options" target="_blank" rel="noopener">fs.createWriteStream</a><br><a href="https://www.zhangxinxu.com/wordpress/2016/08/regular-expression-in-css-selector/" target="_blank" rel="noopener">CSS选择器中的正则表达式</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/blog/tags/Node/" rel="tag"># Node</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/06/27/CRLF行尾问题/" rel="next" title="CRLF行尾问题">
+                <i class="fa fa-chevron-left"></i> CRLF行尾问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/09/18/分析el-select/" rel="prev" title="分析el-select">
+                分析el-select <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjUyNS8xMzA2MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/avatar.jpg" alt="cs.z">
+            
+              <p class="site-author-name" itemprop="name">cs.z</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chess99" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://segmentfault.com/blog/chess99" target="_blank" title="Segmentfault">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Segmentfault</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现步骤"><span class="nav-number">1.</span> <span class="nav-text">实现步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤1-获取角色首页"><span class="nav-number">1.1.</span> <span class="nav-text">步骤1 : 获取角色首页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤2-分析角色首页"><span class="nav-number">1.2.</span> <span class="nav-text">步骤2 : 分析角色首页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤3-获取各角色图片链接"><span class="nav-number">1.3.</span> <span class="nav-text">步骤3 : 获取各角色图片链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤4-下载保存图片"><span class="nav-number">1.4.</span> <span class="nav-text">步骤4 : 下载保存图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后续优化"><span class="nav-number">2.</span> <span class="nav-text">后续优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接"><span class="nav-number">4.</span> <span class="nav-text">链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cs.z</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=65937243";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/blog/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/blog/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/blog/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

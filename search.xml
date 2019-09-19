@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[File API]]></title>
+    <url>%2Fblog%2F2019%2F09%2F18%2FFile-API%2F</url>
+    <content type="text"><![CDATA[File Api &lt;input type=&quot;file&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file Attribute Description accept One or more unique file type specifiers describing file types to allow capture What source to use for capturing image or video data files A FileList listing the chosen files multiple A Boolean which, if present, indicates that the user may choose more than one file 文件类型Each unique file type specifier may take one of the following forms: · A valid case-insensitive filename extension, starting with a period (“.”) character. For example: .jpg, .pdf, or .doc. · A valid MIME type string, with no extensions. · The string audio/* meaning “any audio file”. · The string video/* meaning “any video file”. · The string image/* meaning “any image file”. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file 栗子 · accept=&quot;image/png&quot; or accept=&quot;.png&quot; — Accepts PNG files. · accept=&quot;image/png, image/jpeg&quot; or accept=&quot;.png, .jpg, .jpeg&quot; — Accept PNG or JPEG files. · accept=&quot;image/*&quot; — Accept any file with an image/* MIME type. (Many mobile devices also let the user take a picture with the camera when this is used.) · accept=&quot;.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document&quot; — accept anything that smells like an MS Word document. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#Limiting_accepted_file_types 文件对象FileList https://developer.mozilla.org/en-US/docs/Web/API/FileList File https://developer.mozilla.org/en-US/docs/Web/API/File The FileList behaves like an array, so you can check its length property to get the number of selected files. Each File object contains the following information: nameThe file’s name. lastModifiedA number specifying the date and time at which the file was last modified, in milliseconds since the UNIX epoch (January 1, 1970 at midnight). lastModifiedDateA Date object representing the date and time at which the file was last modified. This is deprecated and should not be used. Use *lastModified* instead. sizeThe size of the file in bytes. typeThe file’s MIME type. webkitRelativePathA string specifying the file’s path relative to the base directory selected in a directory picker (that is, a file picker in which the webkitdirectory attribute is set). This is non-standard and should be used with caution. 文件拖放https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Selecting_files_using_drag_and_drop DataTransfer对象https://developer.mozilla.org/en-US/docs/Web/API/DataTransferThis object is available from the dataTransfer property of all drag events. DataTransfer.filesContains a list of all the local files available on the data transfer. If the drag operation doesn’t involve dragging files, this property is an empty list. 拖拽APIhttps://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API 各种栗子Using files from web applicationshttps://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications图片预览, 文件上传等 URL.createObjectURL()https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Using_object_URLs FileReaderhttps://developer.mozilla.org/zh-CN/docs/Web/API/FileReader]]></content>
+      <categories>
+        <category>webapi</category>
+      </categories>
+      <tags>
+        <tag>webapi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[分析el-upload]]></title>
+    <url>%2Fblog%2F2019%2F09%2F18%2F%E5%88%86%E6%9E%90el-upload%2F</url>
+    <content type="text"><![CDATA[分析el-upload “name”: “element-ui”, “version”: “2.10.1”, 组件文档: 文档源码在packages/upload/下: 链接 12345678|-- upload |-- index.js |-- src |-- ajax.js |-- index.vue |-- upload-dragger.vue |-- upload-list.vue |-- upload.vue 样式在packages/theme-chalk/src/index.scss index.vue整体集成了各组件:Upload组件UploadList组件 12345678910111213141516171819202122232425// index.vueimport UploadList from './upload-list';import Upload from './upload';// import ElProgress from 'element-ui/packages/progress'; // 这里没有用到ElProgress, 实际在UploadList内才有用到 render(h) &#123; // ... const trigger = this.$slots.trigger || this.$slots.default; const uploadComponent = &lt;upload &#123;...uploadData&#125;&gt;&#123;trigger&#125;&lt;/upload&gt;; return ( &lt;div&gt; &#123; this.listType === 'picture-card' ? uploadList : ''&#125; &#123; this.$slots.trigger ? [uploadComponent, this.$slots.default] : uploadComponent &#125; &#123;this.$slots.tip&#125; &#123; this.listType !== 'picture-card' ? uploadList : ''&#125; &lt;/div&gt; ); &#125; Upload组件upload.vue 藏了一个获取文件所需的&lt;input&gt;,若需响应拖放, 则在内容外层包一个注册了drag事件的upload-dragger 12345678&lt;div &#123;...data&#125; tabindex="0" &gt; &#123; drag ? &lt;upload-dragger disabled=&#123;disabled&#125; on-file=&#123;uploadFiles&#125;&gt;&#123;this.$slots.default&#125;&lt;/upload-dragger&gt; : this.$slots.default &#125; &lt;input class="el-upload__input" type="file" ref="input" name=&#123;name&#125; on-change=&#123;handleChange&#125; multiple=&#123;multiple&#125; accept=&#123;accept&#125;&gt;&lt;/input&gt;&lt;/div&gt; $slots.default是上层index.vue传下来的”trigger” 123456789const data = &#123; class: &#123; 'el-upload': true &#125;, on: &#123; click: handleClick, keydown: handleKeydown &#125;&#125;; ...data里注册了点击事件和键盘事件(space键和enter键), 转而触发&lt;input&gt;的click事件 this.$refs.input.click()所以trigger slot里的并不是真正的trigger, 它爹才是, 只不过它爹捕获了冒泡上来的click事件jsx相关用法见vue官方文档 upload-dragger.vue注册了drag相关事件 12345678910111213&lt;template&gt; &lt;div class=&quot;el-upload-dragger&quot; :class=&quot;&#123; &apos;is-dragover&apos;: dragover &#125;&quot; @drop.prevent=&quot;onDrop&quot; @dragover.prevent=&quot;onDragover&quot; @dragleave.prevent=&quot;dragover = false&quot; &gt; &lt;slot&gt;&lt;/slot&gt; &lt;/div&gt;&lt;/template&gt; onDrop内this.$emit(&#39;file&#39;, e.dataTransfer.files)给上级的upload.vue处理参考 DataTransfer.files 文件上传挨个文件调用this.post() 1234567891011121314151617181920212223242526272829// upload.vuepost(rawFile) &#123; const &#123; uid &#125; = rawFile; const options = &#123; headers: this.headers, withCredentials: this.withCredentials, file: rawFile, data: this.data, filename: this.name, action: this.action, onProgress: e =&gt; &#123; this.onProgress(e, rawFile); &#125;, onSuccess: res =&gt; &#123; this.onSuccess(res, rawFile); delete this.reqs[uid]; &#125;, onError: err =&gt; &#123; this.onError(err, rawFile); delete this.reqs[uid]; &#125; &#125;; const req = this.httpRequest(options); this.reqs[uid] = req; if (req &amp;&amp; req.then) &#123; req.then(options.onSuccess, options.onError); &#125;&#125;, httpRequest方法的默认实现在同文件夹的ajax.js里, 也可由&lt;el-upload&gt;的http-request属性传入(element-ui官方文档没写清楚http-request的参数) 12345678910111213141516171819202122232425// ajax.js// httpRequest的默认实现是以下函数export default function upload(option) &#123; // ... const formData = new FormData(); formData.append(option.filename, option.file, option.file.name); const xhr = new XMLHttpRequest(); if (xhr.upload) &#123; xhr.upload.onprogress = function progress(e) &#123; if (e.total &gt; 0) &#123; e.percent = e.loaded / e.total * 100; &#125; option.onProgress(e); &#125;; &#125; xhr.onerror = function error(e) &#123; /* ... */ &#125;; xhr.onload = function onload() &#123; /* ... */ &#125;; xhr.open('post', option.action /* 就是el-upload里传下来的action */, true); xhr.withCredentials = true; xhr.setRequestHeader( /* ... */ ); xhr.send(formData); return xhr;&#125; XMLHttpRequest.upload用法见文档 UploadList组件封装了三种不同显示方式 list-type: “text” list-type: “picture” list-type: “picture-card”]]></content>
+      <categories>
+        <category>element-ui</category>
+      </categories>
+      <tags>
+        <tag>element-ui</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[分析el-select]]></title>
+    <url>%2Fblog%2F2019%2F09%2F18%2F%E5%88%86%E6%9E%90el-select%2F</url>
+    <content type="text"><![CDATA[分析el-select “name”: “element-ui”, “version”: “2.10.1”, 组件文档: 文档源码在packages/select/下: 链接 12345678|-- select |-- index.js |-- src |-- navigation-mixin.js |-- option-group.vue |-- option.vue |-- select-dropdown.vue |-- select.vue 主要文件packages\select\src\select.vueselect主体 packages\select\src\select-dropdown.vueselect选项弹出框这个组件主要只处理placement(弹出框位置)/popperOptions/visibleArrow/appendToBody等配置 src\utils\vue-popper.js封装了createPopper/updatePopper/destroyPopper等作为mixin在select-dropdown/picker-dropdown/cascader等多处被使用 src\utils\popper.js弹出框的各种基础方法 代码片段需要显示弹出框时, select.vue的visible()函数内broadcast ‘updatePopper’事件, 逐层下传select.vue中把el-input标记为reference, popper.js中的_getOffsets根据reference计算popper位置. 1234567891011121314151617181920212223242526272829303132333435363738// popper.js /** * Get offsets to the popper * @method * @memberof Popper * @access private * @param &#123;Element&#125; popper - the popper element * @param &#123;Element&#125; reference - the reference element (the popper will be relative to this) * @returns &#123;Object&#125; An object containing the offsets which will be applied to the popper */ Popper.prototype._getOffsets = function(popper, reference, placement) &#123;&#125;// vue-popper.js createPopper() &#123; const options = this.popperOptions; const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper; let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference; this.popperJS = new PopperJS(reference, popper, options); &#125;// select-dropdown.vue mounted() &#123; this.referenceElm = this.$parent.$refs.reference.$el; this.$parent.popperElm = this.popperElm = this.$el; this.$on('updatePopper', () =&gt; &#123; if (this.$parent.visible) this.updatePopper(); &#125;); this.$on('destroyPopper', this.destroyPopper); &#125;// select.vue &lt;el-input ref="reference" &gt;&lt;/el-input&gt; visible(val) &#123; ... this.broadcast('ElSelectDropdown', 'updatePopper'); &#125;,]]></content>
+      <categories>
+        <category>element-ui</category>
+      </categories>
+      <tags>
+        <tag>element-ui</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[抓取碧蓝航线WIKI角色图片]]></title>
+    <url>%2Fblog%2F2018%2F07%2F07%2F%E6%8A%93%E5%8F%96%E7%A2%A7%E8%93%9D%E8%88%AA%E7%BA%BFWIKI%E8%A7%92%E8%89%B2%E5%9B%BE%E7%89%87%2F</url>
+    <content type="text"><![CDATA[试玩一下JS爬虫从碧蓝WIKI抓取角色图片用到superagent, cheerio, request等库 先上代码地址 : Github 实现步骤步骤1 : 获取角色首页舰娘首页有全部角色的列表 用superagent获取该页 123superagent .get(jianniangHomeUrl) .end(function (err, res) &#123; ... &#125; superagent用法参照文档 步骤2 : 分析角色首页在一个id=&quot;FlourPackage&quot;的div下面,有一系列class=&quot;Flour&quot;的div, 分别各为一个角色的小图框,再下面, a标签中有角色名和链接 用cheerio取出这些信息 1234567var $ = cheerio.load(data) // 此处data为上一步读取回来的整个页面let characterList = []$('#FlourPackage').find('.Flour').each(function () &#123; let title = $(this).find('a').attr('title') // 角色名 let href = $(this).find('a').attr('href') // 角色链接 characterList.push([title, href])&#125;) cheerio用法参照文档, 基本和JQuery一致 步骤3 : 获取各角色图片链接一个角色页的栗子 图片链接在各类似如下的元素里 1&lt;img alt="欧根亲王立绘.jpg" src="http://p9.qhimg.com/dr/350__/t012066ae5fe5a20298.jpg" ... /&gt; 图片链接无明显规律, 参照步骤1的方法, 获取每个角色页, 然后用cheerio取出图片链接 1234567891011let imgLinks = []let imgTypes = ['立绘', '换装', '换装2', '改造', '誓约']imgTypes.forEach(type =&gt; &#123; let selector = `img[alt*="$&#123;type&#125;"]` let element = $(selector) let src = element.attr('src') let imgName = element.attr('alt') if (imgName &amp;&amp; src) &#123; imgLinks.push([imgName, src]) &#125;&#125;) 这里用了正则形式的属性选择器img[alt*=&quot;xxxx&quot;], 选出 有alt属性且alt属性含有xxxx子串的img标签参考CSS选择器中的正则表达式 步骤4 : 下载保存图片12345678request(url) .on('error', function (err) &#123; callback(null, err) &#125;) .pipe(fs.createWriteStream(savePath)) .on('close', function () &#123; callback(null, url); &#125;); request用法参照文档 其他使用了async控制并发数async用法参照文档 后续优化添加抓取间隔等 ( 现在连续抓取后会被暂时屏蔽 ) 最后然而这些图片图像质量并不好.. 链接superagentcheeriorequestasyncfs.createWriteStreamCSS选择器中的正则表达式]]></content>
+      <categories>
+        <category>爬虫</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+        <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CRLF行尾问题]]></title>
+    <url>%2Fblog%2F2018%2F06%2F27%2FCRLF%E8%A1%8C%E5%B0%BE%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[混用行尾的话, 在Linux中, CRLF行尾会导致脚本执行异常整理了一些解决及预防办法 知识回顾CR, 回车, Carriage-Return, ASCII 13, \rLF, 换行, Line-Feed , ASCII 10, \n Windows下默认CRLF,Linux下默认LF, 多余的\r会显示为^M Vim中关于^M的显示12# 刷新显示, 不显示^M:e ++ff=dos 或者在.vimrc中: 12# 让vim可以自动识别DOS和UNIX文本文件格式, 使用vim打开DOS文本文件就不会显示^M字符了setfileformats=dos,unix 参考: File format 格式转换几种方法: 12# 替换掉\r:%s/\r//g 12# 将文件保存为`LF`行尾格式:w ++ff=unix 123# `fileformat`可以写成`ff`:set fileformat=unix:set fileformat=dos 另附, Vim 中读写特殊字符通过 :help digraph-table 可看到所有Vim中可输入的特殊字符 批量转换1find your/path/ -type f -exec dos2unix &#123;&#125; \; 路径自行修改.. 参考: dos2unix整个目录 Git自动转换推荐配置: 1git config --global core.autocrlf input 把core.autocrlf设置成input来告诉 Git 在提交时把CRLF转换成LF，签出时不转换其他选项参见 文档 VSCode默认行尾配置Ctrl + Shift + P, 搜索’首选项’或者’preferences’在USER SETTINGS里增加: 1"files.eol": "\n", 说明: The default end of line character. Use \n for LF and \r\n for CRLF. 其他使用sedDOS转UNIX：sed &#39;s/.$//&quot;dosfile.txt &gt; unixfile.txtUNIX转DOS：sed &quot;s/$/\r/&quot;unixfile.txt &gt; dosfile.txt 使用PerlDOS转UNIX：perl -p -e &#39;s/\r$//&quot;&lt; dosfile.txt &gt; unixfile.txtUNIX转DOS：perl -p -e &#39;s/$/\r/&quot;&lt; unixfile.txt &gt; dosfile.txt 使用awkDOS转UNIX：awk &#39;{sub(&quot;\r$&quot;,&quot;&quot;, $0);print $0}&quot; dosfile.txt &gt; unixfile.txtUNIX转DOS：awk &#39;{sub(&quot;$&quot;,&quot;\r&quot;, $0);print $0}&quot; dosfile.txt &gt; unixfile.txt 参考 DOS和UNIX文本文件之间相互转换的方法]]></content>
+      <categories>
+        <category>综合</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+        <tag>Vim</tag>
+        <tag>CRLF</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript中this的指向]]></title>
+    <url>%2Fblog%2F2018%2F06%2F25%2FJavaScript%E4%B8%ADthis%E7%9A%84%E6%8C%87%E5%90%91%2F</url>
+    <content type="text"><![CDATA[整理一下this用法, 基本是抄了一遍MDN.. 普通函数: 执行上下文, 严格模式下默认不指向全局对象箭头函数: 词法上下文 全局上下文在全局执行上下文中（在任何函数体外部）this总是指代全局对象 (包括严格模式) 1console.log(this === window); // true 在浏览器中，全局对象是window在Node中, 是global 普通函数简单调用123456789101112function f1() &#123; return this&#125;function f2() &#123; 'use strict' return this&#125;f1() // window 或 globalf2() // undefinedwindow.f2() // windowglobal.f2() // TypeError: global.f2 is not a function this保持他进入执行上下文时的值, 如果 this 没有被执行上下文（execution context）定义，那它将保持为 :严格模式 : undefined非严格模式: 全局对象 对象的方法 / 原型链 / getter / setter都是指向的是调用这个方法的对象 构造函数当一个函数用作构造函数时（使用new关键字），它的this被绑定到正在构造的新对象。 构造器返回的默认值是this所指的那个对象，可以手动返回其他的对象（如果返回值不是一个对象，则返回this对象） DOM事件处理函数指向触发事件的元素（一些浏览器在使用非addEventListener的函数动态添加监听函数时不遵守这个约定） 内联事件处理函数当代码被内联on-event 处理函数调用时，它的this指向监听器所在的DOM元素 123&lt;button onclick="alert(this.tagName.toLowerCase());"&gt; Show this&lt;/button&gt; 上面的 alert 会显示button。注意只有外层代码中的this是这样设置的： 123&lt;button onclick="alert((function()&#123;return this&#125;)());"&gt; Show inner this&lt;/button&gt; 在这种情况下，没有设置内部函数的this，所以它指向 global/window 对象（即非严格模式下调用的函数未设置this时指向的默认对象）。 bind / call / apply将一个对象作为call和apply的第一个参数，this会被绑定到这个对象。 f.bind(someObject)会创建一个与f具有相同函数体和作用域的函数，但是在这个新函数中，this将永久地被绑定到了bind的第一个参数，无论这个函数是如何被调用的。 箭头函数在箭头函数中，this与封闭词法上下文的this保持一致。( 函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象 ) 在全局上下文中的箭头函数，this被设置为全局对象 12var foo = (() =&gt; this);foo() // 全局对象 注意: 如果将this传递给call、bind、或者apply，它将被忽略 其他注意事项setInterval / setTimeout1234567891011121314151617var num = 0;function Obj() &#123; this.num = 1, this.getNum1 = function () &#123; setTimeout(function () &#123; console.log('getNum1', this, this.num) &#125;, 1000) &#125;, this.getNum2 = function () &#123; setTimeout(() =&gt; &#123; console.log('getNum2', this.num); &#125;, 1000) &#125;&#125;var obj = new Obj;obj.getNum1(); // 浏览器中0(this为window), Node中undefined(this为Timeout)obj.getNum2(); // 1 setInterval和setTimeout调用的代码运行在与所在函数完全分离的执行环境上 单独调用对象方法12345678var obj = &#123; bar: function () &#123; return this &#125;&#125;;var fn = obj.bar(); // objvar fn2 = obj.barfn2() // 全局对象(fn2定义的上下文) 参考链接this - MDN关于setInterval和setTImeout中的this指向问题]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[支持WSS]]></title>
+    <url>%2Fblog%2F2018%2F06%2F14%2F%E7%BD%91%E7%AB%99%E6%94%AF%E6%8C%81HTTPS%E5%92%8CWSS%2F</url>
+    <content type="text"><![CDATA[使用Let’s Encrypt提供的免费证书,基于node.js的ws模块 步骤购买证书见 使用购买的 SSL 证书或者使用免费的证书: Let’s Encrypt 的 SSL For Free . (只有三个月有效期, 需要定期更新) 合并ca_bundle.crtca_bundle.crt的作用见 链接 这里直接合并进certificate.crt了其他服务使用见相应的配置文档.. 推荐的存放路径 在 RHEL/CentOS 系统上：server.crt 和 server.ca-bundle 上传至 /etc/pki/tls/certs/ ，server.key 上传至 /etc/pki/tls/private/。在 Debian/Ubuntu， FreeBSD 系统上： server.crt 和 server.ca-bundle 上传至 /etc/ssl/certs/， server.key 上传至/etc/ssl/private/。在 OpenBSD 系统上：上传至 /etc/ssl/。 创建wss服务 这里使用node.js的ws模块 12345678910111213141516171819202122232425var options = &#123; key: fs.readFileSync(keypath), cert: fs.readFileSync(certpath), passphrase:'1234'//如果秘钥文件有密码的话，用这个属性设置密码&#125;;var server = https.createServer(options, function (req, res) &#123; console.log((new Date()) + ' Received HTTP(S) request for ' + req.url); //要是单纯的https连接的话返回403 res.writeHead(403); res.end("This is a WebSockets server!\n");&#125;).listen(44301);//把创建好的https服务器丢进websocket的创建函数里，ws会用这个服务器来创建wss服务//同样，如果丢进去的是个http服务的话那么创建出来的还是无加密的ws服务var wss = new ws.Server(&#123; server: server &#125;);wss.on('connection', function (wsConnect) &#123; console.log('connection') wsConnect.on('message', function (message) &#123; console.log('message', message); &#125;);&#125;); 参考链接30分钟让网站支持HTTPSnginx - Configuring HTTPS servers用WS模块创建加密的WSS服务ws - External HTTP/S server]]></content>
+      <categories>
+        <category>搭建</category>
+      </categories>
+      <tags>
+        <tag>SSL</tag>
+        <tag>HTTPS</tag>
+        <tag>WSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DOM元素坐标及事件坐标]]></title>
+    <url>%2Fblog%2F2018%2F06%2F11%2FDOM%E5%85%83%E7%B4%A0%E5%9D%90%E6%A0%87%E5%8F%8A%E4%BA%8B%E4%BB%B6%E5%9D%90%E6%A0%87%2F</url>
+    <content type="text"><![CDATA[DOM元素坐标 clientHeight 和 clientWidth 用于描述元素内尺寸，是指 元素内容+内边距 大小，不包括边框（IE下实际包括）、外边距、滚动条部分 offsetHeight 和 offsetWidth 用于描述元素外尺寸，是指 元素内容+内边距+边框，不包括外边距和滚动条部分 clientTop 和 clientLeft 返回内边距的边缘和边框的外边缘之间的水平和垂直距离，也就是左，上边框宽度 offsetTop 和 offsetLeft 表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离 offsetParent 对象是指元素最近的定位（relative,absolute）祖先元素，递归上溯，如果没有祖先元素是定位的话，会返回null 事件坐标 pageX/Y：从&lt;html&gt;原点到事件触发点的CSS的 pixels clientX/Y：从viewport原点（浏览器窗口）到事件触发点的CSS的 pixels screenX/Y：从用户显示器窗口原点到事件触发点的设备 的 pixels。 获取网页元素的绝对位置 方法1 123456789101112131415function getOffset(element) &#123; let offset = &#123; top: element.offsetTop, left: element.offsetLeft &#125;; let parentElement = element.offsetParent; while (parentElement) &#123; offset.top += element.offsetParent.offsetTop; offset.left += element.offsetParent.offsetLeft; parentElement = parentElement.offsetParent; &#125; return offset;&#125; 方法2 使用getBoundingClientRect()详见 用Javascript获取页面元素的位置 -&gt; 六、获取元素位置的快速方法 参考链接viewports剖析]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo博客插入图片]]></title>
+    <url>%2Fblog%2F2018%2F06%2F11%2FHexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%2F</url>
+    <content type="text"><![CDATA[官方方法1.source/images 文件夹若图片少, 放在 source/images 文件夹中。然后通过类似于 ![](/images/image.jpg) 的方法访问它们。 通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。 2.文章资源文件夹打开资源文件管理功能 12# 站点_config.yml中post_asset_folder: true Hexo将会在你每一次通过 hexo new [layout] &lt;title&gt; 命令创建新文章时自动创建一个与title同名的文件夹。引用图片时, 使用下列的标签插件而不是 markdown 语法 123&#123;% asset_path slug %&#125;&#123;% asset_img slug [title] %&#125;&#123;% asset_link slug [title] %&#125; 参考 官方文档 使用图床使用MWeb, 一次编辑, 多平台发布 详见文章:一个码字工作者的正确书写发文姿势]]></content>
+      <categories>
+        <category>搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>github pages</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo博客站内链接]]></title>
+    <url>%2Fblog%2F2018%2F06%2F11%2FHexo%E5%8D%9A%E5%AE%A2%E7%AB%99%E5%86%85%E9%93%BE%E6%8E%A5%2F</url>
+    <content type="text"><![CDATA[{% post_link 文章标题 链接名称 %} 站内文章链接{% post_link 文章标题 链接名称 %} 如果文章不存在，这段代码将会被直接忽略。 链接名称如果置空，则自动提取文章的标题。 栗子站内相关文章链接: Hexo博客搭建 1&#123;% post_link Hexo博客搭建 %&#125; 锚点跳转在文章A中制作锚点 1&lt;a name="Anchor"/&gt; 在文章B中插入跳转 1[文章A](2018/06/11/articleA#Anchor) 缺点: 硬编码了YYYY/MM/DD一种解决方法: 修改permalink: :year/:month/:day/:title/为permalink: :title/ 参考链接hexo #1709hexo-theme-next #978hexo标签插件]]></content>
+      <categories>
+        <category>搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>github pages</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用相对路径发布vue-cli项目]]></title>
+    <url>%2Fblog%2F2018%2F06%2F06%2F%E4%BD%BF%E7%94%A8%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%8F%91%E5%B8%83vue-cli%E9%A1%B9%E7%9B%AE%2F</url>
+    <content type="text"><![CDATA[项目根目录添加vue.config.js, 编辑baseUrl &gt; v3.0.0项目根目录添加vue.config.js, 编辑baseUrl 1234567891011121314151617module.exports = &#123; // Project deployment base // By default we assume your app will be deployed at the root of a domain, // e.g. https://www.my-app.com/ // If your app is deployed at a sub-path, you will need to specify that // sub-path here. For example, if your app is deployed at // https://www.foobar.com/my-app/ // then change this to '/my-app/' baseUrl: '/', // baseUrl, but for the dev server. // you'll only need this if you need to serve your dev server under // a specific sub-path in order to work with your dev setup. devBaseUrl: '/', ...&#125; 详见 : 文档 &lt; v3.0.0 在config/index.js中，将assetsPublicPath修改为./ 在build/utils.js中，找到ExtractTextPlugin.extract，添加配置项publicPath: &#39;../../&#39; 参考:使用相对路径发布vue-cli项目的坑]]></content>
+      <categories>
+        <category>前端 - Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>vue-cli</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo博客搭建]]></title>
+    <url>%2Fblog%2F2018%2F05%2F31%2FHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[使用Hexo搭建博客, 并部署到github pages 基本配置 安装各种依赖(git, nodejs, hexo…) Hexo 参照Hexo官网(https://hexo.io/zh-cn/), 跟着文档配置一遍… 配置文件为项目根目录的_config.yml 可参考 我的配置记得删除其中的各种key或者换成你自己的 主题 选择一个主题, 跟着文档再配置一遍… 配置文件为themes/your_theme/_config.yml 我用的是NexT(https://theme-next.iissnan.com/)可参考 我的配置 也可以选择其他喜欢主题 ps : 若搜索服务选用的是algolia, 照官方文档配置的不行, apiKey也要加上: 12345algolia: applicationID: your appID apiKey: your Search-Only API Key # 注意不是Admin API Key indexName: your index name chunkSize: 5000 偷懒clone一个自己喜欢的博客, 修改一下… 写作12345# 如果本地已安装hexo# 参考 https://hexo.io/zh-cn/docs/writing.htmlhexo n &lt;title&gt; # new, 创建名为title新文章hexo s # server, 写作时的本地预览 或者, 手动创建md文件, 写好后提交到对应目录就行.. 部署手动部署需要本地已安装hexo等环境 123# 参考 https://hexo.io/zh-cn/docs/generating.htmlhexo g -d # 生成静态文件并部署 部署配置参考 文档 自动部署使用 Travis CI好处是在没有安装hexo的地方也可以写博客, 直接写markdown, 写完提交到github就行了 步骤: 在项目根目录添加.travis.yml文件 .travis.yml文件可参考我的配置说明 : 这里源码放在master分支, 有修改时自动生成并部署到gh-pages分支若要放在其他分支可自行相应修改 参考官方文档:GitHub Pages DeploymentConditional Releases with ‘on:’ 注册Travis CI并配置 https://travis-ci.org/ 中打开对应github仓库的自动集成开关, 在设置中填入GITHUB_TOKEN 附生成GITHUB_TOKEN的的链接:https://github.com/settings/tokens]]></content>
+      <categories>
+        <category>搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>github pages</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2Fblog%2F2018%2F05%2F31%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>testing</category>
+      </categories>
+      <tags>
+        <tag>testing</tag>
+      </tags>
+  </entry>
+</search>
