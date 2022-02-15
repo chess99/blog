@@ -3,18 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: CS.Z's BLOG
+title: Cearl's BLOG
 subtitle: 
 description: 我是要当海贼王的男人,怎么会轻易地死在这里!
 keywords:
-author: cs.z
+author: Cearl
 language: zh-Hans
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://chess99.github.io/blog
-root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -95,6 +93,6 @@ algolia:
 deploy:
   deploy:
   type: git
-  repo: https://github.com/chess99/blog.git
+  repo: https://github.com/chess99/chess99.github.io.git
   branch: gh-pages
   message: update
