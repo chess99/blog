@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.3
-        env:
-          ACCESS_TOKEN: ${{ secrets.GP_DEPLOY }}
-          BRANCH: gh-pages
-          FOLDER: public
+        with:
+          token: ${{ secrets.GP_DEPLOY }}
+          branch: gh-pages
+          folder: public
