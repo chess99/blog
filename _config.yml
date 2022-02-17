@@ -93,6 +93,6 @@ algolia:
 deploy:
   deploy:
   type: git
-  repo: https://github.com/chess99/chess99.github.io.git
+  repo: git@github.com:chess99/chess99.github.io.git
   branch: gh-pages
   message: update

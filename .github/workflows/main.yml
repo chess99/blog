@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: GP_DEPLOY
+name: Hexo Deploy
 
 # Controls when the workflow will run
 on:
@@ -24,22 +24,31 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          ref: master
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Dependency
         run: npm install -g hexo-cli && npm install
 
+      - name: Setup
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.ID_RSA }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${ACTION_DEPLOY_KEY}" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Build and Deploy
+        env:
+          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.HEXO_ALGOLIA_INDEXING_KEY }}
         run: |
           hexo clean
           hexo generate
-          export HEXO_ALGOLIA_INDEXING_KEY=c03c3e48aba6173babf268d96301559d
           hexo algolia
-
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.3
-        with:
-          token: ${{ secrets.GP_DEPLOY }}
-          branch: gh-pages
-          folder: public
+          hexo deploy

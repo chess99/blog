@@ -79,24 +79,5 @@ hexo g -d          # 生成静态文件并部署
 
 ## 自动部署
 
-使用 [Travis CI](https://travis-ci.org/)  
-好处是在没有安装hexo的地方也可以写博客, 直接写markdown, 写完提交到github就行了  
-
-**步骤:**
-
-- 在项目根目录添加`.travis.yml`文件
-
-`.travis.yml`文件可参考[我的配置](https://github.com/chess99/blog/blob/master/.travis.yml)  
-*说明 : 这里源码放在`master`分支, 有修改时自动生成并部署到`gh-pages`分支*  
-*若要放在其他分支可自行相应修改*  
-
-*参考官方文档:*  
-[GitHub Pages Deployment](https://docs.travis-ci.com/user/deployment/pages/)  
-[Conditional Releases with 'on:'](https://docs.travis-ci.com/user/deployment#Conditional-Releases-with-on:)  
-
-- 注册Travis CI并配置
-
-[https://travis-ci.org/](https://travis-ci.org/) 中打开对应github仓库的自动集成开关, 在设置中填入`GITHUB_TOKEN`  
-
-*附生成`GITHUB_TOKEN`的的链接:*  
-[https://github.com/settings/tokens](https://github.com/settings/tokens)  
+[Travis CI](https://travis-ci.org/) 收费了, 改用 Github Actions.  
+脚本见本仓库 `.github\workflows\main.yml`  
