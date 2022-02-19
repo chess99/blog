@@ -45,10 +45,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Build and Deploy
-        env:
-          HEXO_ALGOLIA_INDEXING_KEY: ${{ secrets.HEXO_ALGOLIA_INDEXING_KEY }}
         run: |
           hexo clean
           hexo generate
-          hexo algolia
           hexo deploy
