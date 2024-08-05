@@ -91,6 +91,17 @@ footer:
   # Powered by Hexo & NexT
   powered: true
 
+  # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, https://beian.mps.gov.cn
+  beian:
+    enable: true
+    icp: 滇ICP备18010000号-2
+    # The digit in the num of gongan beian.
+    gongan_id:
+    # The full num of gongan beian.
+    gongan_num:
+    # The icon for gongan beian. Login and See: https://beian.mps.gov.cn/web/business/businessHome/website
+    gongan_icon_url:
+
 # ---------------------------------------------------------------
 # Post Settings
 # See: https://theme-next.js.org/docs/theme-settings/posts

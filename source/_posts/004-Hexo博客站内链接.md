@@ -25,10 +25,10 @@ categories:
 
 站内相关文章链接:
 
-{% post_link Hexo博客搭建 %}
+{% post_link 002-Hexo博客搭建 %}
 
 ```bash
-{% post_link Hexo博客搭建 %}
+{% post_link 002-Hexo博客搭建 %}
 ```
 
 # 锚点跳转
