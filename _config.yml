@@ -13,9 +13,10 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://blog.cearl.cc
+url: https://cearl.cc/blog
+root: /blog/
 # permalink: :year/:month/:day/:title/
-permalink: /posts/:pid/
+permalink: posts/:pid/
 permalink_defaults:
 pretty_urls:
   trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
@@ -143,6 +144,6 @@ waline:
 deploy:
   deploy:
   type: git
-  repo: git@github.com:chess99/chess99.github.io.git
+  repo: git@github.com:chess99/blog.git
   branch: gh-pages
   message: update
