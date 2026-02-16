@@ -49,6 +49,8 @@ highlight:
   enable: true
   line_number: true
   auto_detect: true
+  exclude_languages:
+    - mermaid
   tab_replace: true
   wrap: true
   hljs: false

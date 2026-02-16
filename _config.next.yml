@@ -174,8 +174,16 @@ font:
 # ---------------------------------------------------------------
 
 math:
+  every_page: true
   mathjax:
     enable: true
+    tags: none
+
+mermaid:
+  enable: true
+  theme:
+    light: default
+    dark: dark
 pjax: true
 fancybox: true
 lazyload: true
