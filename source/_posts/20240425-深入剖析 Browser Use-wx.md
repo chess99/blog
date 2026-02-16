@@ -1,22 +1,22 @@
 ---
-title: 深入剖析 Browser Use-wx
+title: 深入剖析 Browser Use：基于 AI 的下一代浏览器自动化框架
 date: 2024-04-25 00:00:00
 tags:
   - AI
   - Agent
   - Browser Use
   - 浏览器自动化
-  - 微信公众号
 categories:
   - AI研究
 ---
-## 深入剖析 Browser Use：基于 AI 的下一代浏览器自动化框架
 
 ### 引言：当 AI 遇上浏览器
 
-Browser Use 在2025年3月完成了一笔1700万美元的种子轮融资，由 Felicis Ventures 领投，A Capital、Nexus Ventures、Y Combinator、Paul Graham、Liquid2、SV Angel、Pioneer Fund 等跟投。
-
 **Browser Use** 是一款由 AI 大模型驱动的浏览器自动化代理工具。它的核心能力在于能够将网站的按钮和界面元素转化为更易于 AI 理解的文本式格式，从而让 AI 智能体能够轻松地“读懂”网站并自动完成复杂任务。这项技术旨在解决传统基于视觉的系统在浏览网站时容易出错的问题，并降低重复执行相同任务的成本。
+
+<!-- more -->
+
+Browser Use 在2025年3月完成了一笔1700万美元的种子轮融资，由 Felicis Ventures 领投，A Capital、Nexus Ventures、Y Combinator、Paul Graham、Liquid2、SV Angel、Pioneer Fund 等跟投。
 
 该项目的两位创始人 Gregor Zunic 和 Magnus Müller 均为苏黎世联邦理工学院的学生，他们在2024年相识，共同提出了将网络爬虫与数据科学结合的想法。他们仅用了五周时间便开发出了 Browser Use 的演示版本，并选择将其开源。其核心代码大约有 8000 行。这个开源项目在 GitHub 上迅速积累了超过 47k 个 Star，吸引了大量开发者的关注。
 

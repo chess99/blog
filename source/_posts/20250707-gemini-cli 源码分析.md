@@ -8,9 +8,10 @@ tags:
 categories:
   - 源码分析
 ---
-# gemini-cli 源码分析
 
 仓库地址: <https://github.com/google-gemini/gemini-cli>
+
+<!-- more -->
 
 (仓库内docs下的文档其实也很详细)
 

@@ -9,9 +9,10 @@ tags:
 categories:
   - 建站
 ---
-# 从 VitePress 到 Next.js：构建 AI 阅读笔记站的技术演进之路
 
 > 在线演示：[https://cearl.cc/ai-reading/](https://cearl.cc/ai-reading/)
+
+<!-- more -->
 
 ## 1. 项目背景
 
