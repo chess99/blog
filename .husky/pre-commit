@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+npm run check:post-pid && npm run check:post-images
