@@ -52,6 +52,12 @@ npm run clean
 npm run check:post-images
 ```
 
+校验文章 `pid`（当 permalink 使用 `:pid` 时）：
+
+```bash
+npm run check:post-pid
+```
+
 ## Post and Image Conventions
 
 ### Writing Posts
@@ -59,6 +65,8 @@ npm run check:post-images
 - 文章文件放在 `source/_posts/*.md`
 - 使用 front matter（至少包含 `title`、`date`、`tags`、`categories`）
 - 永久链接格式由 `_config.yml` 的 `permalink` 控制
+- 当前为 `permalink: posts/:pid/`，因此每篇文章都需要设置唯一 `pid`
+  - 缺失 `pid` 时会生成 `posts/undefined` 这类异常链接
 
 ### Image References
 

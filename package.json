@@ -7,7 +7,8 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "check:post-images": "python3 tools/check_post_images.py"
+    "check:post-images": "python3 tools/check_post_images.py",
+    "check:post-pid": "python3 tools/check_post_pid.py"
   },
   "hexo": {
     "version": "7.3.0"
