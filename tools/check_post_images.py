@@ -10,6 +10,7 @@ from urllib.parse import unquote
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = REPO_ROOT / "source"
 POSTS_DIR = SOURCE_DIR / "_posts"
+SITE_CONFIG = REPO_ROOT / "_config.yml"
 
 # These posts intentionally contain sample paths in docs text.
 IGNORED_POSTS = {
@@ -17,6 +18,7 @@ IGNORED_POSTS = {
 }
 
 IMAGE_LINK_PATTERN = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+ROOT_PATTERN = re.compile(r"^root:\s*(.+?)\s*$", re.MULTILINE)
 
 
 def normalize_markdown_target(raw_target: str) -> str:
@@ -31,12 +33,35 @@ def is_remote_link(target: str) -> bool:
     return target.startswith(("http://", "https://", "data:"))
 
 
-def resolve_candidates(post_file: Path, target: str) -> list[Path]:
+def normalize_root_prefix(value: str) -> str:
+    root = value.strip().strip('"').strip("'")
+    if not root.startswith("/"):
+        root = "/" + root
+    if not root.endswith("/"):
+        root += "/"
+    return root
+
+
+def load_site_root_prefix() -> str:
+    if not SITE_CONFIG.exists():
+        return "/"
+    config_text = SITE_CONFIG.read_text(encoding="utf-8")
+    match = ROOT_PATTERN.search(config_text)
+    if not match:
+        return "/"
+    return normalize_root_prefix(match.group(1))
+
+
+def resolve_candidates(post_file: Path, target: str, site_root_prefix: str) -> list[Path]:
     # Hexo post asset folder, e.g. foo.md -> foo/<asset>
     post_asset_dir = post_file.with_suffix("")
 
     if target.startswith("/"):
-        return [SOURCE_DIR / target.lstrip("/")]
+        candidates = [SOURCE_DIR / target.lstrip("/")]
+        if site_root_prefix != "/" and target.startswith(site_root_prefix):
+            without_root = target[len(site_root_prefix) :].lstrip("/")
+            candidates.append(SOURCE_DIR / without_root)
+        return candidates
 
     return [
         post_file.parent / target,
@@ -47,6 +72,7 @@ def resolve_candidates(post_file: Path, target: str) -> list[Path]:
 def main() -> int:
     missing: list[tuple[str, str, list[str]]] = []
     checked = 0
+    site_root_prefix = load_site_root_prefix()
 
     for post_file in sorted(POSTS_DIR.glob("*.md")):
         if post_file.name in IGNORED_POSTS:
@@ -60,7 +86,7 @@ def main() -> int:
                 continue
 
             checked += 1
-            candidates = resolve_candidates(post_file, target)
+            candidates = resolve_candidates(post_file, target, site_root_prefix)
             if not any(candidate.exists() for candidate in candidates):
                 missing.append(
                     (
