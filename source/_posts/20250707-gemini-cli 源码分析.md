@@ -1,5 +1,6 @@
 ---
 title: gemini-cli 源码分析
+pid: 111
 date: 2025-07-07 00:00:00
 tags:
   - gemini-cli
