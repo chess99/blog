@@ -96,8 +96,14 @@ oh-my-posh init pwsh --config "$HOME/.config/oh-my-posh/themes/paradox.omp.json"
 PowerShell 有一些内置的短别名会与 Git 别名冲突，如 `gp`（Get-ItemProperty）、`gl`（Get-Location）、`gcm`（Get-Command）等。需要先移除这些内置别名：
 
 ```powershell
-Remove-Alias -Name gp,gl,gcm,gcb -Force -ErrorAction SilentlyContinue
+# 兼容 Windows PowerShell 5.1
+Remove-Item Alias:gp -Force -ErrorAction SilentlyContinue
+Remove-Item Alias:gl -Force -ErrorAction SilentlyContinue
+Remove-Item Alias:gcm -Force -ErrorAction SilentlyContinue
+Remove-Item Alias:gcb -Force -ErrorAction SilentlyContinue
 ```
+
+**注意**：`Remove-Alias` 是 PowerShell 6+ 的命令，Windows PowerShell 5.1 需要用 `Remove-Item Alias:xxx` 方式。
 
 ### 为什么用函数而不是 Set-Alias
 
@@ -180,8 +186,11 @@ function cc {
 oh-my-posh init pwsh --config "$HOME/.config/oh-my-posh/themes/paradox.omp.json" | Invoke-Expression
 
 # Git aliases (参考 oh-my-zsh git plugin)
-# 移除 PowerShell 内置别名冲突
-Remove-Alias -Name gp,gl,gcm,gcb -Force -ErrorAction SilentlyContinue
+# 移除 PowerShell 内置别名冲突 (兼容 Windows PowerShell 5.1)
+Remove-Item Alias:gp -Force -ErrorAction SilentlyContinue
+Remove-Item Alias:gl -Force -ErrorAction SilentlyContinue
+Remove-Item Alias:gcm -Force -ErrorAction SilentlyContinue
+Remove-Item Alias:gcb -Force -ErrorAction SilentlyContinue
 
 function g { git $args }
 function ga { git add $args }
