@@ -13,6 +13,8 @@ categories: 工具
 
 作为 Windows 用户，之前命令行主要用 Git Bash 或 WSL。最近把 VS Code 的默认终端切换到 PowerShell 后，发现 PowerShell 其实也挺有可玩性的。本文记录 PowerShell 的美化配置和 Git 别名设置。
 
+<!-- more -->
+
 ## 执行策略配置
 
 PowerShell 默认禁止运行脚本，启动时会报错：
