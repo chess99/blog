@@ -36,7 +36,6 @@ categories: 分类名
 ```yaml
 ---
 title: 文章标题
-pid: 117
 date: 2026-03-10 00:00:00
 tags:
   - tag1
@@ -50,12 +49,11 @@ categories: 分类名
 | 字段 | 必填 | 说明 |
 |------|------|------|
 | `title` | 是 | 文章标题 |
-| `pid` | 是 | 文章 ID，用于生成 URL（如 `/posts/117/`）。新文章需要递增分配，检查现有最大 pid：`grep -h "^pid:" source/_posts/*.md \| sort -n \| tail -1` |
 | `date` | 是 | 发布日期 |
 | `tags` | 否 | 标签列表 |
 | `categories` | 否 | 分类 |
 
-**注意**：pre-commit 钩子会检查 pid 是否存在和唯一，缺少 pid 会阻止提交。
+**pid 字段**：URL 格式为 `posts/:pid/`，pid 由 pre-commit 钩子自动分配，无需手动填写。
 
 ### 文件命名
 
