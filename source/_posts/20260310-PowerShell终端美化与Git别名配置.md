@@ -91,6 +91,14 @@ oh-my-posh init pwsh --config "$HOME/.config/oh-my-posh/themes/paradox.omp.json"
 
 作为开发者，Git 是最常用的命令之一。参考 oh-my-zsh 的 git 插件，可以在 PowerShell 中实现类似的别名体验。
 
+### 解决内置别名冲突
+
+PowerShell 有一些内置的短别名会与 Git 别名冲突，如 `gp`（Get-ItemProperty）、`gl`（Get-Location）、`gcm`（Get-Command）等。需要先移除这些内置别名：
+
+```powershell
+Remove-Alias -Name gp,gl,gcm,gcb -Force -ErrorAction SilentlyContinue
+```
+
 ### 为什么用函数而不是 Set-Alias
 
 PowerShell 的 `Set-Alias` 不支持带参数的命令别名，所以需要用函数实现：
@@ -172,6 +180,9 @@ function cc {
 oh-my-posh init pwsh --config "$HOME/.config/oh-my-posh/themes/paradox.omp.json" | Invoke-Expression
 
 # Git aliases (参考 oh-my-zsh git plugin)
+# 移除 PowerShell 内置别名冲突
+Remove-Alias -Name gp,gl,gcm,gcb -Force -ErrorAction SilentlyContinue
+
 function g { git $args }
 function ga { git add $args }
 function gaa { git add --all $args }
