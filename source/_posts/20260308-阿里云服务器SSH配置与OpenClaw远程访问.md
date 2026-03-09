@@ -1,5 +1,6 @@
 ---
 title: 阿里云服务器SSH配置与OpenClaw远程访问
+pid: 115
 date: 2026-03-08 00:00:00
 tags:
   - SSH

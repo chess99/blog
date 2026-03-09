@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-npm run check:post-pid && npm run check:post-images
+python tools/check_post_pid.py && python tools/check_post_images.py
