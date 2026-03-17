@@ -16,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = REPO_ROOT / "source" / "_posts"
 
 PID_PATTERN = re.compile(r"^pid:\s*(\d+)\s*$", re.MULTILINE)
+EMPTY_PID_PATTERN = re.compile(r"^pid:\s*$", re.MULTILINE)
 PERMALINK_PATTERN = re.compile(r"^permalink:\s*(.+?)\s*$", re.MULTILINE)
 TITLE_PATTERN = re.compile(r"^(title:\s*.+)$", re.MULTILINE)
 
@@ -51,9 +52,15 @@ def add_pid_to_file(post_file: Path, pid: int) -> bool:
     """Add pid to a post file. Returns True if modified."""
     content = post_file.read_text(encoding="utf-8")
 
-    # Check if pid already exists
+    # Check if pid already exists with a value
     if PID_PATTERN.search(content):
         return False
+
+    # Replace empty pid: field if present
+    if EMPTY_PID_PATTERN.search(content):
+        new_content = EMPTY_PID_PATTERN.sub(f"pid: {pid}", content, count=1)
+        post_file.write_text(new_content, encoding="utf-8")
+        return True
 
     # Insert pid after title line
     match = TITLE_PATTERN.search(content)
@@ -61,7 +68,6 @@ def add_pid_to_file(post_file: Path, pid: int) -> bool:
         print(f"Warning: No title found in {post_file.name}")
         return False
 
-    # Find the end of title line
     end_pos = match.end()
     new_content = content[:end_pos] + f"\npid: {pid}" + content[end_pos:]
 
@@ -94,6 +100,7 @@ def main() -> int:
         content = post_file.read_text(encoding="utf-8")
         match = PID_PATTERN.search(content)
         if not match:
+            # Treat empty pid: field same as missing pid
             missing_files.append(post_file)
             continue
 
