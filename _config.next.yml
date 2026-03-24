@@ -194,11 +194,20 @@ pangu: true
 # See: https://theme-next.js.org/docs/third-party-services/statistics-and-analytics
 # ---------------------------------------------------------------
 
-#google_analytics:
-google_analytics: UA-119344558-1
+google_analytics: G-C3YEYVPEBR
 
 # Baidu Analytics ID
 baidu_analytics: a3985caca7018e283757684913b68503
+
+# 不蒜子 - 页面访问量统计
+busuanzi_count:
+  enable: true
+  total_visitors: true       # 全站访客数（UV）
+  total_visitors_icon: fa fa-user
+  total_views: true          # 全站浏览量（PV）
+  total_views_icon: fa fa-eye
+  post_views: true           # 文章阅读量
+  post_views_icon: far fa-eye
 
 #  tracking_id:
 
