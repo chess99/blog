@@ -1,7 +1,7 @@
 ---
 title: Agents - Google智能体白皮书
 pid: 110
-slug: google-agents-whitepaper
+permalink: /posts/google-agents-whitepaper/
 alias:
   - /posts/110/
 date: 2025-05-27 00:00:00

@@ -1,7 +1,7 @@
 ---
 title: 使用相对路径发布vue-cli项目
 pid: 3
-slug: vue-cli-relative-path
+permalink: /posts/vue-cli-relative-path/
 alias:
   - /posts/3/
 date: 2018-06-06 19:28:19

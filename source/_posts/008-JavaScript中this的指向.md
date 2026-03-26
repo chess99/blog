@@ -1,7 +1,7 @@
 ---
 title: JavaScript中this的指向
 pid: 8
-slug: javascript-this
+permalink: /posts/javascript-this/
 alias:
   - /posts/8/
 date: 2018-06-25 12:34:59

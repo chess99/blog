@@ -1,7 +1,7 @@
 ---
 title: 用 GAN 的思路设计 AI 编程 Harness：Anthropic 的多智能体实践
 pid: 122
-slug: harness-design-multi-agent
+permalink: /posts/harness-design-multi-agent/
 alias:
   - /posts/122/
 date: 2026-03-25 00:00:00

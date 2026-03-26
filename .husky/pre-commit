@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-python tools/check_post_slug.py && python tools/check_post_images.py
+python tools/check_post_permalink.py && python tools/check_post_images.py

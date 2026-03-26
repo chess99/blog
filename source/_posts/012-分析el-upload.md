@@ -1,7 +1,7 @@
 ---
 title: 分析el-upload
 pid: 12
-slug: el-upload-analysis
+permalink: /posts/el-upload-analysis/
 alias:
   - /posts/12/
 date: 2019-09-18 00:00:01

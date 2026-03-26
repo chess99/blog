@@ -1,7 +1,7 @@
 ---
 title: PowerShell 终端美化与 Git 别名配置
 pid: 116
-slug: powershell-git-setup
+permalink: /posts/powershell-git-setup/
 alias:
   - /posts/116/
 date: 2026-03-10 00:00:00

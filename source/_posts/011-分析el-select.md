@@ -1,7 +1,7 @@
 ---
 title: 分析el-select
 pid: 11
-slug: el-select-analysis
+permalink: /posts/el-select-analysis/
 alias:
   - /posts/11/
 date: 2019-09-18 00:00:00

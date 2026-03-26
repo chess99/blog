@@ -1,7 +1,7 @@
 ---
 title: CRLF行尾问题
 pid: 9
-slug: crlf-line-endings
+permalink: /posts/crlf-line-endings/
 alias:
   - /posts/9/
 date: 2018-06-27 10:58:51

@@ -1,7 +1,7 @@
 ---
 title: Hexo博客站内链接
 pid: 4
-slug: hexo-internal-links
+permalink: /posts/hexo-internal-links/
 alias:
   - /posts/4/
 date: 2018-06-11 00:36:43

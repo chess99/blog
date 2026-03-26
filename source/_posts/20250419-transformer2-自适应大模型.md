@@ -1,7 +1,7 @@
 ---
 title: Transformer² - 实时自适应大模型的新范式
 pid: 107
-slug: transformer-squared
+permalink: /posts/transformer-squared/
 alias:
   - /posts/107/
 date: 2025-04-19 00:00:00
