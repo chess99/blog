@@ -44,23 +44,32 @@ categories: 分类名
 ---
 ```
 
-**重要字段说明**：
+**字段说明**：
 
 | 字段 | 必填 | 说明 |
 |------|------|------|
-| `title` | 是 | 文章标题 |
+| `title` | 是 | 文章标题（中文） |
 | `date` | 是 | 发布日期 |
 | `tags` | 否 | 标签列表 |
 | `categories` | 否 | 分类 |
 
-**pid 字段**：URL 格式为 `posts/:pid/`，pid 由 pre-commit 钩子自动分配，无需手动填写。
+### 文件命名与 URL
 
-### 文件命名
+文章存放在 `source/_posts/YYYY/MM/` 子目录下，文件名使用语义化英文 slug：
 
-文章存放在 `source/_posts/` 目录，命名格式：
+```
+source/_posts/
+  2026/
+    03/
+      hexo-permalink-deep-dive.md
+      interview-strategy-ai-era.md
+```
 
-- 新格式：`YYYYMMDD-标题.md`（推荐）
-- 旧格式：`001-标题.md`、`002-标题.md`（历史遗留）
+URL 由文件名自动决定：`/posts/<文件名>/`，例如 `/posts/hexo-permalink-deep-dive/`。
+
+**无需在 front matter 里写 `permalink` 字段**，文件名即 URL。
+
+**旧文章**（`001-中文名.md` 或 `YYYYMMDD-中文名.md`）保持原样，front matter 里有 `permalink` 字段显式指定 URL。
 
 ## 常用命令
 
