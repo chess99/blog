@@ -1,54 +1,123 @@
 ---
 title: 页面不存在
+layout: false
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - 页面不存在</title>
+  <title>404 — 页面不存在</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F7F5F2;
+      --ink: #1A1A18;
+      --ink-muted: #6B6860;
+      --ink-faint: #C8C4BC;
+      --accent: #1A1A18;
+      --radius: 2px;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f8f8f8;
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
     }
-    .container { text-align: center; padding: 2rem; }
-    .code {
-      font-size: 6rem;
+
+    .frame {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    /* Top rule */
+    .rule {
+      width: 100%;
+      height: 3px;
+      background: var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    /* 404 numeral — big typographic statement */
+    .numeral {
+      font-size: clamp(6rem, 20vw, 9rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--ink-faint);
+      margin-bottom: 2rem;
+      font-variant-numeric: tabular-nums;
+      user-select: none;
+    }
+
+    .heading {
+      font-size: clamp(1.25rem, 4vw, 1.5rem);
       font-weight: 700;
-      color: #ddd;
-      line-height: 1;
-      letter-spacing: -4px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
     }
-    .message {
-      font-size: 1.25rem;
-      color: #666;
-      margin: 1rem 0 2rem;
+
+    .sub {
+      font-size: 0.9375rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
     }
+
+    /* Bottom rule */
+    .rule-thin {
+      width: 100%;
+      height: 1px;
+      background: var(--ink-faint);
+      margin-bottom: 2rem;
+    }
+
     .home-link {
-      display: inline-block;
-      padding: 0.6rem 1.5rem;
-      background: #333;
-      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      background: var(--accent);
+      color: var(--bg);
       text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      transition: background 0.2s;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: var(--radius);
+      transition: opacity 0.15s ease;
+      cursor: pointer;
     }
-    .home-link:hover { background: #555; }
+
+    .home-link:hover { opacity: 0.75; }
+    .home-link:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 3px;
+    }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .home-link:hover .arrow { transform: translateX(-3px); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="code">404</div>
-    <p class="message">页面不存在或已被移动</p>
-    <a class="home-link" href="/blog/">回到首页</a>
-  </div>
+  <main class="frame" role="main">
+    <div class="rule" aria-hidden="true"></div>
+    <div class="numeral" aria-hidden="true">404</div>
+    <h1 class="heading">页面不存在</h1>
+    <p class="sub">你访问的页面不存在，或已被移动到新地址。</p>
+    <div class="rule-thin" aria-hidden="true"></div>
+    <a class="home-link" href="/blog/">
+      <span class="arrow" aria-hidden="true">←</span>
+      回到首页
+    </a>
+  </main>
 </body>
 </html>
