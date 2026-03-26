@@ -1,6 +1,9 @@
 ---
 title: 支持WSS
 pid: 7
+slug: https-wss-setup
+alias:
+  - /posts/7/
 date: 2018-06-14 09:58:14
 tags:
   - SSL

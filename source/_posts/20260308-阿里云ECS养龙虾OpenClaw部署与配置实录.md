@@ -1,6 +1,9 @@
 ---
 title: 阿里云ECS养龙虾：OpenClaw部署与配置实录
 pid: 115
+slug: openclaw-on-ecs
+alias:
+  - /posts/115/
 date: 2026-03-08 00:00:00
 tags:
   - SSH

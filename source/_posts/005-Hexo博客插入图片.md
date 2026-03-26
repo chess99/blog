@@ -1,6 +1,9 @@
 ---
 title: Hexo博客插入图片
 pid: 5
+slug: hexo-insert-images
+alias:
+  - /posts/5/
 date: 2018-06-11 00:36:44
 tags:
   - Hexo

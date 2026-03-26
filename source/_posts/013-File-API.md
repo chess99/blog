@@ -1,6 +1,9 @@
 ---
 title: File API
 pid: 13
+slug: file-api
+alias:
+  - /posts/13/
 date: 2019-09-18 00:00:02
 tags:
   - webapi

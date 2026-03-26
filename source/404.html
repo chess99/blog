@@ -1,18 +1,54 @@
-<!DOCTYPE HTML>
-<html>
+---
+title: 页面不存在
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8;"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="robots" content="all" />
-  <meta name="robots" content="index,follow"/>
-  <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - 页面不存在</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8f8f8;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container { text-align: center; padding: 2rem; }
+    .code {
+      font-size: 6rem;
+      font-weight: 700;
+      color: #ddd;
+      line-height: 1;
+      letter-spacing: -4px;
+    }
+    .message {
+      font-size: 1.25rem;
+      color: #666;
+      margin: 1rem 0 2rem;
+    }
+    .home-link {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .home-link:hover { background: #555; }
+  </style>
 </head>
 <body>
-  <script type="text/plain" src="http://www.qq.com/404/search_children.js"
-          charset="utf-8" homePageUrl="/"
-          homePageName="回到我的主页">
-  </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
+  <div class="container">
+    <div class="code">404</div>
+    <p class="message">页面不存在或已被移动</p>
+    <a class="home-link" href="/blog/">回到首页</a>
+  </div>
 </body>
 </html>

@@ -16,7 +16,7 @@ timezone: Asia/Shanghai
 url: https://cearl.cc/blog
 root: /blog/
 # permalink: :year/:month/:day/:title/
-permalink: posts/:pid/
+permalink: posts/:slug/
 permalink_defaults:
 pretty_urls:
   trailing_index: false # Set to false to remove trailing 'index.html' from permalinks

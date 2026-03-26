@@ -1,6 +1,9 @@
 ---
 title: AI 写代码写到一半就出轨？你缺的不是更好的提示词，是 Harness
 pid: 118
+slug: ai-coding-harness
+alias:
+  - /posts/118/
 date: 2026-03-23 00:00:00
 tags:
   - Harness Engineering

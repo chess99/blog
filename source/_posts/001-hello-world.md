@@ -1,6 +1,9 @@
 ---
 title: Hello World
 pid: 1
+slug: hello-world
+alias:
+  - /posts/1/
 date: 2018-05-31 20:16:13
 tags:
   - testing

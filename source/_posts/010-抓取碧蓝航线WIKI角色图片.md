@@ -1,6 +1,9 @@
 ---
 title: 抓取碧蓝航线WIKI角色图片
 pid: 10
+slug: azur-lane-wiki-scraper
+alias:
+  - /posts/10/
 date: 2018-07-07 23:55:32
 tags:
   - 爬虫

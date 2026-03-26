@@ -1,6 +1,9 @@
 ---
 title: Hexo博客搭建
 pid: 2
+slug: hexo-setup
+alias:
+  - /posts/2/
 date: 2018-05-31 20:16:14
 tags:
   - Hexo
