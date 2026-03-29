@@ -111,6 +111,23 @@ categories: 工具
 
 什么时候用：开始一个新的大任务之前，或者感觉 Claude 的响应质量下降时先看一眼。如果剩余空间不多，用 `/compact` 释放后再继续。
 
+如果不想每次手动查，可以装 **claude-hud**——它把上下文进度条常驻在输入框下方，绿色到红色渐变，一眼看出剩余空间：
+
+```
+[Opus] │ my-project git:(main*)
+Context █████░░░░░ 45% │ Usage ██░░░░░░░░ 25% (1h 30m / 5h)
+```
+
+三步安装：
+
+```
+/plugin marketplace add jarrodwatts/claude-hud
+/plugin install claude-hud
+/claude-hud:setup
+```
+
+安装后重启 Claude Code 生效。默认显示模型名、项目路径、git 分支、上下文进度条。可选开启工具活动、子 Agent 状态、Todo 进度等，用 `/claude-hud:configure` 配置。
+
 ---
 
 ## 第三组：模型与效率，在速度和质量之间调节
@@ -399,5 +416,5 @@ claude --bare -p "把这段 JSON 格式化输出" <<< "$data"
 **长期项目的上下文管理策略：**
 - 每天开始前用 `/continue` 恢复会话
 - 完成一个大的子任务后用 `/compact` 压缩
-- 用 `/context` 监控剩余空间
+- 用 claude-hud 常驻监控上下文进度，或手动用 `/context` 查看
 - 接近上限时新建会话，把关键信息写进 `CLAUDE.md` 永久保存
