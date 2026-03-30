@@ -15,7 +15,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = REPO_ROOT / "source" / "_posts"
 
-PID_PATTERN = re.compile(r"^pid:\s*(\d+)\s*$", re.MULTILINE)
+PID_PATTERN = re.compile(r"^pid:\s*['\"]?(\d+)['\"]?\s*$", re.MULTILINE)
 EMPTY_PID_PATTERN = re.compile(r"^pid:\s*$", re.MULTILINE)
 PERMALINK_PATTERN = re.compile(r"^permalink:\s*(.+?)\s*$", re.MULTILINE)
 TITLE_PATTERN = re.compile(r"^(title:\s*.+)$", re.MULTILINE)
