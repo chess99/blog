@@ -93,9 +93,56 @@ hexo new "文章标题"
 .
 ├── source/
 │   ├── _posts/          # 文章目录
+│   ├── _drafts/         # 创作过程工作区（每篇文章一个子目录）
+│   ├── _skills/         # 自媒体工作室 SOP 文件
 │   └── images/          # 图片资源
 ├── themes/
 │   └── next/            # NexT 主题
 ├── _config.yml          # Hexo 配置
 └── _config.next.yml     # 主题配置
 ```
+
+## 自媒体工作室
+
+这个博客使用 AI native 的创作流程，每篇文章经过五个角色依次处理。
+
+### 团队角色
+
+| 角色 | SOP 文件 | 职责 | 输出 |
+|------|----------|------|------|
+| 选题编辑 | `source/_skills/topic-editor.md` | 评估原始想法，输出选题卡 | `topic-card.md` |
+| 素材研究员 | `source/_skills/researcher.md` | 收集支撑素材 | `research.md` |
+| 主笔 | `source/_skills/writer.md` | 根据选题卡+素材写初稿 | `draft.md` |
+| 同行审校 | `source/_skills/reviewer.md` | 挑逻辑/事实/表述问题 | `review.md` |
+| 渠道适配 | `source/_skills/publisher.md` | 生成各渠道版本并发布 | 各渠道文件 |
+
+### 流程
+
+```
+原始想法 → [选题编辑] → [素材研究员] → [主笔] → [同行审校] → [渠道适配] → 发布
+```
+
+### 工作区约定
+
+每篇文章的创作过程产物放在 `source/_drafts/<slug>/`：
+
+```
+source/_drafts/<slug>/
+├── topic-card.md   # 选题卡（选题编辑输出）
+├── research.md     # 素材清单（素材研究员输出）
+├── draft.md        # 初稿（主笔输出）
+├── review.md       # 审校意见（同行审校输出）
+└── final.md        # 终稿（处理审校意见后）
+```
+
+### 质量门禁
+
+- 审校意见中的 🔴 必须修改项全部处理完，才能进入渠道适配环节
+- 发布到博客的文件路径：`source/_posts/YYYY/MM/<slug>.md`
+
+### 渠道
+
+同源多渠道，不做轻量化改写，同一篇文章直接发布到所有渠道：
+- **博客**：`source/_posts/YYYY/MM/<slug>.md`
+- **内部知识库**：发布命令见 memory（含 internal-parent-id 和 内部账号）
+- **公众号**：通过 `~/code2/wx-publisher` 发布，发布命令见 memory
