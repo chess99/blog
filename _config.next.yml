@@ -194,7 +194,9 @@ pangu: true
 # See: https://theme-next.js.org/docs/third-party-services/statistics-and-analytics
 # ---------------------------------------------------------------
 
-google_analytics: G-C3YEYVPEBR
+google_analytics:
+  tracking_id: G-C3YEYVPEBR
+  only_pageview: false
 
 # Baidu Analytics ID
 baidu_analytics: a3985caca7018e283757684913b68503
