@@ -1,4 +1,5 @@
 ---
+permalink: /posts/powershell-git-setup/
 title: PowerShell 终端美化与 Git 别名配置
 pid: 116
 

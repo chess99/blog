@@ -55,21 +55,27 @@ categories: 分类名
 
 ### 文件命名与 URL
 
-文章存放在 `source/_posts/YYYY/MM/` 子目录下，文件名使用语义化英文 slug：
+文章存放在 `source/_posts/YYYY/MM/` 子目录下，文件名格式为 `YYYYMMDD-slug.md`：
 
 ```
 source/_posts/
   2026/
     03/
-      hexo-permalink-deep-dive.md
-      interview-strategy-ai-era.md
+      20260326-hexo-permalink-deep-dive.md
+      20260325-interview-strategy-ai-era.md
 ```
 
-URL 由文件名自动决定：`/posts/<文件名>/`，例如 `/posts/hexo-permalink-deep-dive/`。
+日期前缀保证目录内文件按发布日期自然排序。
 
-**无需在 front matter 里写 `permalink` 字段**，文件名即 URL。
+**URL 由 front matter 的 `permalink` 字段决定**，与文件名无关：
 
-**旧文章**（`001-中文名.md` 或 `YYYYMMDD-中文名.md`）保持原样，front matter 里有 `permalink` 字段显式指定 URL。
+```yaml
+permalink: /posts/hexo-permalink-deep-dive/
+```
+
+每篇新文章都必须在 front matter 里显式写 `permalink: /posts/<slug>/`，slug 取文件名去掉日期前缀和扩展名。
+
+**旧文章**（有 `pid` 字段）：URL 靠 `alias` 字段（如 `alias: /posts/102/`）保证，无需 `permalink`。
 
 ## 常用命令
 

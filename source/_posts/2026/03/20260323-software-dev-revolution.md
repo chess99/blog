@@ -1,4 +1,5 @@
 ---
+permalink: /posts/software-dev-revolution/
 title: 软件研发的工业革命：我们已经走到哪里，还有多远
 pid: 120
 

@@ -1,4 +1,5 @@
 ---
+permalink: /posts/openclaw-on-ecs/
 title: 阿里云ECS养龙虾：OpenClaw部署与配置实录
 pid: 115
 

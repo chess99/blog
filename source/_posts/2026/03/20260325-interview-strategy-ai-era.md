@@ -1,4 +1,5 @@
 ---
+permalink: /posts/interview-strategy-ai-era/
 title: AI 时代的面试策略：gstack 的"创始人信号"给了我很多启发
 pid: 123
 

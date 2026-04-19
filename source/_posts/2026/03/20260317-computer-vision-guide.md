@@ -1,4 +1,5 @@
 ---
+permalink: /posts/computer-vision-guide/
 title: CV从入门到精通到入土
 pid: 117
 

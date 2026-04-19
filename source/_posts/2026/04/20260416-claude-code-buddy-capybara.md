@@ -1,4 +1,5 @@
 ---
+permalink: /posts/claude-code-buddy-capybara/
 title: 我让 Claude 逆向了自己，0.04 秒找到传说闪光卡皮巴拉
 pid: 120
 date: 2026-04-16 00:00:00

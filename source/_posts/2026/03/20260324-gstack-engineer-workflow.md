@@ -1,4 +1,5 @@
 ---
+permalink: /posts/gstack-engineer-workflow/
 title: gstack：把 Claude Code 变成一支工程师团队
 pid: 121
 

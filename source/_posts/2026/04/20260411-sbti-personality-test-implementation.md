@@ -1,4 +1,5 @@
 ---
+permalink: /posts/sbti-personality-test-implementation/
 title: 人格测试的结果，15.8% 由数组顺序决定
 date: 2026-04-11 00:00:00
 tags:

@@ -1,4 +1,5 @@
 ---
+permalink: /posts/xpti-personality-test-reverse-engineering/
 title: 拆解一个人格测试：结果页藏着淘宝链接，"同类人"数字是随机数
 date: 2026-04-13 00:00:00
 tags:

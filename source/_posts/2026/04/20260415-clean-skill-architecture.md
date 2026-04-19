@@ -1,4 +1,5 @@
 ---
+permalink: /posts/clean-skill-architecture/
 title: Skill 的整洁之道：软件架构原则在 AI 时代的新生
 date: 2026-04-15 00:00:00
 tags:

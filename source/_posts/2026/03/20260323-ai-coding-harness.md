@@ -1,4 +1,5 @@
 ---
+permalink: /posts/ai-coding-harness/
 title: AI 写代码写到一半就出轨？你缺的不是更好的提示词，是 Harness
 pid: 118
 
