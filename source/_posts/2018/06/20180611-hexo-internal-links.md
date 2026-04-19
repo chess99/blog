@@ -27,8 +27,6 @@ categories:
 
 站内相关文章链接:
 
-{% post_link hexo-setup %}
-
 ```bash
 {% post_link hexo-setup %}
 ```

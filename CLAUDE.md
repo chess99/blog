@@ -38,7 +38,7 @@ source/_posts/YYYY/MM/YYYYMMDD-slug.md
 
 ```
 source/images/<slug>/   # 发布用图片
-source/_drafts/<slug>/  # 创作过程原始素材（不混用）
+drafts/<slug>/          # 创作过程原始素材（不混用）
 ```
 
 文档内引用：`![说明](/images/<slug>/image.jpg)`
@@ -59,8 +59,8 @@ hexo deploy    # 部署
 .
 ├── source/
 │   ├── _posts/      # 文章
-│   ├── _drafts/     # 创作工作区（每篇文章一个子目录）
 │   └── images/      # 图片资源
+├── drafts/          # 创作工作区（每篇文章一个子目录，不被 Hexo 构建）
 ├── .claude/
 │   └── skills/
 │       └── blog-workflow/  # 博客创作流水线 skill

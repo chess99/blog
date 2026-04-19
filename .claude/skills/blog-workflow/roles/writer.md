@@ -6,15 +6,15 @@
 
 ## 输入
 
-- `source/_drafts/<slug>/topic-card.md`（选题卡）
-- `source/_drafts/<slug>/research.md`（素材清单）
+- `drafts/<slug>/topic-card.md`（选题卡）
+- `drafts/<slug>/research.md`（素材清单）
 - 遵循写作风格指南：`.claude/skills/blog-workflow/roles/writing-guide.md`（写作前读取）
 - 中文写作，专有名词保留英文（SOLID、Conway's Law、agent、skill）
 - 长度：技术深度版 1500-3000 字，不为凑字数，也不省掉必要解释
 
 ## 输出
 
-输出到 `source/_drafts/<slug>/draft.md`，包含完整 front matter：
+输出到 `drafts/<slug>/draft.md`，包含完整 front matter：
 
 ```yaml
 ---

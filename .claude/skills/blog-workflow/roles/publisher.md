@@ -6,7 +6,7 @@
 
 ## 输入
 
-`source/_drafts/<slug>/final.md`（终稿，已处理审校意见）
+`drafts/<slug>/final.md`（终稿，已处理审校意见）
 
 ## 渠道规格
 
@@ -45,4 +45,4 @@ npm run dev -- publish \
 ## 质量标准
 
 - 公众号版删改后，核心洞察不能丢失
-- 各渠道版本发布后，在 `source/_drafts/<slug>/` 下记录发布状态
+- 各渠道版本发布后，在 `drafts/<slug>/` 下记录发布状态

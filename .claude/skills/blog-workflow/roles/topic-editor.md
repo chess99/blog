@@ -32,7 +32,7 @@
 
 ## 输出：选题卡
 
-输出到 `source/_drafts/<slug>/topic-card.md`，格式：
+输出到 `drafts/<slug>/topic-card.md`，格式：
 
 ```markdown
 # 选题卡：<标题>

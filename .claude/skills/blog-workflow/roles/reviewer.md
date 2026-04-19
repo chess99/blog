@@ -11,8 +11,8 @@
 主笔完成 `draft.md` 或 `final.md` 后，用 Agent tool 派发审校子 agent，传入以下上下文：
 
 ```
-ARTICLE_PATH: source/_drafts/<slug>/draft.md
-TOPIC_CARD_PATH: source/_drafts/<slug>/topic-card.md
+ARTICLE_PATH: drafts/<slug>/draft.md
+TOPIC_CARD_PATH: drafts/<slug>/topic-card.md
 WHAT_WAS_WRITTEN: <一句话描述文章内容>
 SLUG: <slug>
 ```
@@ -21,13 +21,13 @@ SLUG: <slug>
 ```
 你是同行审校。请阅读以下文章并按 reviewer SOP 输出审校意见。
 
-文章路径：source/_drafts/<slug>/draft.md
-选题卡路径：source/_drafts/<slug>/topic-card.md
+文章路径：drafts/<slug>/draft.md
+选题卡路径：drafts/<slug>/topic-card.md
 文章简介：<一句话>
 
 审校 SOP 在：~/code2/blog/.claude/skills/blog-workflow/roles/reviewer.md
 
-输出审校意见到：source/_drafts/<slug>/review.md
+输出审校意见到：drafts/<slug>/review.md
 ```
 
 审校 agent 不继承主笔的上下文，自己读文件、自己判断。
@@ -43,8 +43,8 @@ SLUG: <slug>
 ## 输入
 
 读取以下文件（不依赖调用方的上下文）：
-- `source/_drafts/<slug>/draft.md`（待审文章）
-- `source/_drafts/<slug>/topic-card.md`（选题卡，用于核对文章是否偏离原定方向）
+- `drafts/<slug>/draft.md`（待审文章）
+- `drafts/<slug>/topic-card.md`（选题卡，用于核对文章是否偏离原定方向）
 
 ## 写作标准参考
 
@@ -74,7 +74,7 @@ SLUG: <slug>
 
 ## 输出：审校意见
 
-输出到 `source/_drafts/<slug>/review.md`，格式：
+输出到 `drafts/<slug>/review.md`，格式：
 
 ```markdown
 # 审校意见：<标题>

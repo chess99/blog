@@ -6,7 +6,7 @@
 
 ## 输入
 
-`source/_drafts/<slug>/topic-card.md`（选题卡）
+`drafts/<slug>/topic-card.md`（选题卡）
 
 ## 工作流程
 
@@ -24,7 +24,7 @@
 
 ## 输出：素材清单
 
-输出到 `source/_drafts/<slug>/research.md`，格式：
+输出到 `drafts/<slug>/research.md`，格式：
 
 ```markdown
 # 素材清单：<标题>

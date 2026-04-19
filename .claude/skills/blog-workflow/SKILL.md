@@ -15,7 +15,7 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 
 ## 阶段检测
 
-收到任务后，先确定 slug，然后检查 `source/_drafts/<slug>/` 下存在哪些文件：
+收到任务后，先确定 slug，然后检查 `drafts/<slug>/` 下存在哪些文件：
 
 | 已有文件 | 当前阶段 | 下一步角色 |
 |---------|---------|-----------|
@@ -43,7 +43,7 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 ## 工作区结构
 
 ```
-source/_drafts/<slug>/
+drafts/<slug>/
 ├── topic-card.md   # 选题卡
 ├── research.md     # 素材清单
 ├── draft.md        # 初稿
