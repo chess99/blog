@@ -75,6 +75,25 @@ permalink: /posts/hexo-permalink-deep-dive/
 
 每篇新文章都必须在 front matter 里显式写 `permalink: /posts/<slug>/`，slug 取文件名去掉日期前缀和扩展名。
 
+### 图片存放
+
+图片按文章分目录，目录名 = slug（与文章文件名去掉日期前缀和扩展名一致）：
+
+```
+source/images/<slug>/
+  image1.jpg
+  image2.png
+```
+
+文档内引用：
+
+```markdown
+![说明](/images/taobao-ai-coding/image1.jpg)
+```
+
+跨文章共用的图片（如主题背景图）直接放 `source/images/` 根目录。
+
+`source/_drafts/<slug>/` 里存放的是创作过程中的原始素材，图片编辑处理后才移入 `source/images/<slug>/`，两者不混用。
 
 ## 常用命令
 
