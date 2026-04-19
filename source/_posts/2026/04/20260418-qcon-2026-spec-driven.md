@@ -8,7 +8,7 @@ tags:
   - 低代码
   - Harness Engineering
 categories: 会议笔记
-permalink: /posts/spec-driven/
+permalink: /posts/qcon-2026-spec-driven/
 ---
 
 > 主讲：姜天意（网易智企，CodeWave & CoreAgent 技术负责人）

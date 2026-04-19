@@ -8,7 +8,7 @@ tags:
   - memOS
   - 多 Agent
 categories: 会议笔记
-permalink: /posts/memtensor-agent-memory/
+permalink: /posts/qcon-2026-memtensor-agent-memory/
 ---
 
 > 主讲：熊飞宇 博士（记忆张量 MemTensor，创始人 & CEO）
@@ -66,7 +66,7 @@ MemTensor 团队 2023 年在上海算法创新研究院成立。在此之前我�
 
 ---
 
-![记忆增强层落地需要做什么 记忆系统五大核心功能](/images/memtensor-agent-memory/IMG_20260418_112958.jpg)
+![记忆增强层落地需要做什么 记忆系统五大核心功能](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_112958.jpg)
 
 
 ## 四、两条技术路径的对比
@@ -93,7 +93,7 @@ MemTensor 团队 2023 年在上海算法创新研究院成立。在此之前我�
 
 ---
 
-![模型驱动 vs 应用驱动 两条路径对比](/images/memtensor-agent-memory/IMG_20260418_113235.jpg)
+![模型驱动 vs 应用驱动 两条路径对比](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_113235.jpg)
 
 
 ## 五、memOS 1.0：记忆分层架构
@@ -114,7 +114,7 @@ memOS 1.0 的核心是**三层记忆分层架构**，源自 MemCube 的思想：
 
 ---
 
-![MemOS 10 三大关键技术 分层 调度 类脑图](/images/memtensor-agent-memory/IMG_20260418_113657.jpg)
+![MemOS 10 三大关键技术 分层 调度 类脑图](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_113657.jpg)
 
 
 ## 六、memOS 2.0：面向长期运行的 Agent
@@ -142,7 +142,7 @@ memOS 1.0 的核心是**三层记忆分层架构**，源自 MemCube 的思想：
 
 ---
 
-![从MemOS 10 到 MemOS 20 演化路径](/images/memtensor-agent-memory/IMG_20260418_113836.jpg)
+![从MemOS 10 到 MemOS 20 演化路径](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_113836.jpg)
 
 
 ## 七、memOS 开源社区
@@ -191,9 +191,9 @@ memOS 从 6 个维度做了提升：
 
 ---
 
-![OpenClaw记忆系统的核心问题](/images/memtensor-agent-memory/IMG_20260418_114931.jpg)
+![OpenClaw记忆系统的核心问题](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_114931.jpg)
 
-![MemOS全面增强OpenClaw 六大核心维度对比](/images/memtensor-agent-memory/IMG_20260418_115130.jpg)
+![MemOS全面增强OpenClaw 六大核心维度对比](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_115130.jpg)
 
 
 
@@ -227,7 +227,7 @@ ClawForce 是我们在 memOS 之上构建的企业级多 Agent 产品。内部�
 
 ---
 
-![Hub技能流转 团队级复用](/images/memtensor-agent-memory/IMG_20260418_115848.jpg)
+![Hub技能流转 团队级复用](/images/qcon-2026-memtensor-agent-memory/IMG_20260418_115848.jpg)
 
 
 ## 答疑

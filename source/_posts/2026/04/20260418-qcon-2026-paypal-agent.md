@@ -8,7 +8,7 @@ tags:
   - EERO
   - 多 Agent
 categories: 会议笔记
-permalink: /posts/paypal-agent/
+permalink: /posts/qcon-2026-paypal-agent/
 ---
 
 > 主讲：郁丁鑫（PayPal，Senior Manager - Software Engineering）
@@ -38,7 +38,7 @@ PayPal 的支付产品已经迭代了好几轮，提供了非常好的支付体�
 
 ---
 
-![MAIA Accelerate Simplify Robus](/images/paypal-agent/IMG_20260418_161023.jpg)
+![MAIA Accelerate Simplify Robus](/images/qcon-2026-paypal-agent/IMG_20260418_161023.jpg)
 
 
 ## MAIA 的工作方式（Live Demo）
@@ -88,7 +88,7 @@ PayPal 的支付产品已经迭代了好几轮，提供了非常好的支付体�
 
 ---
 
-![Agent A B 长短期记忆架构图](/images/paypal-agent/IMG_20260418_161629.jpg)
+![Agent A B 长短期记忆架构图](/images/qcon-2026-paypal-agent/IMG_20260418_161629.jpg)
 
 
 ## 耿树朋：评测体系的设计
@@ -121,7 +121,7 @@ MAIA 有一个特殊的挑战：Agent 托管在商户自己的环境，我们看
 
 一次成功和多次成功的概率要保持一致。基于测试方案 + 数据合成，搭建了自己的回归测试 pipeline。
 
-![Evaluation Synthetic Test Muta](/images/paypal-agent/IMG_20260418_162535.jpg)
+![Evaluation Synthetic Test Muta](/images/qcon-2026-paypal-agent/IMG_20260418_162535.jpg)
 
 
 ### Noise Injection：Multi-Agent 驱动的测试数据工厂
@@ -144,7 +144,7 @@ MAIA 有一个特殊的挑战：Agent 托管在商户自己的环境，我们看
 
 为了引入更多随机性，我们还加了一个"降级"设计：让模型扮演不同风格的工程师画像（20 年经验只写 PHP 的资深工程师 vs 1 年经验只写 React 的初级工程师），从新版本再降级回旧版本，生成更多样的测试变体。
 
-![MAIA Data Synthesis Pipeline N](/images/paypal-agent/IMG_20260418_162944.jpg)
+![MAIA Data Synthesis Pipeline N](/images/qcon-2026-paypal-agent/IMG_20260418_162944.jpg)
 
 
 ### 可观测性工具
@@ -168,7 +168,7 @@ MAIA 有一个特殊的挑战：Agent 托管在商户自己的环境，我们看
 
 **成功 case 和失败 case 同样重要**：只关注失败容易过拟合。用向量空间距离筛选与当前 case 相似的历史成功 case，和失败 case 一起 review——成功的经验帮助过滤掉那些"两边都有"的噪声错误，降低幻觉率。
 
-![Reflection Learning from Exper](/images/paypal-agent/IMG_20260418_163407.jpg)
+![Reflection Learning from Exper](/images/qcon-2026-paypal-agent/IMG_20260418_163407.jpg)
 
 
 ### 技术架构演进
@@ -180,7 +180,7 @@ MAIA 有一个特殊的挑战：Agent 托管在商户自己的环境，我们看
 - Skill 里可以嵌入大量 reference 文档和确定性脚本，提供确定性信号
 - 新业务来了，一两天就能校验原有 Skill 重新组合后能否满足要求（原来要一两周）
 
-![Journey Recap 5 Levels of SDLC](/images/paypal-agent/IMG_20260418_164551.jpg)
+![Journey Recap 5 Levels of SDLC](/images/qcon-2026-paypal-agent/IMG_20260418_164551.jpg)
 
 
 ### Multi-Agent 协作的关键工程经验
