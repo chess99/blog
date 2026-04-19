@@ -75,6 +75,11 @@ permalink: /posts/hexo-permalink-deep-dive/
 
 每篇新文章都必须在 front matter 里显式写 `permalink: /posts/<slug>/`，slug 取文件名去掉日期前缀和扩展名。
 
+slug 命名规则：
+- **独立文章**：主题即 slug，如 `clean-skill-architecture`
+- **有时效的活动系列**（大会、课程等）：`活动名-年份-主题`，如 `qcon-2026-taobao-ai-coding`
+- **无时效的内容系列**（读书、源码分析等）：`系列名-主题`，如 `book-walden-review`、`gemini-cli-source`
+
 ### 图片存放
 
 图片按文章分目录，目录名 = slug（与文章文件名去掉日期前缀和扩展名一致）：
