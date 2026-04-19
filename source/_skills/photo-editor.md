@@ -25,7 +25,7 @@ def ocr(image_path):
         tmp = f.name
     img.save(tmp)
     result = subprocess.run(
-        ['tesseract', tmp, 'stdout', '-l', 'chi_sim+eng', '--psm', '3'],
+        ['tesseract', tmp, 'stdout', '-l', 'chi_sim+eng', '--psm', '6'],
         capture_output=True, text=True, timeout=30
     )
     os.unlink(tmp)
@@ -33,9 +33,11 @@ def ocr(image_path):
 ```
 
 注意：
+- **使用 `--psm 6`**，不要用默认的 `--psm 3`。psm=3 在处理有图表的幻灯片时容易把图表里的数字和附近文字错误拼接，产生不存在的数字（例如把图表坐标轴上的"35"和标题里的"8%"混在一起，读出"35%"）。psm=6 把图片当作单一文字块处理，对幻灯片场景更准确。
 - OCR 识别结果不一定完全准确，尤其是专有名词、英文缩写、表格
 - chars 少（< 20）通常是人物照、观众席、走廊等无文字图片，跳过
 - 相邻几分钟内 OCR 内容高度相似的图，是同一张幻灯片的重复拍摄，只选一张
+- OCR 读出的数字用于辅助校对时，要结合上下文判断合理性，不要直接用 OCR 数字覆盖人工记录
 
 ## 压缩图片
 
