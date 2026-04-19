@@ -123,10 +123,11 @@ hexo new "文章标题"
 ├── source/
 │   ├── _posts/          # 文章目录
 │   ├── _drafts/         # 创作过程工作区（每篇文章一个子目录）
-│   ├── _skills/         # 自媒体工作室 SOP 文件
 │   └── images/          # 图片资源
 ├── themes/
 │   └── next/            # NexT 主题
+├── .claude/
+│   └── skills/          # 自媒体工作室 SOP 文件
 ├── _config.yml          # Hexo 配置
 └── _config.next.yml     # 主题配置
 ```
@@ -139,12 +140,12 @@ hexo new "文章标题"
 
 | 角色 | SOP 文件 | 职责 | 输出 |
 |------|----------|------|------|
-| 选题编辑 | `source/_skills/topic-editor.md` | 评估原始想法，输出选题卡 | `topic-card.md` |
-| 素材研究员 | `source/_skills/researcher.md` | 收集支撑素材 | `research.md` |
-| 主笔 | `source/_skills/writer.md` | 根据选题卡+素材写初稿 | `draft.md` |
-| 同行审校 | `source/_skills/reviewer.md` | 挑逻辑/事实/表述问题 | `review.md` |
-| 图片编辑 | `source/_skills/photo-editor.md` | 从图片素材中选图、OCR 理解内容、压缩后插入文档 | 文档内图片引用 |
-| 渠道适配 | `source/_skills/publisher.md` | 生成各渠道版本并发布 | 各渠道文件 |
+| 选题编辑 | `.claude/skills/topic-editor.md` | 评估原始想法，输出选题卡 | `topic-card.md` |
+| 素材研究员 | `.claude/skills/researcher.md` | 收集支撑素材 | `research.md` |
+| 主笔 | `.claude/skills/writer.md` | 根据选题卡+素材写初稿 | `draft.md` |
+| 同行审校 | `.claude/skills/reviewer.md` | 挑逻辑/事实/表述问题 | `review.md` |
+| 图片编辑 | `.claude/skills/photo-editor.md` | 从图片素材中选图、OCR 理解内容、压缩后插入文档 | 文档内图片引用 |
+| 渠道适配 | `.claude/skills/publisher.md` | 生成各渠道版本并发布 | 各渠道文件 |
 
 ### 流程
 
