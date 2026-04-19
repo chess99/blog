@@ -22,7 +22,7 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 | 无（或只有原始素材） | 未开始 | 选题编辑 |
 | `topic-card.md` | 选题完成 | 素材研究员 |
 | `research.md` | 素材完成 | 主笔 |
-| `draft.md`（无图片任务） | 初稿完成 | 同行审校 |
+| `draft.md`（无图片任务） | 初稿完成 | 同行审校（派独立 agent） |
 | `draft.md`（有图片素材） | 初稿完成 | 图片编辑 |
 | `review.md` | 审校完成 | 主笔处理意见 → 生成 `final.md` |
 | `final.md` | 终稿完成 | 渠道适配 |
@@ -36,7 +36,7 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 - 选题编辑：`.claude/skills/blog-workflow/roles/topic-editor.md`
 - 素材研究员：`.claude/skills/blog-workflow/roles/researcher.md`
 - 主笔：`.claude/skills/blog-workflow/roles/writer.md`
-- 同行审校：`.claude/skills/blog-workflow/roles/reviewer.md`
+- 同行审校：`.claude/skills/blog-workflow/roles/reviewer.md`（**独立 agent 执行，见 SOP 里的触发方式**）
 - 图片编辑：`.claude/skills/blog-workflow/roles/photo-editor.md`
 - 渠道适配：`.claude/skills/blog-workflow/roles/publisher.md`
 

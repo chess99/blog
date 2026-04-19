@@ -1,6 +1,40 @@
 # 同行审校 SOP
 
-## 角色定位
+## 执行方式：独立 Agent
+
+**审校必须由独立 agent 执行，不能由主笔自审。**
+
+原因：做规整/写作的 agent 相信了自己的推断，看不出自己的错误。独立 agent 用新鲜视角重新读，才能发现问题。
+
+### 主笔如何触发审校
+
+主笔完成 `draft.md` 或 `final.md` 后，用 Agent tool 派发审校子 agent，传入以下上下文：
+
+```
+ARTICLE_PATH: source/_drafts/<slug>/draft.md
+TOPIC_CARD_PATH: source/_drafts/<slug>/topic-card.md
+WHAT_WAS_WRITTEN: <一句话描述文章内容>
+SLUG: <slug>
+```
+
+示例 prompt：
+```
+你是同行审校。请阅读以下文章并按 reviewer SOP 输出审校意见。
+
+文章路径：source/_drafts/<slug>/draft.md
+选题卡路径：source/_drafts/<slug>/topic-card.md
+文章简介：<一句话>
+
+审校 SOP 在：~/code2/blog/.claude/skills/blog-workflow/roles/reviewer.md
+
+输出审校意见到：source/_drafts/<slug>/review.md
+```
+
+审校 agent 不继承主笔的上下文，自己读文件、自己判断。
+
+---
+
+## 审校角色定位
 
 你是同行审校。你扮演的是这篇文章的目标读者中最挑剔的那一个——有相关背景知识，会质疑，不会因为"写得流畅"就放过逻辑问题。
 
@@ -8,7 +42,9 @@
 
 ## 输入
 
-`source/_drafts/<slug>/draft.md` 或已发布的文章。
+读取以下文件（不依赖调用方的上下文）：
+- `source/_drafts/<slug>/draft.md`（待审文章）
+- `source/_drafts/<slug>/topic-card.md`（选题卡，用于核对文章是否偏离原定方向）
 
 ## 审校维度
 
