@@ -1,9 +1,8 @@
 ---
+permalink: /posts/browser-use-deep-dive/
 title: 深入剖析 Browser Use：基于 AI 的下一代浏览器自动化框架
 pid: 101
 
-alias:
-  - /posts/101/
 date: 2024-04-25 00:00:00
 tags:
   - AI

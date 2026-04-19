@@ -1,9 +1,8 @@
 ---
+permalink: /posts/walden-review/
 title: 《瓦尔登湖》：祛魅、反思与超越——一部不完美的经典
 pid: 102
 
-alias:
-  - /posts/102/
 date: 2025-03-25 00:00:00
 tags:
   - 读书笔记

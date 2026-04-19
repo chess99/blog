@@ -1,9 +1,8 @@
 ---
+permalink: /posts/vitepress-to-nextjs/
 title: 从VitePress到NextJS-构建AI阅读笔记站的技术演进
 pid: 114
 
-alias:
-  - /posts/114/
 date: 2026-02-14 00:00:00
 tags:
   - Next.js

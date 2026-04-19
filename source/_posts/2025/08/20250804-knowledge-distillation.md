@@ -1,9 +1,8 @@
 ---
+permalink: /posts/knowledge-distillation/
 title: 知识蒸馏（Knowledge Distillation）：一篇从核心原理到前沿应用的完整指南
 pid: 113
 
-alias:
-  - /posts/113/
 date: 2025-08-04 00:00:00
 tags:
   - 知识蒸馏

@@ -1,9 +1,8 @@
 ---
+permalink: /posts/loss-of-plasticity/
 title: 深度持续学习中的可塑性丧失：挑战、机制与解决方案
 pid: 108
 
-alias:
-  - /posts/108/
 date: 2025-04-19 00:00:00
 tags:
   - 持续学习

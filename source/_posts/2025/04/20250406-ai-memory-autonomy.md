@@ -1,9 +1,8 @@
 ---
+permalink: /posts/ai-memory-autonomy/
 title: AI 不仅仅在学习，它正在“到来”：一场关于记忆、自主性与未来的对话
 pid: 103
 
-alias:
-  - /posts/103/
 date: 2025-04-06 00:00:00
 tags:
   - AI

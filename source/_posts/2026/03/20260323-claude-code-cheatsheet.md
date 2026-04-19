@@ -3,8 +3,6 @@ permalink: /posts/claude-code-cheatsheet/
 title: Claude Code 速查手册：从入门到自动化的全部命令
 pid: 119
 
-alias:
-  - /posts/119/
 date: 2026-03-23 00:00:00
 tags:
   - Claude Code

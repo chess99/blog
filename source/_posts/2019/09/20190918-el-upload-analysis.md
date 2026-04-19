@@ -1,9 +1,8 @@
 ---
+permalink: /posts/el-upload-analysis/
 title: 分析el-upload
 pid: 12
 
-alias:
-  - /posts/12/
 date: 2019-09-18 00:00:01
 tags:
   - element-ui

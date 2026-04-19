@@ -1,9 +1,8 @@
 ---
+permalink: /posts/crlf-line-endings/
 title: CRLF行尾问题
 pid: 9
 
-alias:
-  - /posts/9/
 date: 2018-06-27 10:58:51
 tags:
   - Shell

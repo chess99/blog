@@ -1,9 +1,8 @@
 ---
+permalink: /posts/ai-driven-dev-workflow/
 title: 研发流程AI替代方案白皮书
 pid: 106
 
-alias:
-  - /posts/106/
 date: 2025-04-10 00:00:00
 tags:
   - AI

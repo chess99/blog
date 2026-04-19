@@ -3,8 +3,6 @@ permalink: /posts/software-dev-revolution/
 title: 软件研发的工业革命：我们已经走到哪里，还有多远
 pid: 120
 
-alias:
-  - /posts/120/
 date: 2026-03-23 00:00:00
 tags:
   - Harness Engineering

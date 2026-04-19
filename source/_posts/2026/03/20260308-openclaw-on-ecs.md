@@ -3,8 +3,6 @@ permalink: /posts/openclaw-on-ecs/
 title: 阿里云ECS养龙虾：OpenClaw部署与配置实录
 pid: 115
 
-alias:
-  - /posts/115/
 date: 2026-03-08 00:00:00
 tags:
   - SSH

@@ -1,9 +1,8 @@
 ---
+permalink: /posts/javascript-this/
 title: JavaScript中this的指向
 pid: 8
 
-alias:
-  - /posts/8/
 date: 2018-06-25 12:34:59
 tags:
   - JavaScript

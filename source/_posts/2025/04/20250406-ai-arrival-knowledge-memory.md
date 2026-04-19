@@ -1,9 +1,8 @@
 ---
+permalink: /posts/ai-arrival-knowledge-memory/
 title: 人工智能的“到来”：从工具到实体，探索知识、学习与记忆的未来
 pid: 104
 
-alias:
-  - /posts/104/
 date: 2025-04-06 00:00:00
 tags:
   - AI

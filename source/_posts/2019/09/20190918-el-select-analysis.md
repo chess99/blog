@@ -1,9 +1,8 @@
 ---
+permalink: /posts/el-select-analysis/
 title: 分析el-select
 pid: 11
 
-alias:
-  - /posts/11/
 date: 2019-09-18 00:00:00
 tags:
   - element-ui

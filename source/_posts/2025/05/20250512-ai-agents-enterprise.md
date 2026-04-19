@@ -1,9 +1,8 @@
 ---
+permalink: /posts/ai-agents-enterprise/
 title: 智能体：重塑企业运营与决策的革命性力量
 pid: 109
 
-alias:
-  - /posts/109/
 date: 2025-05-12 00:00:00
 tags:
   - 智能体

@@ -75,7 +75,6 @@ permalink: /posts/hexo-permalink-deep-dive/
 
 每篇新文章都必须在 front matter 里显式写 `permalink: /posts/<slug>/`，slug 取文件名去掉日期前缀和扩展名。
 
-**旧文章**（有 `pid` 字段）：URL 靠 `alias` 字段（如 `alias: /posts/102/`）保证，无需 `permalink`。
 
 ## 常用命令
 

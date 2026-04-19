@@ -3,8 +3,6 @@ permalink: /posts/gstack-engineer-workflow/
 title: gstack：把 Claude Code 变成一支工程师团队
 pid: 121
 
-alias:
-  - /posts/121/
 date: 2026-03-24 00:00:00
 tags:
   - AI

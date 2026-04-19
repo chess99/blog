@@ -1,9 +1,8 @@
 ---
+permalink: /posts/dom-coordinates/
 title: DOM元素坐标及事件坐标
 pid: 6
 
-alias:
-  - /posts/6/
 date: 2018-06-11 19:56:00
 tags:
   - JavaScript

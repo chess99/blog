@@ -1,9 +1,8 @@
 ---
+permalink: /posts/https-wss-setup/
 title: 支持WSS
 pid: 7
 
-alias:
-  - /posts/7/
 date: 2018-06-14 09:58:14
 tags:
   - SSL

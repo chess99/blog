@@ -3,8 +3,6 @@ permalink: /posts/interview-strategy-ai-era/
 title: AI 时代的面试策略：gstack 的"创始人信号"给了我很多启发
 pid: 123
 
-alias:
-  - /posts/123/
 date: 2026-03-25 00:00:00
 tags:
   - AI

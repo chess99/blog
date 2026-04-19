@@ -1,9 +1,8 @@
 ---
+permalink: /posts/ai-self-portrait/
 title: AI自画像
 pid: 105
 
-alias:
-  - /posts/105/
 date: 2025-04-10 00:00:00
 tags:
   - AI

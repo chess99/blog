@@ -13,7 +13,7 @@ categories: 技术
 想给博客配置语义化 URL，比如 `posts/hexo-permalink-deep-dive/`，于是在 `_config.yml` 里配置：
 
 ```yaml
-permalink: posts/:slug/
+permalink: /posts/hexo-permalink-deep-dive/
 ```
 
 然后在文章 front matter 里加上：

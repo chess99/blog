@@ -1,9 +1,8 @@
 ---
+permalink: /posts/second-me-source/
 title: Second Me 源码分析
 pid: 112
 
-alias:
-  - /posts/112/
 date: 2025-07-08 00:00:00
 tags:
   - Second-Me
