@@ -46,6 +46,10 @@ SLUG: <slug>
 - `source/_drafts/<slug>/draft.md`（待审文章）
 - `source/_drafts/<slug>/topic-card.md`（选题卡，用于核对文章是否偏离原定方向）
 
+## 写作标准参考
+
+审校前读取 `.claude/skills/blog-workflow/roles/writing-guide.md`，对照其中的禁用词、开头规则、标题规则、技术质量标准逐一检查。
+
 ## 审校维度
 
 **1. 事实准确性**
