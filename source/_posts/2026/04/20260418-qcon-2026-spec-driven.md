@@ -41,9 +41,13 @@ Vibe Coding 解决了速度问题，但带来了质量和可控性问题。网�
 
 反观低代码，感觉是很"low"的技术，这几年 AI + 低代码的产品比较少，大部分还在探索。
 
+![光速奔跑的 Al Coding 传统编程领域](/images/qcon-2026-spec-driven/ai-coding-timeline.jpg)
+
 ### Vibe Coding 的真实问题
 
 2025 年开发者调查报告显示：60% 以上的人认为 AI Coding 显著提升了生产力，但真正能信任 AI 生成代码的只有 3%。
+
+![光速生成暗藏风险 Vibe Coding 真的能实现效率爆炸么](/images/qcon-2026-spec-driven/vibe-coding-stats.jpg)
 
 AI 生成代码有几个核心问题：
 
@@ -56,6 +60,8 @@ AI 生成代码有几个核心问题：
 ### 问题的本质：自然语言的模糊性
 
 48 年前，算法大师 Dijkstra 就讲过：自然语言编程是非常愚蠢的事情。
+
+![论自然语言编程的愚蠢和聪明 来自 48 年前的预言](/images/qcon-2026-spec-driven/dijkstra-natural-language.jpg)
 
 为什么？数学的约束是形式化的符号，你在写形式化符号或编程代码时，同时在做思考和抽象。但用自然语言编程，你想到什么就写什么，AI 写得很快，但缺少了思考。
 
@@ -89,6 +95,8 @@ SDD 能解决什么：
 2. Spec 的编写成本非常高，生成出来的 Spec 人和模型都未必能看懂
 3. 复杂应用给到模型后，模型会把编码任务变成复杂的 Code Agent 长程任务，某个节点出现问题就会导致后面全部出问题，甚至无从排查
 
+![解决自然语言和需求的局限性 引入软件工程 spec 先行](/images/qcon-2026-spec-driven/spec-driven-framework.jpg)
+
 **SDD 只能解决一部分约束问题。** 这就引出了第二个概念：Harness Engineering。
 
 ---
@@ -98,6 +106,8 @@ SDD 能解决什么：
 ### 什么是 Harness Engineering
 
 从 2023 年的 Prompt Engineering，到 2025 年的 Context Engineering，到 2026 年被广泛讨论的 Harness Engineering——本质是：构建一个舒适的环境让大模型去跑。
+
+![Harness Engineering 时间轴 事前可约束事后可验证](/images/qcon-2026-spec-driven/harness-engineering-timeline.jpg)
 
 大模型是一匹快马，没有好的驾驭方案很容易跑偏，在复杂任务上可能失控。
 
@@ -115,6 +125,8 @@ Harness Engineering 包含两个核心要素：
 
 **现在**：我们探索一条新路线——**可控的语言底座 + 可视化开发 + Spec Driven**，彻底解决低代码产品的上手门槛问题，同时通过专用的方式约束 AI 生成代码，借助低代码的资产沉淀、企业级全流程控制和多人协作能力。
 
+![Spec Driven 就够了吗 低代码与 AI Coding 结合的演进](/images/qcon-2026-spec-driven/lowcode-ai-evolution.jpg)
+
 ---
 
 ## 三、产品介绍：需求标准化驱动的开发平台
@@ -130,6 +142,8 @@ Harness Engineering 包含两个核心要素：
 **第四步（开发组）**：按项目大小和工期分工协作，执行业务模块研发任务，可继续补充需求和设计细节，贴近真实开发场景。
 
 任务阶段性完成后检查生成内容，修改调整后发布预览，所有模块完成后应用搭建完成。
+
+![平台介绍 一个 Al 友好的平台长什么样](/images/qcon-2026-spec-driven/platform-overview.jpg)
 
 ### 需求工程：EARS 标准
 
@@ -150,11 +164,15 @@ EARS 的结构：**在什么条件下，当（可选的）什么触发时，系�
 
 我们也调研了 User Story、Gherkin、需求模式等方案，最终选择 EARS，因为它语法简单、可测试性强，非常适合需求工程。
 
+![SDD 的核心 需求工程 EARS 标准示例](/images/qcon-2026-spec-driven/ears-requirements.jpg)
+
 ### 老系统改造：Code to Spec 逆向工程
 
 to B 客户一个很大的痛点是老代码改不动。我们提供了仓库治理插件，可以直接在老代码里对话生成对应的 Spec，再把 Spec 导入到 CodeWave 平台，做源码解读 → 生成 Spec → 开发新系统。
 
 重要的是，在重构过程中还要保持 API 一致性（避免下游依赖崩溃），所以不仅把需求放到 Spec 里，还把技术设计（API 接口）也放进去。
+
+![老应用的历久弥新 基于 SDD 的逆向工程](/images/qcon-2026-spec-driven/code-to-spec-legacy.jpg)
 
 ---
 
@@ -170,12 +188,28 @@ CodeWave 平台所有内容（页面逻辑、数据定义、数据查询）本�
 
 相比 Claude Code，我们还增强了一些功能，比如 Language Server 工具支持（对 Java 应用尤其重要）、Spec 工作流和 CLAUDE.md 等。
 
+![代码智能体底层 Claude Code vs wave-agent 功能对齐分析](/images/qcon-2026-spec-driven/wave-agent-vs-claude.jpg)
+
 ### 整体流程
 
 1. **需求标准化**：文档上传解析 → 多模态处理（图片）+ 大纲抽取 → 生成 EARS 标准需求
 2. **技术设计**：领域模型、领域服务、外部依赖，以及关键的 **API Contract 层**（前后端共同遵守的接口契约，避免前端猜接口）
 3. **代码生成**：生成 NASL（数据模型、服务端逻辑、前端页面）
 4. **验证**：沙箱环境运行，Language Server 校验，生成一对一测试用例
+
+![整体流程 围绕 NASL 生成的 SDD 流程](/images/qcon-2026-spec-driven/nasl-sdd-flow.jpg)
+
+### 技术设计
+
+技术设计生成给架构师审阅的完整文档：领域模型、后端逻辑、前端页面基本目录，再通过子 Agent 并发生成详细设计。依赖关系自动处理（Frontend 强依赖 Backend 接口结构）。
+
+![技术设计 如何生成一份给架构师看的完整文档](/images/qcon-2026-spec-driven/technical-design.jpg)
+
+### NASL 代码生成
+
+海量上下文下如何保证任务稳定？放弃 Manus Like 的 AI 自主执行，改用 Plan & TodoList 模式——把 40+ 实体、150+ 服务端逻辑、60+ 前端页面拆成有序任务列表，逐步执行，防止上下文爆炸。
+
+![NASL 代码生成 海量上下文情况下如何保证任务稳定](/images/qcon-2026-spec-driven/nasl-code-generation.jpg)
 
 ### 智能体架构选型
 
@@ -189,6 +223,8 @@ CodeWave 平台所有内容（页面逻辑、数据定义、数据查询）本�
 
 我们的选择：**根据场景混用**。确定性强的流程用 Workflow，不确定的交给 Agent 自主决策。
 
+![码智能体上层 三种灵活性不同的架构对比](/images/qcon-2026-spec-driven/agent-architectures.jpg)
+
 ### 知识工程：渐进式披露
 
 不能把所有知识全塞进上下文（大部分模型上下文超过 80K 会出现大规模幻觉）。参考 Skill 的渐进式披露原则：
@@ -198,11 +234,15 @@ CodeWave 平台所有内容（页面逻辑、数据定义、数据查询）本�
 3. **文档化知识块**：每个知识块不超过 1500 token，避免上下文爆炸
 4. **Few-shot 补充**：在文档里加上示例
 
+![需求标准化 上下文如何塞满上百页需求](/images/qcon-2026-spec-driven/requirements-normalization.jpg)
+
 ### Compound 复合工程
 
 在跑 SDD 的过程中，模型不知道之前做过的知识是什么样子——比如页面里有些关联是需求层面的，代码层面找不到。
 
 我们引入了 **Compound 复合工程**：每次跑完后，总结经验，把解决的问题记录形成图，让智能体成为自净化的开发伙伴。Manus 最近也实现了类似功能（自己总结自己的计划）。
+
+![Compound 复合工程 让 Al 越跑越精准](/images/qcon-2026-spec-driven/compound-engineering.jpg)
 
 ### 多模态支持
 
@@ -211,6 +251,8 @@ CodeWave 平台所有内容（页面逻辑、数据定义、数据查询）本�
 - 视觉参考 → 转成视觉和交互描述的 DSL（描述页面布局、时长、分块等），同时传入文字和图片信息
 - 架构图 → 直接转化成需求放入 PRD
 - 视觉稿 → 转成 NASL DSL，注入上下文生成页面
+
+![多模态支持与 UI 理解增强 准确判断用户的图片意图](/images/qcon-2026-spec-driven/multimodal-support.jpg)
 
 ### 沙箱技术：Bubblewrap
 
@@ -225,6 +267,8 @@ AI Agent 的行为非常复杂，会遇到 AI 把自己代码删掉、清空数�
 
 架构：Sandbox Manager → 唤起沙箱 → 每个服务器集群有 Sandbox Proxy（创建销毁沙箱）→ 每台机器有 Sandbox Instance（管理沙箱状态和启停）→ 从 3 个 Sandbox Process 收集状态，由 Manager 统一管理。
 
+![沙箱技术 智能体运行时的核心 E2B Docker 自研沙箱对比](/images/qcon-2026-spec-driven/sandbox-comparison.jpg)
+
 ### Harness Engineering 设计原则总结
 
 1. **每个 Skill 对应一个 Sub-agent**，保证上下文隔离
@@ -235,6 +279,8 @@ AI Agent 的行为非常复杂，会遇到 AI 把自己代码删掉、清空数�
 6. **一旦生成错误，验证失败**，防止错误向后传播
 
 三要素：**智能体架构选择 + 任务管理 + 结果验证**
+
+![总结 如何设计马具工程 解决长程任务的稳定性](/images/qcon-2026-spec-driven/harness-design-summary.jpg)
 
 ---
 
@@ -250,6 +296,8 @@ AI Agent 的行为非常复杂，会遇到 AI 把自己代码删掉、清空数�
 
 从开发效率、需求排单度、代码数量等维度综合计算。
 
+![产品提效度量体系 CodeWave SDD 研发提效评估架构图](/images/qcon-2026-spec-driven/efficiency-metrics.jpg)
+
 ### 代码大模型训练
 
 **选择基座模型的标准**：代码生成能力、评测及推理能力（推理能力很多 Benchmark 没考虑，但代码生成需要大模型真正理解代码语义）。
@@ -264,6 +312,8 @@ AI Agent 的行为非常复杂，会遇到 AI 把自己代码删掉、清空数�
 5. **DPO 偏好对齐**：构造（问题, 正确代码, 错误代码）三元组，强化训练过程。Bad case 比 Good case 更有效。
 
 **效果**：通过工程修复和模型微调，HumanEval 中文得分从前沿的 5% 提升到 80%。
+
+![No Data No BB CodeWave SDD Benchmark 各类测试集](/images/qcon-2026-spec-driven/benchmark-system.jpg)
 
 ### AI 工程化平台：闭环迭代
 
@@ -282,13 +332,19 @@ Benchmark → 识别产品边界（technology product fit）→ 上线后观测 
 
 Spec Driven 并不是高深的理念，只是通过形式化方式降低混乱程度的过程。
 
+![Spec Driven 的本质 需求混乱度金字塔 从混乱到有序](/images/qcon-2026-spec-driven/spec-driven-entropy.jpg)
+
 **CodeWave 可视化软件工厂 vs AI Coding IDE**：前者具备所见即所得、资产沉淀、生命周期管理、大促售货等企业级能力。
+
+![CodeWave 可视化软件工厂和 Al Coding IDE 的对比](/images/qcon-2026-spec-driven/codewave-vs-ide.jpg)
 
 **未来规划**：
 - Spec 与代码的双向绑定（改了代码同步更新 Spec，避免 Spec 失效）
 - 优化生成速度
 - 国产模型适配（Claude 限流封号问题严重）
 - 与低代码平台更深度结合
+
+![未来规划 Spec 与 NASL 双向绑定 优化生成速度和质量](/images/qcon-2026-spec-driven/future-roadmap.jpg)
 
 ---
 
