@@ -58,9 +58,9 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 ---
 
-![AI浪潮下需求痛点 初始化效率低 数仓基线优化](/images/qcon-2026-netease-data-agent/IMG_20260418_170357.jpg)
+![AI浪潮下需求痛点 初始化效率低 数仓基线优化](/images/qcon-2026-netease-data-agent/IMG_20260418_170357_ppt.jpg)
 
-![数据开发治理平台全景架构 Cli Skills 三层](/images/qcon-2026-netease-data-agent/IMG_20260418_170102.jpg)
+![数据开发治理平台全景架构 Cli Skills 三层](/images/qcon-2026-netease-data-agent/IMG_20260418_170102_ppt.jpg)
 
 
 
@@ -93,9 +93,9 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 ---
 
-![四阶段演进 ChatAPI Copilot AutoETL ](/images/qcon-2026-netease-data-agent/IMG_20260418_170618.jpg)
+![四阶段演进 ChatAPI Copilot AutoETL ](/images/qcon-2026-netease-data-agent/IMG_20260418_170618_ppt.jpg)
 
-![AutoETL架构 标准化业务场景模版抽象](/images/qcon-2026-netease-data-agent/IMG_20260418_172245.jpg)
+![AutoETL架构 标准化业务场景模版抽象](/images/qcon-2026-netease-data-agent/IMG_20260418_172245_ppt.jpg)
 
 
 
@@ -167,7 +167,7 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 ---
 
-![CLI vs MCP Token效率差距35倍](/images/qcon-2026-netease-data-agent/IMG_20260418_174107.jpg)
+![CLI vs MCP Token效率差距35倍](/images/qcon-2026-netease-data-agent/IMG_20260418_174107_ppt.jpg)
 
 
 ## 五、SQL 生成的关键实现
@@ -212,7 +212,7 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 ---
 
-![SQL代码生成 问题改写 知识召回](/images/qcon-2026-netease-data-agent/IMG_20260418_173911.jpg)
+![SQL代码生成 问题改写 知识召回](/images/qcon-2026-netease-data-agent/IMG_20260418_173911_ppt.jpg)
 
 
 ## 六、DataAgent 落地的优先级选择
@@ -227,7 +227,7 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 ---
 
-![DataAgent智能运维 OOM诊断 自动调整重跑](/images/qcon-2026-netease-data-agent/IMG_20260418_173022.jpg)
+![DataAgent智能运维 OOM诊断 自动调整重跑](/images/qcon-2026-netease-data-agent/IMG_20260418_173022_ppt.jpg)
 
 
 ## 七、未来展望

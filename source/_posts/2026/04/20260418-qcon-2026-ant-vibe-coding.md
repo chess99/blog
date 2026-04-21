@@ -38,7 +38,7 @@ permalink: /posts/qcon-2026-ant-vibe-coding/
 
 ---
 
-![像聊天一样开发 所见即所得 分享协作](/images/qcon-2026-ant-vibe-coding/IMG_20260418_140119.jpg)
+![像聊天一样开发 所见即所得 分享协作](/images/qcon-2026-ant-vibe-coding/IMG_20260418_140119_ppt.jpg)
 
 
 ## Case 1：PMO 同事——Token 成本优化
@@ -86,7 +86,7 @@ Token 主要花在代码逻辑上。当时的做法：把 2000 行代码文件�
 
 ---
 
-![PMO同事 战役管理平台 2000轮 6亿tokens](/images/qcon-2026-ant-vibe-coding/IMG_20260418_140259.jpg)
+![PMO同事 战役管理平台 2000轮 6亿tokens](/images/qcon-2026-ant-vibe-coding/IMG_20260418_140259_ppt.jpg)
 
 
 ## Case 2：HR 团队——企业私有知识落地
@@ -117,7 +117,7 @@ HR 还要求和内部文档、钉钉通知、邮件、日程打通。**企业内
 
 ---
 
-![HR同事自助搭建 一站式内部文档钉钉打通](/images/qcon-2026-ant-vibe-coding/IMG_20260418_142301.jpg)
+![HR同事自助搭建 一站式内部文档钉钉打通](/images/qcon-2026-ant-vibe-coding/IMG_20260418_142301_ppt.jpg)
 
 
 ## Case 3：营销同学——C 端大流量 + 私有知识
@@ -145,7 +145,7 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 
 ---
 
-![靠对话说上线的营销活动 C端活动](/images/qcon-2026-ant-vibe-coding/IMG_20260418_142435.jpg)
+![靠对话说上线的营销活动 C端活动](/images/qcon-2026-ant-vibe-coding/IMG_20260418_142435_ppt.jpg)
 
 
 ## 多 Agent 协同与多人协作的挑战
@@ -216,7 +216,7 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 
 ---
 
-![近期AI技术热点 Karpathy Claude Code ](/images/qcon-2026-ant-vibe-coding/IMG_20260418_144359.jpg)
+![近期AI技术热点 Karpathy Claude Code ](/images/qcon-2026-ant-vibe-coding/IMG_20260418_144359_ppt.jpg)
 
 
 ## Q&A

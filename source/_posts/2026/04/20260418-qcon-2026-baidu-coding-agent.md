@@ -78,7 +78,7 @@ Agent 框架的"感冒"，就是没跟上模型变化。百度 Comate 分享了�
 
 ---
 
-![构建Agent Loop面对的核心问题 动态调整框架](/images/qcon-2026-baidu-coding-agent/IMG_20260418_150610.jpg)
+![构建Agent Loop面对的核心问题 动态调整框架](/images/qcon-2026-baidu-coding-agent/IMG_20260418_150610_ppt.jpg)
 
 
 ## 三、Feedback Loop：让 Agent 行为可观测
@@ -117,7 +117,7 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 
 我们的做法：**让模型基于当前 query，识别过去哪些工具调用结果已经没用了，直接把无用的部分摘除**，而不是整体压缩。这样既复用了缓存，又保障了当前 query 的上下文质量，还能兼顾成本和效果。
 
-![MCP渐进式加载 节省98 Token](/images/qcon-2026-baidu-coding-agent/IMG_20260418_151023.jpg)
+![MCP渐进式加载 节省98 Token](/images/qcon-2026-baidu-coding-agent/IMG_20260418_151023_ppt.jpg)
 
 
 ### 线上发现的另一个实践：Tool 执行网络
@@ -152,7 +152,7 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 
 实践发现：**用一个干净上下文的 AI 去评判另一个 AI 的执行结果，效果很好**。它能给出很多客观的东西，不用担心它帮我们解决不了问题——它可以客观地评判。这也意味着，现在用 AI Agent 做代码 review 也不是问题了。
 
-![评测结果度量 四象限分析法 Outcome Executio](/images/qcon-2026-baidu-coding-agent/IMG_20260418_151615.jpg)
+![评测结果度量 四象限分析法 Outcome Executio](/images/qcon-2026-baidu-coding-agent/IMG_20260418_151615_ppt.jpg)
 
 
 ### 四象限分析：看异常值而非分数
@@ -202,7 +202,7 @@ Harness 应该分成两层：
 
 ---
 
-![全员转型推动新的Agent能力 异步沙盒 打破角色边界](/images/qcon-2026-baidu-coding-agent/IMG_20260418_152617.jpg)
+![全员转型推动新的Agent能力 异步沙盒 打破角色边界](/images/qcon-2026-baidu-coding-agent/IMG_20260418_152617_ppt.jpg)
 
 
 ## 六、总结
@@ -216,7 +216,7 @@ Harness 应该分成两层：
 
 ---
 
-![可执行的工程成果 Agent交付不仅仅是代码](/images/qcon-2026-baidu-coding-agent/IMG_20260418_152850.jpg)
+![可执行的工程成果 Agent交付不仅仅是代码](/images/qcon-2026-baidu-coding-agent/IMG_20260418_152850_ppt.jpg)
 
 
 ## Q&A

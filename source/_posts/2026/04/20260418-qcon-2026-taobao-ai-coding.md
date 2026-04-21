@@ -70,7 +70,7 @@ AI 编码本质上是概率模型，天然有幻觉，但我们的需求是确�
 
 ---
 
-![不变的工程本质 变换的生产关系](/images/qcon-2026-taobao-ai-coding/IMG_20260418_103134.jpg)
+![不变的工程本质 变换的生产关系](/images/qcon-2026-taobao-ai-coding/IMG_20260418_103134_ppt.jpg)
 
 
 ## 三、实战方案
@@ -85,7 +85,7 @@ AI 编码本质上是概率模型，天然有幻觉，但我们的需求是确�
 
 新增需求侧重整体架构设计，修改需求侧重现有代码的变更分析，两套模板分开。
 
-![双端约束较少幻觉 代码即规范规范即代码](/images/qcon-2026-taobao-ai-coding/IMG_20260418_103421.jpg)
+![双端约束较少幻觉 代码即规范规范即代码](/images/qcon-2026-taobao-ai-coding/IMG_20260418_103421_ppt.jpg)
 
 
 ### 3.2 工程兼容：工程架构作为"宪法"
@@ -167,7 +167,7 @@ AI 自我审查维度：
 
 用户只需把这套方案拷贝到本地工程目录，使用时感觉不到任何规范和 skill 的存在。
 
-![Rules Spec Skills 三位一体方案架构](/images/qcon-2026-taobao-ai-coding/IMG_20260418_105229.jpg)
+![Rules Spec Skills 三位一体方案架构](/images/qcon-2026-taobao-ai-coding/IMG_20260418_105229_ppt.jpg)
 
 ---
 
@@ -186,7 +186,7 @@ AI 自我审查维度：
 
 ---
 
-![AI前端编码实战 前后端研发特点洞察](/images/qcon-2026-taobao-ai-coding/IMG_20260418_110057.jpg)
+![AI前端编码实战 前后端研发特点洞察](/images/qcon-2026-taobao-ai-coding/IMG_20260418_110057_ppt.jpg)
 
 
 ## 六、方案运营与推广

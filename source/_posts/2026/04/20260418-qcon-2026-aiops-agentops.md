@@ -58,7 +58,7 @@ Coding 场景相对好做，因为上下文非常清晰——你要写什么代�
 2. 数据应用的智能化
 3. 系统交互的智能化
 
-![从AIOps 到 AgentOps](/images/qcon-2026-aiops-agentops/IMG_20260418_093633.jpg)
+![从AIOps 到 AgentOps](/images/qcon-2026-aiops-agentops/IMG_20260418_093633_ppt.jpg)
 
 
 ### 核心方案：可观测知识图谱
@@ -97,7 +97,7 @@ Coding 场景相对好做，因为上下文非常清晰——你要写什么代�
 
 实际场景中，规则类型很有限，可能就是 MySQL、K8s、物理机等几类，每类生成一套规则，程序来执行。
 
-![知识图谱的自动建设](/images/qcon-2026-aiops-agentops/IMG_20260418_094957.jpg)
+![知识图谱的自动建设](/images/qcon-2026-aiops-agentops/IMG_20260418_094957_ppt.jpg)
 
 
 ### 知识图谱在 AI Agent 中的四种用法
@@ -118,7 +118,7 @@ Coding 场景相对好做，因为上下文非常清晰——你要写什么代�
 
 把知识图谱作为假设验证的循环。模型往往过于自信——分析出"根因是 B 服务"，但 B 服务到底有没有问题？需要验证。流程：得出结论 B 后，去知识库查 B 的健康指标、成功率、存活状态。如果 B 确实有问题，结论明确；如果 B 指标正常，告诉模型"B 是正常的，重新思考"；如果 B 根本不在知识库里，无法验证，则提示模型给出不确定的结论。这个机制能有效避免模型的过度自信误导人。
 
-![知识图谱如何帮助 Agent 推理 几种不同的使用策略](/images/qcon-2026-aiops-agentops/IMG_20260418_095408.jpg)
+![知识图谱如何帮助 Agent 推理 几种不同的使用策略](/images/qcon-2026-aiops-agentops/IMG_20260418_095408_ppt.jpg)
 
 
 ### Harness 工程：精准信息供给
@@ -147,7 +147,7 @@ Harness 这个概念本质上和"上下文工程"是一回事——给模型提�
 
 原则：**只提供精准且必要的信息**。
 
-![Harness 实践 SubAgent 共享上下文](/images/qcon-2026-aiops-agentops/IMG_20260418_100354.jpg)
+![Harness 实践 SubAgent 共享上下文](/images/qcon-2026-aiops-agentops/IMG_20260418_100354_ppt.jpg)
 
 
 ### Workflow vs. Agent
@@ -176,7 +176,7 @@ Harness 这个概念本质上和"上下文工程"是一回事——给模型提�
 
 还有一种**长期演化记忆**：Agent 应该能自我学习。历史故障分析完后，Agent 应该记住结论，下次遇到类似故障可以参考。但这里有复杂机制——一年前的故障经验未必适合今天，需要设计时间衰减和淘汰机制。这个方向我们还在探索中。
 
-![Agent 的记忆系统 短期记忆 结构化记忆 长期记忆](/images/qcon-2026-aiops-agentops/IMG_20260418_100959.jpg)
+![Agent 的记忆系统 短期记忆 结构化记忆 长期记忆](/images/qcon-2026-aiops-agentops/IMG_20260418_100959_ppt.jpg)
 
 
 ### 产品落地：FlashCat
@@ -202,7 +202,7 @@ FlashCat 是我们基于开源运营实现的可观测性产品，把上述知�
 
 ---
 
-![Flashcat AI Agent 架构](/images/qcon-2026-aiops-agentops/IMG_20260418_101154.jpg)
+![Flashcat AI Agent 架构](/images/qcon-2026-aiops-agentops/IMG_20260418_101154_ppt.jpg)
 
 
 ## Q&A
