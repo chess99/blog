@@ -42,6 +42,8 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 我们不只服务网易内部，还有大量对外的 to B 客户，覆盖各行各业。
 
+![数据开发治理平台在数据价值链路中的定位](/images/qcon-2026-netease-data-agent/slide_001.jpg)
+
 ### AI 浪潮下的需求爆发
 
 **痛点一：to B 实施效率**
@@ -57,12 +59,6 @@ permalink: /posts/qcon-2026-netease-data-agent/
 新人如何快速熟悉数据架构？数仓同学遇到问题时，不应该还要去关注 Spark 特性、底层存储架构——这些对数仓同学太不友好了，知识负担太重。
 
 ---
-
-![AI浪潮下需求痛点 初始化效率低 数仓基线优化](/images/qcon-2026-netease-data-agent/IMG_20260418_170357_ppt.jpg)
-
-![数据开发治理平台全景架构 Cli Skills 三层](/images/qcon-2026-netease-data-agent/IMG_20260418_170102_ppt.jpg)
-
-
 
 ## 二、平台 AI 演进的四个阶段
 
@@ -91,13 +87,9 @@ permalink: /posts/qcon-2026-netease-data-agent/
    - 金融、国企客户对安全要求非常严格，外部客户端不可接受
    - 需要端到端的场景应用
 
+![从Copilot到Agent可控的自主化演进](/images/qcon-2026-netease-data-agent/slide_002.jpg)
+
 ---
-
-![四阶段演进 ChatAPI Copilot AutoETL ](/images/qcon-2026-netease-data-agent/IMG_20260418_170618_ppt.jpg)
-
-![AutoETL架构 标准化业务场景模版抽象](/images/qcon-2026-netease-data-agent/IMG_20260418_172245_ppt.jpg)
-
-
 
 ## 三、DataAgent 技术架构
 
@@ -106,6 +98,8 @@ permalink: /posts/qcon-2026-netease-data-agent/
 - **应用层**：各产品业务入口
 - **接入层（对话层）**：通过 SSE 做流式展示，做一层框架无关的抽象（不绑定特定框架，便于未来切换更强的框架），处理安全、权限、上下文管理
 - **工具层**：大量工具抽象，渐进式加载（比直接全量注入 token 消耗更低、效果更好）
+
+![DataAgent架构分层客户端接入安全编排记忆执行反馈模型](/images/qcon-2026-netease-data-agent/slide_003.jpg)
 
 ### 核心能力模块
 
@@ -163,12 +157,11 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 **验证时间点**：我们内部讨论完不久，钉钉、飞书、企业微信在 72 小时内争相把自己的方案切换到了 CLI 化——这印证了我们的判断。
 
+![CLI vs MCP核心差距Schema注入token消耗对比](/images/qcon-2026-netease-data-agent/slide_006.jpg)
+
 **CLI 设计**：分成约 10 个模块，高频操作做短平快的封装，同时维护前端 API 管理（非正式版，用于典型场景验证，稳定后再转成正式版）。做好缓存管理，定期刷新，必要时做实时更新。
 
 ---
-
-![CLI vs MCP Token效率差距35倍](/images/qcon-2026-netease-data-agent/IMG_20260418_174107_ppt.jpg)
-
 
 ## 五、SQL 生成的关键实现
 
@@ -210,10 +203,9 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 **示例**：用户问一个复杂的数据查询问题 → 改写为标准查询意图 → 生成处理条件 → 做假设性回复验证 → 识别所需表 → 召回关联表和计算公式 → 生成 SQL → 语法纠错 → 输出。
 
+![SQL代码生成问题改写知识召回代码生成三阶段流程](/images/qcon-2026-netease-data-agent/slide_005.jpg)
+
 ---
-
-![SQL代码生成 问题改写 知识召回](/images/qcon-2026-netease-data-agent/IMG_20260418_173911_ppt.jpg)
-
 
 ## 六、DataAgent 落地的优先级选择
 
@@ -225,10 +217,9 @@ permalink: /posts/qcon-2026-netease-data-agent/
 
 以前运维同学晚上睡觉手机开震动，随时可能被叫起来处理。现在这部分工作越来越多地被 Agent 接管，随着场景不断完善，Agent 处理的比例会越来越高。
 
+![DataAgent智能运维用户与Agent工具调用链路](/images/qcon-2026-netease-data-agent/slide_004.jpg)
+
 ---
-
-![DataAgent智能运维 OOM诊断 自动调整重跑](/images/qcon-2026-netease-data-agent/IMG_20260418_173022_ppt.jpg)
-
 
 ## 七、未来展望
 
@@ -239,3 +230,5 @@ permalink: /posts/qcon-2026-netease-data-agent/
 **Skill 的持续抽象**：把数据开发治理领域的各种能力不断抽象成可复用的 Skill，构建数据开发治理领域的 Skill 生态。
 
 **自动化评估体系**：人工做回归成本太高，必须建立自动化评估体系，这是整个 AI 效果持续提升的关键环节。
+
+![EasyData全景SKILL架构基于CLI构建的大数据开发治理平台智能能力矩阵](/images/qcon-2026-netease-data-agent/slide_007.jpg)

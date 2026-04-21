@@ -39,6 +39,8 @@ Agent 框架的"感冒"，就是没跟上模型变化。百度 Comate 分享了�
 
 数据：这周我们一个人一周发了将近 100 次 query，挺多的。
 
+![Coding Agent深入人心从研发扩散到全员增长趋势图](/images/qcon-2026-baidu-coding-agent/slide_001.jpg)
+
 **三个值得关注的变化：**
 
 **1. 工具迁移**：越来越多的同学从 JetBrains、VS Code 等传统 IDE 迁移到 Cursor 这类 AI 原生编辑器，不再担心编译调试等问题，都在 IDE 里完成了。
@@ -53,6 +55,8 @@ Agent 框架的"感冒"，就是没跟上模型变化。百度 Comate 分享了�
 - **实现新功能（17.1%）**：才排第三
 
 这恰恰符合工程师的真实工作——我们每天并不都在实现新功能，更多是在研究和排查问题。
+
+![使用Coding Agent完成的任务类别统计覆盖所有环节](/images/qcon-2026-baidu-coding-agent/slide_002.jpg)
 
 **两类 query 的业务价值：**
 
@@ -70,6 +74,8 @@ Agent 框架的"感冒"，就是没跟上模型变化。百度 Comate 分享了�
 
 前段时间 Claude Code 源码泄露，大家可以看到里面有大量处理边界条件的 if-else——**所谓 Harness，本质就是把脏活累活、各种边界条件处理好**。
 
+![Agent Loop的基本框架核心Loop外层Loop两层结构](/images/qcon-2026-baidu-coding-agent/slide_003.jpg)
+
 **框架为什么会"感冒"：**
 
 举个具体例子：DeepSeek 刚出来时，它对 function calling 支持很差，但支持 XML 格式。当时很多社区的 Agent 框架都选择了 XML 路线。但到了去年下半年，DeepSeek 的 function calling 支持已经很好了，原来那套框架就跟不上了。
@@ -77,9 +83,6 @@ Agent 框架的"感冒"，就是没跟上模型变化。百度 Comate 分享了�
 随着模型能力越来越强，很多之前需要精细处理的细节不再需要了——比如以前要把大任务拆成很多小 task，现在直接把整件事给 AI，让它自己做计划执行就行了。**没有一个框架可以永远确定，必须动态强化。**
 
 ---
-
-![构建Agent Loop面对的核心问题 动态调整框架](/images/qcon-2026-baidu-coding-agent/IMG_20260418_150610_ppt.jpg)
-
 
 ## 三、Feedback Loop：让 Agent 行为可观测
 
@@ -109,6 +112,8 @@ Agent 框架的"感冒"，就是没跟上模型变化。百度 Comate 分享了�
 
 Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Comate 自动为每个 MCP 生成一个 Skill 描述**，内置一个 skill 工具，描述里说明"现在有 3 个 MCP"。当 Agent 真正需要用某个 MCP 时，再调这个 skill 工具，此时才把对应 MCP 的工具加载进来——典型的渐进式加载。这个方案可以节省最高 98% 的上下文消耗。
 
+![MCP和Skills的Tokens消耗对比使用Skills方式实现MCP动态加载](/images/qcon-2026-baidu-coding-agent/slide_004.jpg)
+
 **实践二：智能上下文压缩**
 
 我们发现 8% 的工具调用是无效的——Agent 走了错误路径，但它有自愈能力，能捞回来。
@@ -116,9 +121,6 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 问题：传统压缩方式是把整个上下文交给模型做摘要（summary），但这会让缓存失效，造成大量上下文重新计算。
 
 我们的做法：**让模型基于当前 query，识别过去哪些工具调用结果已经没用了，直接把无用的部分摘除**，而不是整体压缩。这样既复用了缓存，又保障了当前 query 的上下文质量，还能兼顾成本和效果。
-
-![MCP渐进式加载 节省98 Token](/images/qcon-2026-baidu-coding-agent/IMG_20260418_151023_ppt.jpg)
-
 
 ### 线上发现的另一个实践：Tool 执行网络
 
@@ -131,6 +133,8 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 具体实现：给 tool 加 description，比如"如果你从未读过一个文件就想编辑它，应该先调 read 工具"；"如果反复 read 还找不到想要的内容，尝试 search"。
 
 **这种方式比强制规定"写文件时必须用 old_string/new_string 格式"更好**——不是硬约束，而是引导 Agent 自然地走向正确路径。
+
+![从评测中发现Tools的执行网络Edit失败后通常会Read](/images/qcon-2026-baidu-coding-agent/slide_007.jpg)
 
 ---
 
@@ -152,8 +156,7 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 
 实践发现：**用一个干净上下文的 AI 去评判另一个 AI 的执行结果，效果很好**。它能给出很多客观的东西，不用担心它帮我们解决不了问题——它可以客观地评判。这也意味着，现在用 AI Agent 做代码 review 也不是问题了。
 
-![评测结果度量 四象限分析法 Outcome Executio](/images/qcon-2026-baidu-coding-agent/IMG_20260418_151615_ppt.jpg)
-
+![评测结果的度量Outcome权重60%Execution权重40%四象限分析](/images/qcon-2026-baidu-coding-agent/slide_005.jpg)
 
 ### 四象限分析：看异常值而非分数
 
@@ -165,6 +168,8 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 - **低结果 + 高效率**：异常！结果这么差，执行效率为什么这么高？说明这类模型倾向于不做自我验证就快速结束
 
 **核心原则：不看分数高低，看异常值。** 同样 60 分，上次对的题和这次对的题可能完全不同——分数一样，但能力分布变了，只有看异常值才能发现这种变化。
+
+![Outcome高Execution高成熟可复用70.5%四象限异常值分析](/images/qcon-2026-baidu-coding-agent/slide_006.jpg)
 
 ---
 
@@ -192,6 +197,8 @@ Skill 和 MCP 不是非此即彼的，各有长处。我们的做法：**让 Com
 
 **交付物的变化**：AI Agent 交付的内容不只是代码，还包括：验证截图、执行轨迹文档、质量证据。从"你相信我没问题"变成"请你检验我"——AI 写完代码后，给你看它的验证截图和全流程记录，你来判断结果准不准。
 
+![Agent交付的内容不仅仅是代码可执行可追溯可验证可复用](/images/qcon-2026-baidu-coding-agent/slide_008.jpg)
+
 ### Harness 的两个层次
 
 Harness 工程往前倒一步是"上下文工程"，本质是给模型看到的信息做精准控制。
@@ -201,9 +208,6 @@ Harness 应该分成两层：
 2. **给开发者/用户的 Harness**：每次 AI 写完代码后，如果某个地方写错了，记录下来，未来写代码时作为参考——这是一种技术约束，在教 AI 怎么做
 
 ---
-
-![全员转型推动新的Agent能力 异步沙盒 打破角色边界](/images/qcon-2026-baidu-coding-agent/IMG_20260418_152617_ppt.jpg)
-
 
 ## 六、总结
 
@@ -215,9 +219,6 @@ Harness 应该分成两层：
 核心建议：**构建一个 Feedback Loop，让它能在本地跑 Benchmark，发现异常值，而不是盯着分数去强化训练**。不要因为模型的每次发布，让整个 Agent 框架感冒。
 
 ---
-
-![可执行的工程成果 Agent交付不仅仅是代码](/images/qcon-2026-baidu-coding-agent/IMG_20260418_152850_ppt.jpg)
-
 
 ## Q&A
 

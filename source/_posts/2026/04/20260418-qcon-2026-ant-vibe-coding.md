@@ -38,9 +38,6 @@ permalink: /posts/qcon-2026-ant-vibe-coding/
 
 ---
 
-![像聊天一样开发 所见即所得 分享协作](/images/qcon-2026-ant-vibe-coding/IMG_20260418_140119_ppt.jpg)
-
-
 ## Case 1：PMO 同事——Token 成本优化
 
 ### 背景
@@ -76,18 +73,21 @@ Token 主要花在代码逻辑上。当时的做法：把 2000 行代码文件�
 
 > 顺带一提：最近有个热门项目把自然语言压缩成信息密度极高的类文言文形式来省 token，这类小技巧以后可能都会被 KV Cache 方案覆盖。
 
+![System Prompt Stable](/images/qcon-2026-ant-vibe-coding/slide_001.jpg)
+
 ### 这个 Case 的三点启发
 
 1. **不要用固定 workflow 限制 AI**：有段时间产品喜欢搞"先分析→前端 Agent→测试 Agent"这种流水线，不要搞。AI 能力越来越强，固定 workflow 只会让效果变差。**Harness 才是正确理念**：给 AI 真实世界的工具和反馈，让他自己决定怎么做，自己优化。
 
 2. **文件即记忆**：受 Manus 团队启发，每一个重要的执行结果都持久化成文件存在目录里，只把索引放到上下文里。需要时让大模型自己用文件方式读取。为什么？文件是 Linux 的一等公民，也是大模型的原生语言——bash、cat、grep 这些它最擅长，给文件地址它自己会 search、head，能精准找到想要的内容，不会把上下文压死。Skills 也一样，以文件形式存在目录里，保持稳定可召回。
 
+![tool_results searchj](/images/qcon-2026-ant-vibe-coding/slide_002.jpg)
+
 3. **超大工程管理**：传统工程基建在 AI 时代依然有用。比如提前对项目做一次编译，构建有向无环图描述函数定义和引用关系，给 AI 一个查询工具，它就能精准找到函数在哪定义、被谁消费，直接操作，效率远高于让 AI 自己搜索。**把工具提供给 AI，让 AI 决定怎么用**。另外 context 一定要管好，1 兆上下文也会 lost in the middle，注意力依然会发散。
 
+![Agent架构跃迁 文件即记忆 超大工程](/images/qcon-2026-ant-vibe-coding/slide_003.jpg)
+
 ---
-
-![PMO同事 战役管理平台 2000轮 6亿tokens](/images/qcon-2026-ant-vibe-coding/IMG_20260418_140259_ppt.jpg)
-
 
 ## Case 2：HR 团队——企业私有知识落地
 
@@ -117,9 +117,6 @@ HR 还要求和内部文档、钉钉通知、邮件、日程打通。**企业内
 
 ---
 
-![HR同事自助搭建 一站式内部文档钉钉打通](/images/qcon-2026-ant-vibe-coding/IMG_20260418_142301_ppt.jpg)
-
-
 ## Case 3：营销同学——C 端大流量 + 私有知识
 
 ### 设计稿还原
@@ -145,9 +142,6 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 
 ---
 
-![靠对话说上线的营销活动 C端活动](/images/qcon-2026-ant-vibe-coding/IMG_20260418_142435_ppt.jpg)
-
-
 ## 多 Agent 协同与多人协作的挑战
 
 随着用户规模增长，遇到了两个大挑战：
@@ -159,6 +153,8 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 **挑战二：多人协同**
 
 5 个人一起做一个项目，又要做图片、文档、网站，没法实时多人协同。传统的 git 分支合并方式非技术用户根本用不了。
+
+![从单Agent走向多Agent全能](/images/qcon-2026-ant-vibe-coding/slide_004.jpg)
 
 ### 三个架构理念
 
@@ -174,6 +170,8 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 
 传统 git 分支方式太慢。Claude Code 的作者在开发 Claude Code 时，本地起了非常多 Agent 实例，为了让它们在不同目录里独立工作又能汇总，大量使用了 git worktree。这是现在新的协作模式。
 
+![一切内容都是文件 一切文件都用Git管理](/images/qcon-2026-ant-vibe-coding/slide_005.jpg)
+
 ---
 
 ## 几个"暴论"
@@ -181,6 +179,8 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 **1. 未来基建必须天生 AI 友好**
 
 以后基建不是给人用的，是给 AI 用的。**造轮子的时代彻底结束了**——你造一个新框架，AI 不会写，谁会用？要保证你的编程界面和外界开源方案对齐。我们数据库方案完全对齐 Supabase SDK，告诉 AI "这是 Supabase"，它就能直接写，只是换了个底层服务。
+
+![未来基建必须天生AI友好 保障AI会写](/images/qcon-2026-ant-vibe-coding/slide_006.jpg)
 
 **2. 文档是写给 AI 看的**
 
@@ -215,9 +215,6 @@ Skill 方案不够完整。更好的方案：**在脚手架里内置 examples �
 - **如何用好 Claude Code**：最近 CLAUDE.md 的 star 数涨得很快，排名第一。核心启发：释放 AI 潜力和约束 AI 行为是双轨并行的——一边要释放让他做得更好，一边要约束让他按预期来
 
 ---
-
-![近期AI技术热点 Karpathy Claude Code ](/images/qcon-2026-ant-vibe-coding/IMG_20260418_144359_ppt.jpg)
-
 
 ## Q&A
 
