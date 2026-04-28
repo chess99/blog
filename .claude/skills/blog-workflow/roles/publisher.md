@@ -33,11 +33,22 @@ oa-skills citadel createDocument \
 ### 公众号
 
 ```bash
-cd ~/code2/wx-publisher
-npm run dev -- publish \
-  --file source/_posts/YYYY/MM/<slug>.md \
+# 步骤 1：生成封面图（浏览器选图，人工确认）
+# gen-cover 的 stdout 是 JSON，stderr 是进度日志
+wxp gen-cover \
+  --file ~/code2/blog/drafts/<slug>/final.md \
+  --output ~/code2/blog/drafts/<slug>/cover.jpg \
+  || { echo "封面图生成失败，发布终止" >&2; exit 1; }
+
+# 封面图路径持久化（供重试用）
+echo ~/code2/blog/drafts/<slug>/cover.jpg > ~/code2/blog/drafts/<slug>/cover-path.txt
+
+# 步骤 2：发布（无交互）
+wxp publish \
+  --file ~/code2/blog/drafts/<slug>/final.md \
   --theme tech \
-  --title "<标题>"
+  --title "<标题>" \
+  --cover ~/code2/blog/drafts/<slug>/cover.jpg
 ```
 
 发布命令详情（含 internal-parent-id、内部账号）见 memory。
