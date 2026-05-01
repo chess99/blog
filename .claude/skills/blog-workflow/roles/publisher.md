@@ -33,22 +33,24 @@ oa-skills citadel createDocument \
 ### 公众号
 
 ```bash
-# 步骤 1：生成封面图（浏览器选图，人工确认）
-# gen-cover 的 stdout 是 JSON，stderr 是进度日志
+# 步骤 1：AI 生成候选封面图，写入文件夹，立即退出
 wxp gen-cover \
   --file ~/code2/blog/drafts/<slug>/final.md \
-  --output ~/code2/blog/drafts/<slug>/cover.jpg \
+  --output-dir ~/code2/blog/drafts/<slug>/covers/ \
   || { echo "封面图生成失败，发布终止" >&2; exit 1; }
+# stdout JSON: { candidates: [...路径列表], prompt, output_dir }
+# 人工在 Finder 查看 drafts/<slug>/covers/，挑选一张，记下路径
+```
 
-# 封面图路径持久化（供重试用）
-echo ~/code2/blog/drafts/<slug>/cover.jpg > ~/code2/blog/drafts/<slug>/cover-path.txt
+**STOP — 人工判断**：查看生成的候选图，选定一张，把路径告诉 Agent 继续。
 
-# 步骤 2：发布（无交互）
+```bash
+# 步骤 2：发布（无交互，--cover 传入选定路径）
 wxp publish \
   --file ~/code2/blog/drafts/<slug>/final.md \
   --theme tech \
   --title "<标题>" \
-  --cover ~/code2/blog/drafts/<slug>/cover.jpg
+  --cover ~/code2/blog/drafts/<slug>/covers/<选定文件名>
 ```
 
 发布命令详情（含 internal-parent-id、内部账号）见 memory。
