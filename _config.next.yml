@@ -168,6 +168,11 @@ font:
 #google_site_verification:
 #baidu_site_verification:
 
+open_graph:
+  enable: true
+  options:
+    image: https://blog.cearl.cc/images/avatar.png
+
 # ---------------------------------------------------------------
 # Third Party Plugins & Services Settings
 # See: https://theme-next.js.org/docs/third-party-services/
