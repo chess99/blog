@@ -88,18 +88,19 @@ npm run check:post-pid
 - 识别子路径部署前缀（来自 `_config.yml` 的 `root`）
 - 忽略文档示例文章：`005-Hexo博客插入图片.md`
 
-## Subpath Deployment Rules
+## Deployment URL Configuration
 
-当前以子路径方式部署（`/blog`），统一规则：
+当前部署在自定义子域名（`blog.cearl.cc`），配置：
 
 - `_config.yml`：
-  - `url: https://cearl.cc/blog`
-  - `root: /blog/`
-- 不在文章和主题配置里硬编码 `/blog`
+  - `url: https://blog.cearl.cc`
+  - `root: /`
+- `source/CNAME`：内容为 `blog.cearl.cc`，防止 GitHub Pages 每次部署后丢失自定义域名设置
+- 不在文章和主题配置里硬编码域名路径
 - 主题自定义样式通过 `hexo-config('root')` 拼接资源路径
   - 当前 `source/_data/variables.styl`：`hexo-config('root') + 'images/'`
 
-未来改路径时，只需要调整 `_config.yml` 的 `url/root`。
+如需变更部署地址，只需要调整 `_config.yml` 的 `url/root` 和 `source/CNAME`。
 
 ## Deployment
 
@@ -122,7 +123,6 @@ npm run deploy
 ## Quick Troubleshooting
 
 - 背景图/公共图片 404：
-  - 检查请求路径是否含 `/blog/`
   - 检查 `_config.yml` 的 `url/root`
   - 检查 `source/_data/variables.styl` 是否仍为 root-aware 写法
 - 文章图片 404：
