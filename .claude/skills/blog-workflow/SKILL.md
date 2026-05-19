@@ -15,7 +15,7 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 
 ## 阶段检测
 
-收到任务后，先确定 slug，然后检查 `drafts/<slug>/` 下存在哪些文件：
+收到任务后，先确定 slug，然后检查 `drafts/YYYYMMDD-<slug>/` 下存在哪些文件。目录命名必须带日期前缀（如 `20260519-codex-cheatsheet`），日期取创建当天。
 
 | 已有文件 | 当前阶段 | 下一步角色 |
 |---------|---------|-----------|
@@ -43,14 +43,14 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 ## 工作区结构
 
 ```
-drafts/<slug>/
-├── topic-card.md   # 选题卡
-├── research.md     # 素材清单
-├── draft.md        # 初稿
-├── review.md       # 审校意见
-└── final.md        # 终稿
+drafts/YYYYMMDD-<slug>/     # 日期取创建当天，如 20260519-codex-cheatsheet
+├── topic-card.md            # 选题卡
+├── research.md              # 素材清单
+├── draft.md                 # 初稿
+├── review.md                # 审校意见
+└── final.md                 # 终稿
 
-source/images/<slug>/   # 图片资产
+source/images/<slug>/        # 图片资产（不带日期前缀）
 ```
 
 ## 质量门禁
