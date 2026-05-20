@@ -36,8 +36,8 @@ oa-skills citadel createDocument \
 
 ```bash
 wxp publish \
-  --file drafts/<slug>/final.md \
-  --cover drafts/<slug>/cover.jpg \
+  --file drafts/YYYYMMDD-<slug>/final.md \
+  --cover drafts/YYYYMMDD-<slug>/cover.jpg \
   --theme tech \
   --title "<标题>"
 ```
