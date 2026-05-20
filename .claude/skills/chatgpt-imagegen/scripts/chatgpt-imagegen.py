@@ -195,12 +195,22 @@ def _build_headers(token: str, account_id: str | None, version: str) -> dict[str
 
 # ---------- request ----------
 
+_SUPPORTED_REF_EXTS = {"jpg", "jpeg", "png", "webp", "gif"}
+_REF_MIME = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+             "webp": "image/webp", "gif": "image/gif"}
+
+
 def _encode_image(path: Path) -> str:
     """Return a data URI for the image at path."""
     ext = path.suffix.lower().lstrip(".")
-    mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
-            "webp": "image/webp", "gif": "image/gif"}.get(ext, "image/png")
-    data = base64.b64encode(path.read_bytes()).decode("ascii")
+    mime = _REF_MIME.get(ext, "image/png")
+    if ext not in _SUPPORTED_REF_EXTS:
+        print(f"   .. warning: unrecognised ref extension .{ext}; defaulting to image/png",
+              file=sys.stderr)
+    try:
+        data = base64.b64encode(path.read_bytes()).decode("ascii")
+    except OSError as e:
+        sys.exit(f"cannot read --ref file {path}: {e}")
     return f"data:{mime};base64,{data}"
 
 
@@ -433,6 +443,8 @@ def main() -> int:
         p = Path(r)
         if not p.exists():
             sys.exit(f"--ref path not found: {p}")
+        if not p.is_file():
+            sys.exit(f"--ref path is not a file: {p}")
         ref_paths.append(p)
     if len(ref_paths) > 5:
         sys.exit("--ref accepts at most 5 reference images")

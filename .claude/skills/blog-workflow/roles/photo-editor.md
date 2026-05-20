@@ -132,7 +132,7 @@ clean flat design, dark theme, <品牌色> and white accent colors,
 以下命令在仓库根目录执行。先检测 chatgpt-imagegen 是否可用：
 
 ```bash
-python .claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py --help 2>/dev/null
+python3 .claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py --help 2>/dev/null
 ```
 
 **路径 A — chatgpt-imagegen 可用**（需要 `codex login` 登录过 ChatGPT Plus）：
@@ -147,11 +147,16 @@ SCRIPT=".claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py"
 mkdir -p drafts/$SLUG/cover-candidates
 
 for i in 1 2 3 4; do
-  python "$SCRIPT" "$PROMPT" \
+  python3 "$SCRIPT" "$PROMPT" \
     -o "drafts/$SLUG/cover-candidates/cover-$i.png" \
     --size 1792x1024 --quiet &
 done
 wait
+
+# 验证所有图片都已生成
+for i in 1 2 3 4; do
+  [[ -f "drafts/$SLUG/cover-candidates/cover-$i.png" ]] || echo "WARNING: cover-$i.png missing"
+done
 ```
 
 **路径 B — 未配置**：
