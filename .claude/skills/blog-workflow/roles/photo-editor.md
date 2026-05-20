@@ -127,9 +127,15 @@ clean flat design, dark theme, <品牌色> and white accent colors,
 
 **关键原则**：prompt 由编辑主导起草，不自动从文章推导。
 
-### 第二步：生成 4 张候选图
+### 第二步：生成候选图
 
-确认 pixforge 已配置 OpenAI profile（首次使用运行 `pixforge setup`）。
+先检测 pixforge 是否已配置：
+
+```bash
+pixforge --version 2>/dev/null && pixforge profile 2>/dev/null | grep -q "api_key"
+```
+
+**路径 A — pixforge 已配置**：
 
 ```bash
 SLUG="YYYYMMDD-article-slug"
@@ -144,11 +150,7 @@ for i in 1 2 3 4; do
 done
 ```
 
-`--quality low` 约 15 秒/张，适合候选筛选。
-
-**STOP — 人工判断**：在 Finder 查看 `cover-candidates/`，选定一张，告知编号 N。
-
-### 第三步：生成高质量终稿
+`--quality low` 约 15 秒/张。候选图生成后，进入第三步生成高质量终稿：
 
 ```bash
 pixforge -p "$PROMPT" \
@@ -156,14 +158,20 @@ pixforge -p "$PROMPT" \
   -W 1792 -H 1024 --quality high --no-open -q
 ```
 
-约 3 分钟，画质更好。
+**路径 B — pixforge 未配置**：
+
+把第一步起草的 prompt 交给用户，让用户在 ChatGPT（或其他生图工具）里生成，下载后放入 `drafts/$SLUG/cover-candidates/`。
+
+**STOP — 人工判断**：查看 `cover-candidates/`，选定一张，把文件名告知 Agent 继续。
 
 ### 第四步：裁剪到 900×383（公众号标准）
+
+将选定的文件（路径 A 为 `cover-final.png`，路径 B 为用户提供的文件名）裁剪：
 
 ```bash
 # 缩放到宽 900（高约 507）
 sips --resampleWidth 900 \
-  drafts/$SLUG/cover-candidates/cover-final.png \
+  drafts/$SLUG/cover-candidates/<选定文件名> \
   --out drafts/$SLUG/cover.jpg
 
 # 居中裁剪到 900×383
