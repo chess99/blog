@@ -11,7 +11,7 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 原始想法 → [选题编辑] → [素材研究员] → [主笔] → [图片编辑*] → [同行审校] → [渠道适配] → 发布
 ```
 
-*图片编辑可选，有图片素材时介入。
+*图片编辑可选，有图片素材时 **或** 文章计划发公众号时介入。
 
 ## 阶段检测
 
@@ -25,7 +25,9 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 | `draft.md`（无图片任务） | 初稿完成 | 同行审校（派独立 agent） |
 | `draft.md`（有图片素材） | 初稿完成 | 图片编辑 |
 | `review.md` | 审校完成 | 主笔处理意见 → 生成 `final.md` |
-| `final.md` | 终稿完成 | 渠道适配 |
+| `final.md`（计划发公众号，无 cover.jpg） | 终稿完成 | 图片编辑（封面图） |
+| `final.md` + `cover.jpg` | 封面完成 | 渠道适配 |
+| `final.md`（不发公众号） | 终稿完成 | 渠道适配 |
 
 如果用户明确指定了角色（如"帮我做审校"），跳过检测直接执行。
 
@@ -48,7 +50,13 @@ drafts/YYYYMMDD-<slug>/     # 日期取创建当天，如 20260519-codex-cheatsh
 ├── research.md              # 素材清单
 ├── draft.md                 # 初稿
 ├── review.md                # 审校意见
-└── final.md                 # 终稿
+├── final.md                 # 终稿
+├── cover-candidates/        # pixforge 候选图（临时，选完可删）
+│   ├── cover-1.png
+│   ├── cover-2.png
+│   ├── cover-3.png
+│   └── cover-4.png
+└── cover.jpg                # 终稿封面，900×383，提交 git
 
 source/images/<slug>/        # 图片资产（不带日期前缀）
 ```
