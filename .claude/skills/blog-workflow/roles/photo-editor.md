@@ -127,55 +127,45 @@ clean flat design, dark theme, <品牌色> and white accent colors,
 
 **关键原则**：prompt 由编辑主导起草，不自动从文章推导。
 
-### 第二步：生成候选图（低质量快速预览）
+### 第二步：生成 4 张候选图
 
-以下命令在仓库根目录执行。先检测 pixforge 是否已配置：
+以下命令在仓库根目录执行。先检测 chatgpt-imagegen 是否可用：
 
 ```bash
-pixforge --version 2>/dev/null && pixforge profile 2>/dev/null | grep -q "api_key"
+python .claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py --help 2>/dev/null
 ```
 
-**路径 A — pixforge 已配置**：
+**路径 A — chatgpt-imagegen 可用**（需要 `codex login` 登录过 ChatGPT Plus）：
+
+4 张并行生成，每张约 20-40 秒：
 
 ```bash
 SLUG="YYYYMMDD-article-slug"
 PROMPT="<第一步起草的 prompt>"
+SCRIPT=".claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py"
 
 mkdir -p drafts/$SLUG/cover-candidates
 
 for i in 1 2 3 4; do
-  pixforge -p "$PROMPT" \
-    -o drafts/$SLUG/cover-candidates/cover-$i.png \
-    -W 1792 -H 1024 --quality low --no-open -q
+  python "$SCRIPT" "$PROMPT" \
+    -o "drafts/$SLUG/cover-candidates/cover-$i.png" \
+    --size 1792x1024 --quiet &
 done
+wait
 ```
 
-`--quality low` 约 15 秒/张，用于确认方向。
-
-**路径 B — pixforge 未配置**：
+**路径 B — 未配置**：
 
 把第一步起草的 prompt 交给用户，让用户在 ChatGPT（或其他生图工具）里生成，下载后放入 `drafts/$SLUG/cover-candidates/`。
 
-### 第三步：确认方向，生成高质量终稿
+### 第三步：选定候选图
 
-**STOP — 人工判断**：查看 `cover-candidates/`，确认风格方向是否符合预期，告知 Agent 继续。
-
-- **路径 A**：方向确认后，生成高质量终稿（约 3 分钟）：
-
-```bash
-pixforge -p "$PROMPT" \
-  -o drafts/$SLUG/cover-candidates/cover-final.png \
-  -W 1792 -H 1024 --quality high --no-open -q
-```
-
-裁剪使用 `cover-final.png`。
-
-- **路径 B**：用户在 Finder 中选定一张，告知文件名，裁剪使用该文件。
+**STOP — 人工判断**：查看 `cover-candidates/`，确认风格方向，选定一张，告知文件名（路径 A 为 `cover-1.png` 到 `cover-4.png`，路径 B 为用户提供的文件名）。
 
 ### 第四步：裁剪到 900×383（公众号标准）
 
 ```bash
-# 路径 A 用 cover-final.png，路径 B 用用户指定的文件名
+# 填入第三步选定的文件名
 sips --resampleWidth 900 \
   drafts/$SLUG/cover-candidates/<选定文件名> \
   --out drafts/$SLUG/cover.jpg
