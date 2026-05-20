@@ -135,11 +135,11 @@ clean flat design, dark theme, <品牌色> and white accent colors,
 SLUG="YYYYMMDD-article-slug"
 PROMPT="<第一步起草的 prompt>"
 
-mkdir -p ~/code2/blog/drafts/$SLUG/cover-candidates
+mkdir -p drafts/$SLUG/cover-candidates
 
 for i in 1 2 3 4; do
   pixforge -p "$PROMPT" \
-    -o ~/code2/blog/drafts/$SLUG/cover-candidates/cover-$i.png \
+    -o drafts/$SLUG/cover-candidates/cover-$i.png \
     -W 1792 -H 1024 --quality low --no-open -q
 done
 ```
@@ -152,7 +152,7 @@ done
 
 ```bash
 pixforge -p "$PROMPT" \
-  -o ~/code2/blog/drafts/$SLUG/cover-candidates/cover-final.png \
+  -o drafts/$SLUG/cover-candidates/cover-final.png \
   -W 1792 -H 1024 --quality high --no-open -q
 ```
 
@@ -163,19 +163,19 @@ pixforge -p "$PROMPT" \
 ```bash
 # 缩放到宽 900（高约 507）
 sips --resampleWidth 900 \
-  ~/code2/blog/drafts/$SLUG/cover-candidates/cover-final.png \
-  --out ~/code2/blog/drafts/$SLUG/cover.jpg
+  drafts/$SLUG/cover-candidates/cover-final.png \
+  --out drafts/$SLUG/cover.jpg
 
 # 居中裁剪到 900×383
 sips --cropToHeightWidth 383 900 \
-  ~/code2/blog/drafts/$SLUG/cover.jpg
+  drafts/$SLUG/cover.jpg
 ```
 
 ### 第五步：验证并存档
 
 ```bash
 sips -g pixelWidth -g pixelHeight \
-  ~/code2/blog/drafts/$SLUG/cover.jpg
+  drafts/$SLUG/cover.jpg
 # 预期：pixelWidth: 900 / pixelHeight: 383
 ```
 

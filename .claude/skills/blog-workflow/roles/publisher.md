@@ -32,17 +32,12 @@ oa-skills citadel createDocument \
 
 ### 公众号
 
-封面图须由图片编辑（封面图流程）提前生成，存为 `drafts/YYYYMMDD-<slug>/cover.jpg`。
+封面图由图片编辑（封面图流程）提前生成，确认 `drafts/YYYYMMDD-<slug>/cover.jpg` 存在后发布。
 
 ```bash
-# 前置检查：cover.jpg 必须存在
-[ ! -f ~/code2/blog/drafts/<slug>/cover.jpg ] && \
-  echo "❌ 缺少 cover.jpg，请先完成图片编辑（封面图）步骤" >&2 && exit 1
-
-# 发布
 wxp publish \
-  --file ~/code2/blog/drafts/<slug>/final.md \
-  --cover ~/code2/blog/drafts/<slug>/cover.jpg \
+  --file drafts/<slug>/final.md \
+  --cover drafts/<slug>/cover.jpg \
   --theme tech \
   --title "<标题>"
 ```
