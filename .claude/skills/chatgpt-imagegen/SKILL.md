@@ -49,6 +49,7 @@ Useful flags:
 | Flag | When to use |
 | --- | --- |
 | `-o PATH` | Always use when you know where the file should go in the repo. |
+| `--ref PATH` | Reference image for style/composition guidance (repeatable, up to 5). |
 | `--size 1024x1024` | Square icons / logos (verified) |
 | `--size 1536x1024` | Landscape hero banners, social cards (verified) |
 | `--size 1024x1536` | Portrait covers, mobile splashes (verified) |

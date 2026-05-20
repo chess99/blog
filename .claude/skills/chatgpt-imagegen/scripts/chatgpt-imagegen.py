@@ -195,7 +195,19 @@ def _build_headers(token: str, account_id: str | None, version: str) -> dict[str
 
 # ---------- request ----------
 
-def _build_payload(prompt: str, size: str, output_format: str, model: str) -> JsonDict:
+def _encode_image(path: Path) -> str:
+    """Return a data URI for the image at path."""
+    ext = path.suffix.lower().lstrip(".")
+    mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+            "webp": "image/webp", "gif": "image/gif"}.get(ext, "image/png")
+    data = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:{mime};base64,{data}"
+
+
+def _build_payload(
+    prompt: str, size: str, output_format: str, model: str,
+    ref_paths: list[Path] | None = None,
+) -> JsonDict:
     user_text = (
         "Use the image_generation tool to render the following. "
         f"Request: {prompt}. "
@@ -204,6 +216,12 @@ def _build_payload(prompt: str, size: str, output_format: str, model: str) -> Js
     if size and size != "auto":
         user_text += f" Size: {size}."
     user_text += " Do not include explanatory text — produce only the image."
+
+    # Reference images go before the text instruction so the model sees them first.
+    content: list[JsonDict] = []
+    for ref in (ref_paths or []):
+        content.append({"type": "input_image", "image_url": {"url": _encode_image(ref)}})
+    content.append({"type": "input_text", "text": user_text})
 
     image_tool: JsonDict = {"type": "image_generation", "output_format": output_format}
     if size and size != "auto":
@@ -215,13 +233,7 @@ def _build_payload(prompt: str, size: str, output_format: str, model: str) -> Js
         "model": model,
         "stream": True,
         "instructions": "You are an image generation assistant.",
-        "input": [
-            {
-                "type": "message",
-                "role": "user",
-                "content": [{"type": "input_text", "text": user_text}],
-            }
-        ],
+        "input": [{"type": "message", "role": "user", "content": content}],
         "tools": [image_tool],
         "tool_choice": "auto",
         "parallel_tool_calls": False,
@@ -386,6 +398,10 @@ def main() -> int:
     parser.add_argument("prompt", help="Description of the image to generate")
     parser.add_argument("-o", "--out", help="Output file path (default: assets/generated/<slug>.<ext>)")
     parser.add_argument(
+        "--ref", metavar="PATH", action="append", dest="refs", default=[],
+        help="Reference image path (repeatable, up to 5). Passed to the model before the prompt.",
+    )
+    parser.add_argument(
         "--size",
         default="auto",
         help="auto | WIDTHxHEIGHT (e.g. 1024x1024, 1536x1024, 1024x1536). "
@@ -412,13 +428,24 @@ def main() -> int:
             "requires a subscription OAuth token.)"
         )
 
+    ref_paths: list[Path] = []
+    for r in args.refs:
+        p = Path(r)
+        if not p.exists():
+            sys.exit(f"--ref path not found: {p}")
+        ref_paths.append(p)
+    if len(ref_paths) > 5:
+        sys.exit("--ref accepts at most 5 reference images")
+
     version = _detect_codex_version()
-    payload = _build_payload(args.prompt, args.size, args.format, args.model)
+    payload = _build_payload(args.prompt, args.size, args.format, args.model, ref_paths)
     deadline = time.monotonic() + args.timeout
 
     if not args.quiet:
         print(f"-> POST {CODEX_BACKEND}", file=sys.stderr)
         print(f"   prompt: {args.prompt[:80]}{'…' if len(args.prompt) > 80 else ''}", file=sys.stderr)
+        if ref_paths:
+            print(f"   refs: {[str(p) for p in ref_paths]}", file=sys.stderr)
         print(
             f"   size={args.size} format={args.format} model={args.model} "
             f"codex_version={version} timeout={args.timeout}s",
