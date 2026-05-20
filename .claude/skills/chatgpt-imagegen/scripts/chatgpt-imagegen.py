@@ -220,7 +220,7 @@ def _build_payload(
     # Reference images go before the text instruction so the model sees them first.
     content: list[JsonDict] = []
     for ref in (ref_paths or []):
-        content.append({"type": "input_image", "image_url": {"url": _encode_image(ref)}})
+        content.append({"type": "input_image", "image_url": _encode_image(ref)})
     content.append({"type": "input_text", "text": user_text})
 
     image_tool: JsonDict = {"type": "image_generation", "output_format": output_format}
