@@ -96,3 +96,87 @@ quality=72 适合博客/公众号用途，原图 3-5MB 压缩后约 250-400KB。
 - 每张选入的图，都能说清楚它对应文章哪个论点、补充了什么文字说不清楚的信息
 - 不因为"有图总比没图好"而凑数
 - 同一幻灯片不重复选
+
+---
+
+## 封面图（公众号）
+
+以下流程仅在文章计划发公众号时执行。
+
+### 输入
+
+`drafts/YYYYMMDD-<slug>/final.md`
+
+### 第一步：读文章，起草 prompt
+
+读 `final.md`，提取：
+- 主角工具/产品名（如 Codex CLI、Claude Code）
+- 官方品牌色（OpenAI：黑白；Anthropic Claude：橙白）
+- 3-6 个最能代表文章内容的核心命令词
+
+按以下模板起草 prompt：
+
+```
+Official <品牌> logo (<颜色描述，如 "black circle with white swoosh">) centered on a dark charcoal background,
+below it a minimal terminal prompt showing '> <工具名>',
+surrounded by floating command snippets in small monospace font
+(<命令词1>, <命令词2>, <命令词3>, ...),
+clean flat design, dark theme, <品牌色> and white accent colors,
+16:9 aspect ratio, professional developer tool aesthetic, no people.
+```
+
+**关键原则**：prompt 由编辑主导起草，不自动从文章推导。
+
+### 第二步：生成 4 张候选图
+
+确认 pixforge 已配置 OpenAI profile（首次使用运行 `pixforge setup`）。
+
+```bash
+SLUG="YYYYMMDD-article-slug"
+PROMPT="<第一步起草的 prompt>"
+
+mkdir -p ~/code2/blog/drafts/$SLUG/cover-candidates
+
+for i in 1 2 3 4; do
+  pixforge -p "$PROMPT" \
+    -o ~/code2/blog/drafts/$SLUG/cover-candidates/cover-$i.png \
+    -W 1792 -H 1024 --quality low --no-open -q
+done
+```
+
+`--quality low` 约 15 秒/张，适合候选筛选。
+
+**STOP — 人工判断**：在 Finder 查看 `cover-candidates/`，选定一张，告知编号 N。
+
+### 第三步：生成高质量终稿
+
+```bash
+pixforge -p "$PROMPT" \
+  -o ~/code2/blog/drafts/$SLUG/cover-candidates/cover-final.png \
+  -W 1792 -H 1024 --quality high --no-open -q
+```
+
+约 3 分钟，画质更好。
+
+### 第四步：裁剪到 900×383（公众号标准）
+
+```bash
+# 缩放到宽 900（高约 507）
+sips --resampleWidth 900 \
+  ~/code2/blog/drafts/$SLUG/cover-candidates/cover-final.png \
+  --out ~/code2/blog/drafts/$SLUG/cover.jpg
+
+# 居中裁剪到 900×383
+sips --cropToHeightWidth 383 900 \
+  ~/code2/blog/drafts/$SLUG/cover.jpg
+```
+
+### 第五步：验证并存档
+
+```bash
+sips -g pixelWidth -g pixelHeight \
+  ~/code2/blog/drafts/$SLUG/cover.jpg
+# 预期：pixelWidth: 900 / pixelHeight: 383
+```
+
+`cover.jpg` 与 `final.md` 一起提交 git，`cover-candidates/` 可删除。
