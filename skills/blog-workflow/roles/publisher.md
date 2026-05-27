@@ -34,12 +34,21 @@ oa-skills citadel createDocument \
 
 封面图由图片编辑（封面图流程）提前生成，确认 `drafts/YYYYMMDD-<slug>/cover.jpg` 存在后发布。
 
+公众号不支持普通外部超链接。不要为了兼容公众号改写博客终稿；在渠道适配阶段单独生成 `drafts/YYYYMMDD-<slug>/wechat.md`：
+
+- 保留正文语义，把 Markdown 链接改成纯文本名称
+- 文末增加「参考资料」，列出名称和完整 URL，便于读者复制
+- 将站内图片路径改为本地绝对路径，交给 `wxp publish` 上传到微信素材库
+- 去掉 front matter 和 `<!-- more -->`
+- 准备 120 字以内摘要，通过 `--digest` 写入微信草稿；它会显示在转发卡片等位置，不要留空依赖默认截取正文
+
 ```bash
 wxp publish \
-  --file drafts/YYYYMMDD-<slug>/final.md \
+  --file drafts/YYYYMMDD-<slug>/wechat.md \
   --cover drafts/YYYYMMDD-<slug>/cover.jpg \
-  --theme tech \
-  --title "<标题>"
+  --theme warm-tech \
+  --title "<标题>" \
+  --digest "<120字以内摘要>"
 ```
 
 发布命令详情（含 internal-parent-id、内部账号）见 memory。
