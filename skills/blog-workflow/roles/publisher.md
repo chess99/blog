@@ -30,6 +30,18 @@ oa-skills citadel createDocument \
   --internal-account <见 memory>
 ```
 
+内部知识库不应直接使用博客站内图片或外部图片 URL。创建文档后，对正文里的本地图片逐张执行：
+
+```bash
+oa-skills citadel uploadImageToDocument \
+  --contentId <新文档ID> \
+  --image source/images/<slug>/<image> \
+  --alt "<图片描述>" \
+  --internal-account <见 memory>
+```
+
+然后按 `getDocumentCitadelMd -> 替换图片节点为返回的 imageMd -> updateDocumentByMd` 流程回写文档。发布记录中要保存新文档 ID、内部知识库链接和图片上传映射。
+
 ### 公众号
 
 封面图由图片编辑（封面图流程）提前生成，确认 `drafts/YYYYMMDD-<slug>/cover.jpg` 存在后发布。
