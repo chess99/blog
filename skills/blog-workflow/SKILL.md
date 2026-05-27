@@ -35,12 +35,12 @@ description: 博客文章创作流水线。当用户提到写文章、新选题�
 
 确定角色后，读取对应的 SOP 文件并按其指示执行：
 
-- 选题编辑：`.claude/skills/blog-workflow/roles/topic-editor.md`
-- 素材研究员：`.claude/skills/blog-workflow/roles/researcher.md`
-- 主笔：`.claude/skills/blog-workflow/roles/writer.md`
-- 同行审校：`.claude/skills/blog-workflow/roles/reviewer.md`（**独立 agent 执行，见 SOP 里的触发方式**）
-- 图片编辑：`.claude/skills/blog-workflow/roles/photo-editor.md`
-- 渠道适配：`.claude/skills/blog-workflow/roles/publisher.md`
+- 选题编辑：`skills/blog-workflow/roles/topic-editor.md`
+- 素材研究员：`skills/blog-workflow/roles/researcher.md`
+- 主笔：`skills/blog-workflow/roles/writer.md`
+- 同行审校：`skills/blog-workflow/roles/reviewer.md`（**独立 agent 执行，见 SOP 里的触发方式**）
+- 图片编辑：`skills/blog-workflow/roles/photo-editor.md`
+- 渠道适配：`skills/blog-workflow/roles/publisher.md`
 
 ## 工作区结构
 

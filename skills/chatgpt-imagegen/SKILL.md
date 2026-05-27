@@ -42,7 +42,7 @@ No `OPENAI_API_KEY` is required — and setting one will not help. This is the s
 python "$CLAUDE_SKILL_DIR/scripts/chatgpt-imagegen.py" "<prompt>" [options]
 ```
 
-`$CLAUDE_SKILL_DIR` is set by the Claude Code harness when the skill loads. Always use this variable — never hardcode the path or rely on the script being on `$PATH`.
+`$CLAUDE_SKILL_DIR` is set by the active agent harness when the skill loads. Always use this variable — never hardcode the path or rely on the script being on `$PATH`.
 
 Useful flags:
 
