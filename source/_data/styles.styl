@@ -335,6 +335,158 @@ li {
   }
 }
 
+/************************* Friends *************************/
+
+.friends-intro {
+  margin: 0 auto 24px;
+  max-width: 34em;
+  color: var(--blockquote-color);
+  line-height: 1.8;
+  text-align: left;
+}
+
+.friend-list {
+  display: grid;
+  margin: 0 auto;
+  max-width: 680px;
+}
+
+.friend-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 82px;
+  padding: 18px 2px;
+  border-top: 1px solid rgba(0, 0, 0, .08);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+
+  &:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, .08);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--text-color);
+    border-bottom-color: transparent;
+    outline: none;
+    text-decoration: none;
+    transform: translateX(3px);
+
+    .friend-name,
+    .friend-arrow {
+      color: var(--link-hover-color);
+    }
+
+    .friend-arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  &:focus-visible {
+    border-radius: $myradius;
+    box-shadow: 0 0 0 3px rgba(4, 119, 171, .2);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border-top-color: rgba(255, 255, 255, .1);
+
+    &:last-child {
+      border-bottom-color: rgba(255, 255, 255, .1);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px rgba(100, 154, 182, .28);
+    }
+  }
+}
+
+.friend-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: $myradius + 7px;
+  object-fit: cover;
+  background: var(--content-bg-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+  flex-shrink: 0;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .28);
+  }
+}
+
+.posts-expand .post-body .friend-avatar {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .28);
+  }
+}
+
+.friend-content {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.friend-name {
+  color: var(--text-color);
+  font-size: 1.05em;
+  font-weight: 700;
+  line-height: 1.35;
+  transition: color .2s ease;
+}
+
+.friend-desc {
+  color: var(--blockquote-color);
+  font-size: .88em;
+  line-height: 1.65;
+}
+
+.friend-arrow {
+  color: var(--blockquote-color);
+  font-size: 1.2em;
+  line-height: 1;
+  transition: color .2s ease, transform .2s ease;
+}
+
++mobile() {
+  .friends-intro {
+    margin-bottom: 18px;
+    max-width: none;
+  }
+
+  .friend-list {
+    max-width: none;
+  }
+
+  .friend-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 74px;
+    padding: 15px 0;
+    transform: none;
+
+    &:hover,
+    &:focus {
+      transform: none;
+    }
+  }
+
+  .friend-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: $myradius + 4px;
+  }
+
+  .friend-arrow {
+    display: none;
+  }
+}
+
 /************************* Waline Comment ************************/
 
 /* comment-圆角 */
