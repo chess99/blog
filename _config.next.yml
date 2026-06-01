@@ -47,6 +47,7 @@ menu:
   home: / || fas fa-home
   tags: /tags/ || fas fa-tags
   categories: /categories/ || fas fa-stream
+  友链: /friends/ || fas fa-link
 
 # ---------------------------------------------------------------
 # Sidebar Settings
