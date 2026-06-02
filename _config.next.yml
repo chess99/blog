@@ -130,7 +130,7 @@ tag_icon: true
 # ---------------------------------------------------------------
 
 # Preconnect CDN for fonts and plugins.
-preconnect: true
+preconnect: false
 
 # Android Chrome header panel color ($brand-bg / $headband-bg => $black-deep).
 android_chrome_color: "#6c599f"
@@ -154,11 +154,14 @@ back2top:
 font:
   enable: true
   global:
-    family: EB Garamond, Noto Serif SC
+    external: false
+    family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei"
   title:
-    family: Long Cang
-    size: 2
+    external: false
+    family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei"
+    size: 1.35
   headings:
+    external: false
     size: 1.48
 
 # ---------------------------------------------------------------
@@ -180,7 +183,7 @@ open_graph:
 # ---------------------------------------------------------------
 
 math:
-  every_page: true
+  every_page: false
   mathjax:
     enable: true
     tags: none
@@ -190,8 +193,8 @@ mermaid:
   theme:
     light: default
     dark: dark
-pjax: true
-fancybox: true
+pjax: false
+fancybox: false
 lazyload: true
 pangu: true
 
