@@ -122,10 +122,13 @@ below it a minimal terminal prompt showing '> <工具名>',
 surrounded by floating command snippets in small monospace font
 (<命令词1>, <命令词2>, <命令词3>, ...),
 clean flat design, dark theme, <品牌色> and white accent colors,
-16:9 aspect ratio, professional developer tool aesthetic, no people.
+2.35:1 WeChat article cover aspect ratio, keep all important text and UI inside the center safe area,
+professional developer tool aesthetic, no people.
 ```
 
 **关键原则**：prompt 由编辑主导起草，不自动从文章推导。
+
+公众号封面最终尺寸是 `900×383`，但生图后端要求宽高都能被 16 整除，不能直接请求 `900x383`。优先请求同为 2.35:1 且可被 16 整除的 `1504x640`，再缩放为 `900×383`。这样通常不需要从 16:9 大图裁剪，能减少主体被裁掉的风险。
 
 ### 第二步：生成 4 张候选图
 
@@ -142,14 +145,14 @@ python3 .claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py --help 2>/de
 ```bash
 SLUG="YYYYMMDD-article-slug"
 PROMPT="<第一步起草的 prompt>"
-SCRIPT=".claude/skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py"
+SCRIPT="skills/chatgpt-imagegen/scripts/chatgpt-imagegen.py"
 
 mkdir -p drafts/$SLUG/cover-candidates
 
 for i in 1 2 3 4; do
   python3 "$SCRIPT" "$PROMPT" \
     -o "drafts/$SLUG/cover-candidates/cover-$i.png" \
-    --size 1792x1024 --quiet &
+    --size 1504x640 --quiet &
 done
 wait
 
@@ -167,17 +170,19 @@ done
 
 **STOP — 人工判断**：查看 `cover-candidates/`，确认风格方向，选定一张，告知文件名（路径 A 为 `cover-1.png` 到 `cover-4.png`，路径 B 为用户提供的文件名）。
 
-### 第四步：裁剪到 900×383（公众号标准）
+### 第四步：缩放到 900×383（公众号标准）
 
 ```bash
 # 填入第三步选定的文件名
-sips --resampleWidth 900 \
+sips --resampleHeightWidth 383 900 \
   drafts/$SLUG/cover-candidates/<选定文件名> \
   --out drafts/$SLUG/cover.jpg
 
-# 居中裁剪到 900×383
-sips --cropToHeightWidth 383 900 \
-  drafts/$SLUG/cover.jpg
+# 确保最终文件是真正的 JPEG，而不是 PNG 内容配 .jpg 扩展名
+sips -s format jpeg \
+  drafts/$SLUG/cover.jpg \
+  --out drafts/$SLUG/cover.jpeg
+mv drafts/$SLUG/cover.jpeg drafts/$SLUG/cover.jpg
 ```
 
 ### 第五步：验证并存档

@@ -8,3 +8,10 @@ public/
 _multiconfig.yml
 .obsidian/
 .gstack/
+
+# Blog workflow scratch artifacts. Keep final drafts, channel Markdown, and
+# selected covers in git; ignore generated previews and disposable candidates.
+drafts/_tmp/
+drafts/**/wechat-preview.html
+drafts/**/cover-candidates/
+drafts/**/cover-work/
