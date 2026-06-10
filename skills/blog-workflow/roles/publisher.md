@@ -20,27 +20,9 @@
 
 ### 内部知识库
 
-```bash
-# 去掉 front matter 和 <!-- more --> 后发布
-sed '/^---$/,/^---$/d; /^<!-- more -->$/d' source/_posts/YYYY/MM/<slug>.md > /tmp/<slug>-km.md
-oa-skills citadel createDocument \
-  --title "<标题>" \
-  --file /tmp/<slug>-km.md \
-  --internal-parent-id <见 memory> \
-  --internal-account <见 memory>
-```
+内部知识库发布只保留渠道适配原则，不在仓库中记录具体系统、账号、父级目录、文档链接或发布命令。需要复用这些信息时，从本地配置或 agent memory 读取。
 
-内部知识库不应直接使用博客站内图片或外部图片 URL。创建文档后，对正文里的本地图片逐张执行：
-
-```bash
-oa-skills citadel uploadImageToDocument \
-  --contentId <新文档ID> \
-  --image source/images/<slug>/<image> \
-  --alt "<图片描述>" \
-  --internal-account <见 memory>
-```
-
-然后按 `getDocumentCitadelMd -> 替换图片节点为返回的 imageMd -> updateDocumentByMd` 流程回写文档。发布记录中要保存新文档 ID、内部知识库链接和图片上传映射。
+发布前先去掉 front matter 和 `<!-- more -->`，并把站内图片转换为该平台可访问的图片。发布状态、文档链接和图片上传映射只写入本地已忽略的 `drafts/<slug>/publish-status.md`，不要提交到 git。
 
 ### 公众号
 
@@ -63,9 +45,9 @@ wxp publish \
   --digest "<120字以内摘要>"
 ```
 
-发布命令详情（含 internal-parent-id、内部账号）见 memory。
+发布命令详情见本地配置或 agent memory，不写入仓库。
 
 ## 质量标准
 
 - 公众号版删改后，核心洞察不能丢失
-- 各渠道版本发布后，在 `drafts/<slug>/` 下记录发布状态
+- 各渠道版本发布后，在本地已忽略的 `drafts/<slug>/publish-status.md` 记录发布状态

@@ -15,6 +15,7 @@ drafts/_tmp/
 drafts/**/wechat-preview.html
 drafts/**/cover-candidates/
 drafts/**/cover-work/
+drafts/**/publish-status.md
 
 # Local ASR artifacts.
 .venv-asr/
