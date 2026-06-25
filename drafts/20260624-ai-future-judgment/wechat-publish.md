@@ -30,7 +30,8 @@ wxp publish \
 - 封面已由内置 image_gen 生成，并验证为 900×383 JPEG。
 - `wx-publisher` 本地配置已写入 `D:\code\wx-publisher\.wxp.json`（该文件已被 wx-publisher 仓库忽略，不提交）。
 - 草稿已成功创建：2026-06-25。
-- media_id：`bpB07u_8H2Ns8YJAsyxW3XAKLW9JD-HxsKOxCYG6JHa-WvXQTO4ZE1fGtV4Mlp5f`
+- 最新 media_id：`bpB07u_8H2Ns8YJAsyxW3QkhIieT618ccfLpANG1Z7PGLSwXs14aXZZEr5XwPrwh`
+- 旧版 media_id：`bpB07u_8H2Ns8YJAsyxW3XAKLW9JD-HxsKOxCYG6JHa-WvXQTO4ZE1fGtV4Mlp5f`（已被新版草稿取代，勿发布）。
 - 主题：`default`。
 - 正文图片：检测 0 张，上传 0 张。
 - 封面：使用本地 `cover.jpg`，未使用占位图。
