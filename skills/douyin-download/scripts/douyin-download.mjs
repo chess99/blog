@@ -129,7 +129,14 @@ async function closeTab(proxy, target) {
 }
 
 async function openParser(proxy, parserUrl) {
-  const json = await proxyGet(proxy, '/new', { url: parserUrl });
+  const res = await fetch(new URL('/new', `${proxy}/`), {
+    method: 'POST',
+    body: parserUrl,
+  });
+  if (!res.ok) {
+    throw new Error(`CDP proxy /new failed: HTTP ${res.status} ${await res.text()}`);
+  }
+  const json = await res.json();
   if (!json.targetId) {
     throw new Error(`Unexpected /new response: ${JSON.stringify(json)}`);
   }
