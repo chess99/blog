@@ -44,11 +44,11 @@ douyin-dl favorites --limit 20 --dry-run
 douyin-dl favorites --limit 20 -o drafts/<slug>/douyin
 ```
 
-只有用户明确要求完整归档时才使用 `--all`。成功作品记录在输出根目录的 `archive.jsonl`，重复运行会自动跳过；用户明确要求重下时添加 `--force`。
+只有用户明确要求完整归档时才使用 `--all`。首次枚举会写入 `inventory.jsonl` 快照，断点续跑默认复用快照；只有需要重新抓取当前收藏时才添加 `--refresh-inventory`。成功作品记录在输出根目录的 `archive.jsonl`，重复运行会自动跳过；用户明确要求重下时添加 `--force`。最终失败项写入 `errors.jsonl`。
 
 ## 输出与边界
 
-- 视频输出 `video.mp4`，图集输出 `image-001.webp` 等，每个作品同时写入 `metadata.json`。
+- 视频输出 `source.mp4`，图集输出 `image-001.webp` 等，每个作品同时写入 `metadata.json`。可选的 Whisper 转写会生成 `transcript.json`、`transcript.srt` 和必要的抽帧联系表；内容提炼由外部 AI 工作流写入 `analysis.json`，不使用仓库内置的本地大模型。
 - 博客创作原始素材默认放在 `drafts/<slug>/`，除非用户指定其他位置。
 - 不提交下载的视频、图片、Cookie、收藏列表或临时媒体 URL，除非用户明确要求版本化媒体。
 - 不绕过付费、私密、已删除或其他访问控制；单条不可访问作品应报告具体错误。
