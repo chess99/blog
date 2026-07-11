@@ -1,108 +1,57 @@
 ---
 name: douyin-download
-description: Download and extract public Douyin videos or image posts from user-provided douyin.com / v.douyin.com links. Use this skill whenever the user asks for 抖音下载, 抖音去水印, 抖音解析, 下载抖音视频, 保存抖音图集, or provides a Douyin video/share URL and wants local media files or media URLs.
+description: Use when a user asks to download, archive, parse, or save Douyin videos, image posts, favorites, or provides a douyin.com / v.douyin.com link.
 ---
 
-# Douyin Download Skill
+# Douyin Download
 
-Use this skill to turn a user-provided public Douyin link into local media files and useful metadata.
+使用独立命令行工具 `douyin-dl` 下载用户有权访问和保存的抖音内容。工具复用 Chrome 或 Edge 的现有登录态，不导出 Cookie，不依赖第三方解析站。
 
-## Scope
+## 使用前检查
 
-This skill supports:
+浏览器需要已登录抖音，并在 `chrome://inspect/#remote-debugging` 或 `edge://inspect/#remote-debugging` 中开启远程调试。
 
-- Single public Douyin video posts.
-- Single public Douyin image/text posts.
-- Long desktop URLs such as `https://www.douyin.com/video/...`.
-- Mobile share links such as `https://v.douyin.com/...`.
-
-This skill does not support:
-
-- Batch downloads from a user homepage, favorites, likes, collections, topics, or search result pages.
-- Background music extraction.
-- Private, login-only, deleted, or otherwise inaccessible content.
-- Bypassing access controls or platform restrictions.
-
-Only download content the user provided and is allowed to use. If the content is for a blog draft, save raw media under `drafts/<slug>/` unless the user specifies another location. Do not commit downloaded videos/images unless the user explicitly asks to version them.
-
-## Required Tooling
-
-This workflow uses the `web-access` skill's Chrome CDP proxy. Before running the script, load and follow `web-access`, then run its dependency check:
-
-```bash
-node "$CLAUDE_SKILL_DIR/scripts/check-deps.mjs"
+```powershell
+douyin-dl doctor
 ```
 
-The proxy should be available at `http://localhost:3456`.
+若命令不存在，在本机工具仓库安装：
 
-## Recommended Command
-
-From the blog repository root:
-
-```bash
-node skills/douyin-download/scripts/douyin-download.mjs \
-  "https://www.douyin.com/video/7631971197437201715?previous_page=app_code_link" \
-  --out-dir drafts/context-rot/douyin
+```powershell
+cd D:\code\douyin-dl
+npm link
 ```
 
-Outputs:
+## 下载单条作品
 
-- `metadata.json` with title, source link, parsed media URLs, and output file paths.
-- `video.mp4` for video posts.
-- `image-001.jpg`, `image-002.jpg`, ... for image posts.
-
-Optional flags:
-
-```bash
---out-dir <dir>          Output directory. Default: ./douyin-download
---filename <name>        Video filename. Default: video.mp4
---parser-url <url>       Parser page. Default: https://blog.aitoolwang.com/dy/
---proxy <url>            CDP proxy. Default: http://localhost:3456
---timeout-ms <ms>        Parse timeout. Default: 45000
---chunk-size <bytes>     Browser fetch download chunk size. Default: 1048576
---media-url <url>        Skip parsing and download an already parsed media URL
---keep-tab               Keep the parser tab open for debugging
---metadata-only          Parse metadata and media URLs without downloading
+```powershell
+douyin-dl single "https://www.douyin.com/video/作品ID" -o drafts/<slug>/douyin
+douyin-dl single "https://www.douyin.com/note/作品ID" -o drafts/<slug>/douyin
 ```
 
-## How It Works
+只采集稳定元数据而不下载媒体：
 
-Direct `curl` requests to Douyin pages often hit anti-bot JavaScript or CDN 403s. The parser page at `https://blog.aitoolwang.com/dy/` successfully handles single public links, but its API signing logic is obfuscated. The stable path is to operate the parser page inside the user's Chrome:
-
-1. Open the parser page in a new background tab.
-2. Fill `textarea.url-input` with the Douyin URL.
-3. Click `#startParse`.
-4. Poll the DOM for `#videoTitle`, `#videoPlayer.src`, and `#imgList img`.
-5. Download promptly because returned media URLs are time-limited.
-
-For some `douyinvod.com` media URLs, local `curl` can return 403 while browser `fetch` succeeds. The bundled script therefore downloads through the parser tab using Range requests and writes chunks to disk locally.
-
-## Manual Fallback
-
-If the script fails but the parser page shows a playable video:
-
-1. Use CDP `/eval` to read `document.querySelector('#videoPlayer').src`.
-2. Test browser-side access:
-
-```js
-fetch(videoUrl, { headers: { Range: 'bytes=0-1023' } })
+```powershell
+douyin-dl single "<抖音链接>" --metadata-only -o drafts/<slug>/douyin
 ```
 
-3. If browser fetch succeeds and local curl fails, keep the browser-chunk download path or run the script with `--media-url`.
-4. If the parser page reports an error, retry once with the original mobile share URL if available. If it still fails, tell the user the web parser cannot parse this item.
+## 收藏列表
 
-If the parser page says `今日解析次数已达上限`, stop retrying the parser. Reuse a media URL already captured in a previous successful parse, ask the user for another parser/source, or tell the user to wait for the parser quota to reset.
+先预览，再按用户确认的数量下载：
 
-## Notes From Verification
+```powershell
+douyin-dl favorites --limit 20 --dry-run
+douyin-dl favorites --limit 20 -o drafts/<slug>/douyin
+```
 
-Verified on 2026-06-09 with:
+只有用户明确要求完整归档时才使用 `--all`。成功作品记录在输出根目录的 `archive.jsonl`，重复运行会自动跳过；用户明确要求重下时添加 `--force`。
 
-`https://www.douyin.com/video/7631971197437201715?previous_page=app_code_link`
+## 输出与边界
 
-The parser returned:
+- 视频输出 `video.mp4`，图集输出 `image-001.webp` 等，每个作品同时写入 `metadata.json`。
+- 博客创作原始素材默认放在 `drafts/<slug>/`，除非用户指定其他位置。
+- 不提交下载的视频、图片、Cookie、收藏列表或临时媒体 URL，除非用户明确要求版本化媒体。
+- 不绕过付费、私密、已删除或其他访问控制；单条不可访问作品应报告具体错误。
+- 退出码 `1` 表示批量中存在内容失败，退出码 `2` 表示参数、浏览器、登录态或配置错误。
 
-- Title beginning with `上下文腐烂 (Context rot) 其实是两种病`.
-- A `douyinvod.com` `video/mp4` URL.
-- No image list.
-
-Local `curl` against the media URL returned 403, while browser-side Range `fetch` returned `206 video/mp4`, so browser-chunk downloading is required for this class of URLs.
+完整命令说明见 `D:\code\douyin-dl\README.md`。
