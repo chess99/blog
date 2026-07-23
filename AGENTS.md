@@ -37,13 +37,16 @@ source/_posts/YYYY/MM/YYYYMMDD-slug.md
 ### 图片
 
 ```
-source/images/<slug>/   # 发布用图片
-drafts/<slug>/          # 创作过程原始素材（不混用）
+source/images/<slug>/   # 博客发布用图片副本
 ```
 
 文档内引用：`![说明](/images/<slug>/image.jpg)`
 
 跨文章共用图片放 `source/images/` 根目录。
+
+创作过程、研究、渠道稿件和原始素材统一保存在
+`D:\code\content\topics\YYYYMMDD-<slug>\`。本仓库中的文章与图片是
+`blog.cearl.cc` 的发布副本，不作为继续创作的唯一来源。
 
 ## 常用命令
 
@@ -60,15 +63,14 @@ hexo deploy    # 部署
 ├── source/
 │   ├── _posts/      # 文章
 │   └── images/      # 图片资源
-├── drafts/          # 创作工作区（每篇文章一个子目录，不被 Hexo 构建）
-├── skills/
-│   └── blog-workflow/  # 博客创作流水线 skill
+├── tools/           # 博客构建和发布检查工具
 ├── _config.yml
 └── _config.next.yml
 ```
 
-## 创作流程
+## 项目边界
 
-使用 `blog-workflow` skill 驱动，自动检测文章阶段并执行对应角色。
-
-详见 `skills/blog-workflow/SKILL.md`。
+- 内容资产与渠道稿件位于 `D:\code\content`。
+- 创作 skills、工具和工作流位于 `D:\code\content-workflows`。
+- 本仓库只维护博客最终发布副本、Hexo 配置、站点页面和部署流程。
+- 文章需要修改时，优先修改内容资产库中的来源，再同步发布副本，避免两边独立演化。

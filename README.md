@@ -2,6 +2,8 @@
 
 Hexo + NexT 博客仓库运维与日常操作说明。
 
+本仓库是 [blog.cearl.cc](https://blog.cearl.cc) 的发布目录，只保存博客构建所需的最终文章副本、图片、页面和配置。创作过程资产位于 `D:\code\content`，通用创作 skills 与工具位于 `D:\code\content-workflows`。
+
 ## Repository Overview
 
 - 技术栈：`Hexo 7` + `hexo-theme-next`
@@ -11,6 +13,13 @@ Hexo + NexT 博客仓库运维与日常操作说明。
   - `source/images/`：全站公共图片（如背景图、头像）
   - `source/_data/`：NexT 自定义样式/模板覆盖
   - `tools/`：仓库级工具脚本（不会被 Hexo 当作插件加载）
+
+## Content Boundary
+
+- `D:\code\content` 是选题、研究、草稿和多渠道内容的唯一来源。
+- 本仓库 `source/_posts/` 和 `source/images/` 中的文件是博客发布副本。
+- 修改文章时优先修改内容资产库中的来源，再同步到本仓库。
+- 不在本仓库保存创作草稿、公众号/小红书/抖音素材或通用内容工作流。
 - 关键配置：
   - `_config.yml`：Hexo 主配置
   - `_config.next.yml`：NexT 主题配置
