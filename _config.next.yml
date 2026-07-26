@@ -204,11 +204,11 @@ pangu: true
 # ---------------------------------------------------------------
 
 google_analytics:
-  tracking_id: G-C3YEYVPEBR
+  tracking_id: G-X1YEV9MS8W
   only_pageview: false
 
 # Baidu Analytics ID
-baidu_analytics: 8864588cde35a2181784b07b34f770f9
+baidu_analytics: 10253534746223dafa915941902393be
 
 # 不蒜子 - 页面访问量统计
 busuanzi_count:
