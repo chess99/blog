@@ -71,6 +71,6 @@ hexo deploy    # 部署
 ## 项目边界
 
 - 内容资产与渠道稿件位于 `D:\code\content`。
-- 创作 skills、工具和工作流位于 `D:\code\content-workflows`。
+- 创作 skills、工具和工作流位于 `D:\code\content-studio`。
 - 本仓库只维护博客最终发布副本、Hexo 配置、站点页面和部署流程。
 - 文章需要修改时，优先修改内容资产库中的来源，再同步发布副本，避免两边独立演化。
