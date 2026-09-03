@@ -1,0 +1,28 @@
+# Cearl's Blog — 技术与思考的个人博客
+
+## 是什么
+
+这是 Cearl（chess99）的个人技术博客，记录 AI 编程实践、软件工程思考、技术大会见闻，以及读书与生活随笔。博客使用 Hexo + NexT 主题搭建，部署于 GitHub Pages。
+
+## 核心主题
+
+- AI 编程与 Agent 开发：Claude Code、AI Coding 工作流、Agent 架构设计
+- 软件工程：代码架构、工程实践、工具链
+- 技术会议笔记：QCon、InfoQ 等大会分享整理
+- 读书与思考：技术书籍精读、个人成长
+
+## 主要页面
+
+- 首页: https://blog.cearl.cc/
+- 文章归档: https://blog.cearl.cc/archives/
+- 分类列表: https://blog.cearl.cc/categories/
+- 标签列表: https://blog.cearl.cc/tags/
+- 关于: https://blog.cearl.cc/about/
+- Sitemap: https://blog.cearl.cc/sitemap.xml
+- RSS: https://blog.cearl.cc/atom.xml
+
+## 统计
+
+- 文章数：50+ 篇
+- 主要语言：中文
+- 更新频率：不定期，活跃更新中

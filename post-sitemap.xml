@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://blog.cearl.cc/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-leetcode-3628/</loc>
+        <lastmod>2026-09-03T10:52:33.785Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/codex-sqlite-vacuum/</loc>
+        <lastmod>2026-09-03T10:38:57.056Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/android-decompiled-app-runnable-recovery/</loc>
+        <lastmod>2026-08-29T07:09:03.917Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/software-alternative-opportunities/</loc>
+        <lastmod>2026-08-26T10:45:41.913Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/payment-gateways-online-business/</loc>
+        <lastmod>2026-08-18T15:41:41.941Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/android-jiagu-runtime-dex-dump/</loc>
+        <lastmod>2026-08-12T17:14:00.877Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-future-judgment/</loc>
+        <lastmod>2026-06-25T11:47:29.786Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/codex-goal-mode/</loc>
+        <lastmod>2026-06-23T11:23:34.659Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/context-rot-two-diseases/</loc>
+        <lastmod>2026-06-23T11:23:34.659Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/codex-cheatsheet/</loc>
+        <lastmod>2026-06-23T11:23:34.658Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-web-design-workflow/</loc>
+        <lastmod>2026-06-23T11:23:34.658Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-taobao-ai-coding/</loc>
+        <lastmod>2026-06-23T11:23:34.657Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/training-transcript-editor/</loc>
+        <lastmod>2026-06-23T11:23:34.657Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/future-of-work-with-ai/</loc>
+        <lastmod>2026-06-23T11:23:34.657Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-netease-data-agent/</loc>
+        <lastmod>2026-06-23T11:23:34.656Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-paypal-agent/</loc>
+        <lastmod>2026-06-23T11:23:34.656Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-spec-driven/</loc>
+        <lastmod>2026-06-23T11:23:34.656Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-guide/</loc>
+        <lastmod>2026-06-23T11:23:34.655Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-joycode/</loc>
+        <lastmod>2026-06-23T11:23:34.655Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-memtensor-agent-memory/</loc>
+        <lastmod>2026-06-23T11:23:34.655Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-aiops-agentops/</loc>
+        <lastmod>2026-06-23T11:23:34.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-ant-vibe-coding/</loc>
+        <lastmod>2026-06-23T11:23:34.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/qcon-2026-baidu-coding-agent/</loc>
+        <lastmod>2026-06-23T11:23:34.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/xpti-personality-test-reverse-engineering/</loc>
+        <lastmod>2026-06-23T11:23:34.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/clean-skill-architecture/</loc>
+        <lastmod>2026-06-23T11:23:34.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/claude-code-buddy-capybara/</loc>
+        <lastmod>2026-06-23T11:23:34.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/sbti-personality-test-implementation/</loc>
+        <lastmod>2026-06-23T11:23:34.652Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/interview-strategy-ai-era/</loc>
+        <lastmod>2026-06-23T11:23:34.652Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/20260326-hexo-permalink-deep-dive/</loc>
+        <lastmod>2026-06-23T11:23:34.652Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/gstack-engineer-workflow/</loc>
+        <lastmod>2026-06-23T11:23:34.651Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/software-dev-revolution/</loc>
+        <lastmod>2026-06-23T11:23:34.651Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/harness-design-multi-agent/</loc>
+        <lastmod>2026-06-23T11:23:34.651Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/computer-vision-guide/</loc>
+        <lastmod>2026-06-23T11:23:34.650Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-coding-harness/</loc>
+        <lastmod>2026-06-23T11:23:34.650Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/claude-code-cheatsheet/</loc>
+        <lastmod>2026-06-23T11:23:34.650Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/powershell-git-setup/</loc>
+        <lastmod>2026-06-23T11:23:34.649Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/openclaw-on-ecs/</loc>
+        <lastmod>2026-06-23T11:23:34.649Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/knowledge-distillation/</loc>
+        <lastmod>2026-06-23T11:23:34.648Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/book-influence-mnemonics/</loc>
+        <lastmod>2026-06-23T11:23:34.648Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/vitepress-to-nextjs/</loc>
+        <lastmod>2026-06-23T11:23:34.648Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/book-consciousness-ai-discussion/</loc>
+        <lastmod>2026-06-23T11:23:34.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/second-me-source/</loc>
+        <lastmod>2026-06-23T11:23:34.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/gemini-cli-source/</loc>
+        <lastmod>2026-06-23T11:23:34.646Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/google-agents-whitepaper/</loc>
+        <lastmod>2026-06-23T11:23:34.646Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-agents-enterprise/</loc>
+        <lastmod>2026-06-23T11:23:34.645Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/loss-of-plasticity/</loc>
+        <lastmod>2026-06-23T11:23:34.645Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/transformer-squared/</loc>
+        <lastmod>2026-06-23T11:23:34.645Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-self-portrait/</loc>
+        <lastmod>2026-06-23T11:23:34.644Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-driven-dev-workflow/</loc>
+        <lastmod>2026-06-23T11:23:34.644Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-arrival-knowledge-memory/</loc>
+        <lastmod>2026-06-23T11:23:34.643Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/ai-memory-autonomy/</loc>
+        <lastmod>2026-06-23T11:23:34.643Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/browser-use-deep-dive/</loc>
+        <lastmod>2026-06-23T11:23:34.642Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/walden-review/</loc>
+        <lastmod>2026-06-23T11:23:34.642Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/el-select-analysis/</loc>
+        <lastmod>2026-06-23T11:23:34.639Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/file-api/</loc>
+        <lastmod>2026-06-23T11:23:34.639Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/el-upload-analysis/</loc>
+        <lastmod>2026-06-23T11:23:34.639Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/azur-lane-wiki-scraper/</loc>
+        <lastmod>2026-06-23T11:23:34.638Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/crlf-line-endings/</loc>
+        <lastmod>2026-06-23T11:23:34.618Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/javascript-this/</loc>
+        <lastmod>2026-06-23T11:23:34.618Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/https-wss-setup/</loc>
+        <lastmod>2026-06-23T11:23:34.617Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/dom-coordinates/</loc>
+        <lastmod>2026-06-23T11:23:34.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/hexo-insert-images/</loc>
+        <lastmod>2026-06-23T11:23:34.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/hexo-internal-links/</loc>
+        <lastmod>2026-06-23T11:23:34.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/hexo-setup/</loc>
+        <lastmod>2026-06-23T11:23:34.614Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/vue-cli-relative-path/</loc>
+        <lastmod>2026-06-23T11:23:34.614Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.cearl.cc/posts/hello-world/</loc>
+        <lastmod>2026-06-23T11:23:34.613Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->
