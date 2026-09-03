@@ -6,7 +6,7 @@ tags:
   - 前端
   - JavaScript
   - 算法
-categories: 技术
+categories: 逆向工程
 ---
 
 [SBTI](https://sbti.jerryz.com.cn/) 是一个最近在传的人格测试，27种人格全是互联网黑话：CTRL（拿捏者）、Dior-s（屌丝）、DRUNK（酒鬼）……整个网站三个静态文件，没有后端，部署在 Cloudflare Pages。

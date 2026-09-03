@@ -8,8 +8,7 @@ tags:
   - SSL
   - HTTPS
   - WSS
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 使用`Let’s Encrypt`提供的免费证书,

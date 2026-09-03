@@ -9,7 +9,7 @@ tags:
   - Claude Code
   - 工程效率
   - 工具
-categories: 工具
+categories: AI 工程
 ---
 
 ## 一个人，一天一万行代码

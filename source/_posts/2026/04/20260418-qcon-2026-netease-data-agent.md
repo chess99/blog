@@ -7,7 +7,7 @@ tags:
   - 数据治理
   - SQL 生成
   - CLI
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-netease-data-agent/
 ---
 

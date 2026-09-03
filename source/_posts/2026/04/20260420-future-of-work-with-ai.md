@@ -5,7 +5,7 @@ tags:
   - AI Engineering
   - 研发工作流
   - 深度思考
-categories: AI Engineering
+categories: AI 观察
 permalink: /posts/future-of-work-with-ai/
 ---
 

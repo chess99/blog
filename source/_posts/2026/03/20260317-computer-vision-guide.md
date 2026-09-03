@@ -3,7 +3,7 @@ permalink: /posts/computer-vision-guide/
 title: CV从入门到精通到入土
 pid: 117
 
-categories: []
+categories: 开发实践
 tags: []
 mathjax: false
 comments: true

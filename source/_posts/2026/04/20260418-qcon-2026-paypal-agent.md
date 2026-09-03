@@ -7,7 +7,7 @@ tags:
   - 评测体系
   - EERO
   - 多 Agent
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-paypal-agent/
 ---
 

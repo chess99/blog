@@ -7,8 +7,7 @@ date: 2018-07-07 23:55:32
 tags:
   - 爬虫
   - Node
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 试玩一下JS爬虫

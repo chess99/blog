@@ -6,7 +6,7 @@ tags:
   - 产品机会
   - 软件出海
   - SaaS
-categories: 工具与工作流
+categories: 产品与商业
 permalink: /posts/software-alternative-opportunities/
 ---
 

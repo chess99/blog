@@ -7,7 +7,7 @@ tags:
   - AgentOps
   - 可观测性
   - 知识图谱
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-aiops-agentops/
 ---
 

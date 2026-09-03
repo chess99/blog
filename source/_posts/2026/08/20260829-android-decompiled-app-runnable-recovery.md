@@ -6,7 +6,7 @@ tags:
   - 逆向工程
   - JADX
   - Gradle
-categories: 技术
+categories: 逆向工程
 permalink: /posts/android-decompiled-app-runnable-recovery/
 ---
 上一篇文章里，我处理了一份 360 加固风格的 Android APK。静态 JADX 只能看到 6 个 Java 文件，业务代码要等应用运行起来以后，再从进程内存里找。最后拿到 11 份 DEX 候选，筛出 6 份相关文件一起反编译，JADX 总共生成约 18,027 个 Java 文件，目标业务包里有 613 个。

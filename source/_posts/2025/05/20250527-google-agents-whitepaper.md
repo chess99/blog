@@ -8,8 +8,7 @@ tags:
   - 智能体
   - Google
   - 白皮书
-categories:
-  - AI论文解读
+categories: AI 工程
 ---
 
 原文: https://www.kaggle.com/whitepaper-agents

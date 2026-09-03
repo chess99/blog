@@ -9,8 +9,7 @@ tags:
   - VitePress
   - 博客搭建
   - AI阅读
-categories:
-  - 建站
+categories: 开发实践
 ---
 
 > 在线演示：[https://cearl.cc/ai-reading/](https://cearl.cc/ai-reading/)

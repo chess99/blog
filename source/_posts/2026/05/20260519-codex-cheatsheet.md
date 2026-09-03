@@ -6,7 +6,7 @@ tags:
   - OpenAI
   - AI 工具
   - 开发效率
-categories: 工具
+categories: AI 工程
 permalink: /posts/codex-cheatsheet/
 ---
 

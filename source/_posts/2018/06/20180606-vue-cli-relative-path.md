@@ -7,8 +7,7 @@ date: 2018-06-06 19:28:19
 tags:
   - Vue
   - vue-cli
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 项目根目录添加`vue.config.js`, 编辑`baseUrl`

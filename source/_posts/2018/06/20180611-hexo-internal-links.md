@@ -8,8 +8,7 @@ tags:
   - Hexo
   - NexT
   - github pages
-categories:
-  - 小折腾
+categories: 开发实践
 ---
 
     {% post_link 文章标题 链接名称 %}

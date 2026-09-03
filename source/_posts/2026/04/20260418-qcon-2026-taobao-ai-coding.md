@@ -6,7 +6,7 @@ tags:
   - AI Coding
   - Harness Engineering
   - 工程实践
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-taobao-ai-coding/
 ---
 

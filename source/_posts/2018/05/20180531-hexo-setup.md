@@ -8,8 +8,7 @@ tags:
   - Hexo
   - NexT
   - github pages
-categories:
-  - 小折腾
+categories: 开发实践
 ---
 
 使用Hexo搭建博客, 并部署到github pages  

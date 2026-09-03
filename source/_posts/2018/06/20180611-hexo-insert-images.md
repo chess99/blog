@@ -8,8 +8,7 @@ tags:
   - Hexo
   - NexT
   - github pages
-categories:
-  - 小折腾
+categories: 开发实践
 ---
 
 {% asset_img 四月は君の嘘.png This is an example image %}

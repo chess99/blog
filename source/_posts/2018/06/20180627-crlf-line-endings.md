@@ -9,8 +9,7 @@ tags:
   - Vim
   - CRLF
   - Git
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 混用行尾的话, 在Linux中, CRLF行尾会导致脚本执行异常

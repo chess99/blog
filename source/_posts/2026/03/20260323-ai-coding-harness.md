@@ -8,7 +8,7 @@ tags:
   - Harness Engineering
   - AI Agent
   - 工程实践
-categories: 技术
+categories: AI 工程
 ---
 
 **TL;DR：Harness Engineering 是继 Prompt Engineering 和 Context Engineering 之后 AI 开发的第三阶段，通过把架构约束、执行计划、上下文管理机械化，让 AI Agent 可以稳定完成工程级别的任务。入门方法很简单：从一个 CLAUDE.md 文件开始，把你教过 AI 的每一件事都写进去。**

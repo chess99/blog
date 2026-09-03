@@ -7,8 +7,7 @@ date: 2018-06-11 19:56:00
 tags:
   - JavaScript
   - HTML
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 # DOM元素坐标

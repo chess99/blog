@@ -7,7 +7,7 @@ tags:
   - 工程实践
   - 架构设计
   - Claude Code
-categories: AI Engineering
+categories: AI 工程
 ---
 
 软件开发领域有两本经典：《代码整洁之道》和《架构整洁之道》。前者讲怎么写好一个函数，后者讲怎么组织一个系统。

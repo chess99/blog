@@ -5,7 +5,7 @@ tags:
   - AI Agent
   - 工作流
   - Claude Code
-categories: AI Engineering
+categories: AI 工程
 permalink: /posts/training-transcript-editor/
 ---
 

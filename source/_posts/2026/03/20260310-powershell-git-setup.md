@@ -9,7 +9,7 @@ tags:
   - 终端
   - Git
   - Oh My Posh
-categories: 工具
+categories: 开发实践
 ---
 
 ## 背景

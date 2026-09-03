@@ -6,7 +6,7 @@ tags:
   - 互联网商业
   - Similarweb
   - 数据分析
-categories: 数据与财经
+categories: 产品与商业
 permalink: /posts/payment-gateways-online-business/
 ---
 

@@ -5,7 +5,7 @@ tags:
   - AI
   - 社会影响
   - 职业发展
-categories: AI
+categories: AI 观察
 permalink: /posts/ai-future-judgment/
 ---
 这篇文章试图回答一个更具体的问题：当 AI 从工具演示走向工作流基础设施，普通白领、中产家庭、大学教育和个人资产配置会被怎样重估？

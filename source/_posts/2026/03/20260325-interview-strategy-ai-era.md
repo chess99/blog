@@ -9,7 +9,7 @@ tags:
   - 招聘
   - 面试
   - 工程效率
-categories: 思考
+categories: AI 观察
 ---
 
 ## 一个意外的弹窗

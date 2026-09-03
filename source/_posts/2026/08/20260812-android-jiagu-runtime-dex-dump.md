@@ -6,7 +6,7 @@ tags:
   - 逆向工程
   - DEX
   - JADX
-categories: 技术
+categories: 逆向工程
 pid: 124
 permalink: /posts/android-jiagu-runtime-dex-dump/
 ---

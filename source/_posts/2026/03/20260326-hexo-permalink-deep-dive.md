@@ -5,7 +5,7 @@ date: 2026-03-26 00:00:00
 tags:
   - Hexo
   - 源码分析
-categories: 技术
+categories: 开发实践
 ---
 
 ## 背景

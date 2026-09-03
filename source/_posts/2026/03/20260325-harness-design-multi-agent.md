@@ -9,7 +9,7 @@ tags:
   - Claude
   - Agent
   - 工程效率
-categories: AI Engineering
+categories: AI 工程
 ---
 
 ## 背景

@@ -5,7 +5,7 @@ tags:
   - AI Coding
   - Agent
   - LLM
-categories: AI 工具
+categories: AI 工程
 permalink: /posts/context-rot-two-diseases/
 ---
 

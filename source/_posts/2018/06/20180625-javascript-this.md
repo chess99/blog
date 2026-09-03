@@ -6,8 +6,7 @@ pid: 8
 date: 2018-06-25 12:34:59
 tags:
   - JavaScript
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 整理一下`this`用法, 基本是抄了一遍MDN..

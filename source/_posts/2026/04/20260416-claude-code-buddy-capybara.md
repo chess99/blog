@@ -7,7 +7,7 @@ tags:
   - Claude Code
   - 逆向工程
   - JavaScript
-categories: 工具
+categories: 逆向工程
 ---
 
 Claude Code 有个 `/buddy` 命令，会根据你的账户 ID 孵化一只陪你写代码的小动物。稀有度五档，legendary shiny 的概率是万分之一。

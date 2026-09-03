@@ -9,8 +9,7 @@ tags:
   - Agent
   - Browser Use
   - 浏览器自动化
-categories:
-  - AI研究
+categories: AI 工程
 ---
 
 ### 引言：当 AI 遇上浏览器

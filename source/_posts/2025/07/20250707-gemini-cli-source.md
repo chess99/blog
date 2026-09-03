@@ -8,8 +8,7 @@ tags:
   - gemini-cli
   - 源码分析
   - Google
-categories:
-  - 源码分析
+categories: AI 工程
 ---
 
 仓库地址: <https://github.com/google-gemini/gemini-cli>

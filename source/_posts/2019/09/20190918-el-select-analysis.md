@@ -6,8 +6,7 @@ pid: 11
 date: 2019-09-18 00:00:00
 tags:
   - element-ui
-categories:
-  - 大前端
+categories: 开发实践
 ---
 
 分析el-select

@@ -5,7 +5,7 @@ tags:
   - Codex
   - AI 工具
   - AI Coding
-categories: 工具
+categories: AI 工程
 permalink: /posts/codex-goal-mode/
 ---
 

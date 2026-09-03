@@ -8,8 +8,7 @@ tags:
   - Second-Me
   - 源码分析
   - 开源项目
-categories:
-  - 源码分析
+categories: AI 工程
 ---
 
 ## 一、项目概述与愿景

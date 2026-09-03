@@ -7,7 +7,7 @@ tags:
   - 记忆系统
   - memOS
   - 多 Agent
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-memtensor-agent-memory/
 ---
 

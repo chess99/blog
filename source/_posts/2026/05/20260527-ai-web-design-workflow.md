@@ -6,7 +6,7 @@ tags:
   - 前端设计
   - Skill
   - UI
-categories: 工具
+categories: AI 工程
 permalink: /posts/ai-web-design-workflow/
 ---
 

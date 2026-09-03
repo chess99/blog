@@ -8,7 +8,7 @@ tags:
   - Claude Code
   - AI 工具
   - 开发效率
-categories: 工具
+categories: AI 工程
 ---
 
 **TL;DR**：这是一份完整的 Claude Code 命令速查手册，按使用频率和学习顺序排列。新用户从第一组开始读，老用户直接跳到需要的部分。每个功能说清楚是什么、怎么用、什么时候用。

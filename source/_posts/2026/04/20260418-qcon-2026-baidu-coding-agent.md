@@ -7,7 +7,7 @@ tags:
   - Benchmark
   - Feedback Loop
   - 百度 Comate
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-baidu-coding-agent/
 ---
 

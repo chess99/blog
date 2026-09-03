@@ -8,7 +8,7 @@ tags:
   - SSH
   - 阿里云
   - OpenClaw
-categories: 运维
+categories: AI 工程
 ---
 
 买了台阿里云 ECS 专门跑 OpenClaw（绰号"龙虾"），记录折腾过程。

@@ -6,7 +6,7 @@ tags:
   - 前端
   - JavaScript
   - 产品分析
-categories: 技术
+categories: 逆向工程
 ---
 
 [XPTI](https://xpti.pages.dev/) 是最近在传的另一个人格测试，20道题，16种人格类型，界面比 SBTI 精致很多——React + Framer Motion，题目切换有滑动动画，结果页有雷达图。

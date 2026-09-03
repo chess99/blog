@@ -9,8 +9,7 @@ tags:
   - 软件研发
   - 智能体
   - 白皮书
-categories:
-  - AI研究
+categories: AI 工程
 ---
 
 ## 摘要

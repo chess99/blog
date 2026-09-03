@@ -7,7 +7,7 @@ tags:
   - 平台工程
   - KV Cache
   - Harness
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-ant-vibe-coding/
 ---
 

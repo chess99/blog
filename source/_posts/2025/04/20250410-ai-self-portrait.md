@@ -8,8 +8,7 @@ tags:
   - AI
   - Prompt
   - 创意实验
-categories:
-  - AI实验
+categories: AI 观察
 ---
 
 prompt:

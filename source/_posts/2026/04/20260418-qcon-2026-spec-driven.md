@@ -7,7 +7,7 @@ tags:
   - AI Coding
   - 低代码
   - Harness Engineering
-categories: 会议笔记
+categories: AI 工程
 permalink: /posts/qcon-2026-spec-driven/
 ---
 

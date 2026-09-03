@@ -6,7 +6,7 @@ tags:
   - SQLite
   - Windows
   - 磁盘清理
-categories: 工具与工作流
+categories: 开发实践
 permalink: /posts/codex-sqlite-vacuum/
 ---
 
