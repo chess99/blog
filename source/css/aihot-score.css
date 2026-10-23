@@ -1,0 +1,19 @@
+[data-aihot-score] {
+  border: 1px solid var(--table-border-color, #b8c3ce);
+  border-radius: 8px;
+  padding: clamp(16px, 3vw, 28px);
+  margin: 28px 0;
+  background: var(--content-bg-color, #fff);
+  color: var(--text-color, #222);
+}
+[data-aihot-score][hidden] { display: none; }
+[data-aihot-score] h3 { margin-top: 0; }
+[data-aihot-score] form { display: grid; gap: 12px; }
+[data-aihot-score] label { font-weight: 600; }
+[data-aihot-score] output { float: right; font-variant-numeric: tabular-nums; }
+[data-aihot-score] input[type=range] { width: 100%; min-height: 44px; margin: 0; accent-color: #0969da; }
+[data-aihot-score] select { font: inherit; color: inherit; background: var(--content-bg-color, #fff); width: 100%; min-height: 44px; padding: 6px; border: 1px solid #8996a5; border-radius: 4px; }
+[data-aihot-score] :focus-visible { outline: 3px solid #0969da; outline-offset: 3px; }
+[data-aihot-score] .score-result { padding: 14px 0; border-top: 2px solid #0969da; margin: 12px 0 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+[data-aihot-score] .score-note { margin: 16px 0 0; font-size: .88em; line-height: 1.7; }
+@media print { [data-aihot-score] { display: none; } }
