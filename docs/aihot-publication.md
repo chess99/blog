@@ -1,23 +1,53 @@
 # AIHOT 文章维护
 
-源稿位于内容资产库 `topics/20261023-aihot-architecture/longform/article.md`，图表规格为同目录的 `figures.json`。博客保留发布副本，编辑应先回到源稿，再使用 Content Studio 的 `wxp prepare` 同步；具体命令见该仓库 `apps/wx-publisher/docs/dual-channel-publication.md`。
+博客源稿位于内容资产库 `topics/20261023-aihot-architecture/longform/blog/article.md`。通用稿、SVG 和 PNG 保留在 `longform/` 供其他渠道使用；博客使用源稿中的语义模块，不经过公众号转换器生成发布副本。
 
-## 渲染
+文章路径保持 `/posts/aihot-architecture/`，既有二级标题和章节锚点保留。研究结论仍对应 AIHOT `b3998dc6fc138eb9659f33f55eb38c1c716f0d57`；排版更新日期与源码核验日期分别记录。
 
-- `scripts/research-widgets.js` 识别 `<!-- interactive:aihot-score -->`，只为含此标记的文章加载轻量 CSS 与脚本。
-- 静态正文保留完整阈值表、算例与理论衰减数据；禁用 JavaScript 或打印时不影响核心结论。
-- 配图改用浏览器原生懒加载并补充尺寸，避免 NexT 的 `data-src` 机制在无 JavaScript 时丢图。
-- 计算器只说明两次评分与分级门槛的数学关系，不模拟模型评分，也不把够分等同于入选。
-- 静态图使用精确比例与与微信技术简报主题一致的蓝灰配色。JS 无第三方依赖，其他文章不加载计算器资源。
+## 内容模块
 
-## 预览与验证
+`tools/lib/article-blocks.js` 在构建时把三种语义块转换为原生 HTML/SVG。块名称和行结构与正文一起版本管理，不依赖外部图床、图表 CDN 或浏览器执行模型。
+
+```markdown
+:::flow[处理链路]
+采集 | 读取信源并判重
+分析 | 评分并抽取事实
+发布 | 输出公开内容
+note: 箭头表示处理顺序。
+:::
+
+:::bars[示范信源构成]
+机构 | 10
+媒体 | 5
+个人 | 3
+note: 数值与条形宽度来自同一份数据。
+:::
+
+:::decay[单个参与方的热度贡献]
+halfLifeHours: 24
+windowHours: 48
+note: 无新信号时的理论贡献。
+:::
+```
+
+- `flow` 支持1–5步，阅读栏宽度达到600px时横排，否则竖排。每一步使用独立文字，不缩放整张图。
+- `bars` 支持1–8行非负数据，按总量计算比例；窄栏把标签与条形拆为两行，数值保持可读。
+- `decay` 从同一数据生成宽、窄两套SVG刻度，按阅读栏宽度切换；曲线按24小时半衰期绘制，48小时窗口严格归零。滑块仅增强读数，静态图和关键数值在无JS时完整保留。
+- 已有评分计算器保持两次分数之和与门槛的规则；宽栏并排两个输入，窄栏纵排。键盘可操作，结果使用实时区域播报。
+- CSS按文章加载，兼容NexT暗色变量；不改站点主题和其他文章版式。当前不在正文中加载PNG配图，也不设置图片固定高度。
+- 模块解析跳过代码围栏，数据错误使构建失败；文本转义后再交给Hexo输出，防止内容字段进入HTML或模板指令。
+
+## 验证
 
 ```sh
-npm ci
+npm test
+npm run clean
 npm run build
 npm run server
 ```
 
-打开 `/posts/aihot-architecture/`。检查 1440、390、320 px 宽度，两个评分的键盘调整、T1/T1.5/T2 阈值、半分展示取整，以及关闭 JavaScript 后的三张图片与正文。页面包含标题、description、canonical，并继续使用 NexT 的文章与目录结构。
+修改渲染器后须清理Hexo缓存再构建。打开 `/posts/aihot-architecture/`，检查1440、1024、768、390和320px屏宽；另验暗色与无JS。
 
-源码审查固定到 AIHOT `b3998dc6fc138eb9659f33f55eb38c1c716f0d57`。更新文章时应重新核对来源配置、评分 Prompt、双评分门槛、热度窗口和出刊规则，不直接修改图中的数字。
+重点检查：横向溢出、实际字号、流程重排、SVG刻度、长标识符与Prompt代码换行；评分临界值75+77=152、半分显示取整；衰减24小时50%与48小时0%。首页摘要、RSS正文、文章URL、canonical和章节目录也需保持有效。
+
+原版PNG继续保留在原路径，避免破坏已有图片链接；当前页面不再请求这些文件。
