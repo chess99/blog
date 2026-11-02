@@ -81,3 +81,9 @@ hexo deploy    # 部署
 - 创作 skills、工具和工作流位于 `D:\code\content-studio`。
 - 本仓库只维护博客最终发布副本、Hexo 配置、站点页面和部署流程。
 - 文章需要修改时，优先修改内容资产库中的来源，再同步发布副本，避免两边独立演化。
+
+## 外观定制
+
+- 主题通过 npm 安装，站点配置放在 `_config.next.yml`，样式覆盖放在 `source/_data/styles.styl`；不直接修改 `node_modules/hexo-theme-next`。
+- 代码块使用随页面切换的深浅色背景，默认隐藏行号；需要行号的源码可使用 Hexo `codeblock` 标签的 `line_number:true` 参数。
+- 代码复制按钮由 `source/js/code-blocks.js` 提供，经 `source/_data/body-end.njk` 加载。调整时检查长行滚动、手机布局、键盘操作和复制反馈，并保留 Mermaid 图表行为。
