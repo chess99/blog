@@ -5,7 +5,7 @@
     document.querySelectorAll('.post-body figure.highlight, .post-body pre').forEach(block => {
       // 排除高亮块内部的 pre，以及由 Mermaid 接管的图表。
       if (block.parentElement.closest('figure.highlight, .code-block') ||
-          block.matches('.mermaid') || block.querySelector('.mermaid')) return;
+          block.matches('.mermaid, .article-diagram-code') || block.querySelector('.mermaid')) return;
 
       const container = document.createElement('div');
       container.className = 'code-block';

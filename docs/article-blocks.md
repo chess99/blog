@@ -62,6 +62,17 @@
 
 叶节点至少包含 `title`、`text`、`chips`、`code` 中的一项，只有角标的空卡片无效。所有字符串必须非空；未知字段、错误类型和不完整布局会报错。
 
+## 图片组、资源卡与引用
+
+文章 front matter 设置 `rich_content: true`，可按需加载 `article-rich-content.css`：
+
+- `.article-image-group`：图片链接组，桌面三列、手机横向滑动；配图仍引用 `source/images/<slug>/` 的本地发布副本。
+- `.article-resource-list` / `.article-resource-card`：保留段落、图片和外链的资源卡片。
+- `.article-citation`：包含可直接打开来源的 `.article-citation-label` 链接，以及列出全部来源的 `.article-citation-popup`。鼠标停留或键盘焦点进入时展开；手机显示在屏幕底部。
+- 四列及以上的 Markdown 表格会生成可聚焦的横向滚动区域，避免手机上把产品名与正文挤成单字列；普通表格与代码高亮不变。
+
+手写 HTML 应放在 Hexo 的 `{% raw %}` / `{% endraw %}` 标签之间。公式使用 `mathjax: true` 并按 NexT 的数学语法书写。只改构建插件时，需先 `npm run clean` 再构建，以刷新 Hexo 的文章缓存；本地服务也需重启才能加载新的插件。
+
 ## 验证
 
 运行 `npm test` 检查解析、嵌套、转义、代码围栏保留及资源加载。修改布局后，还需通过本地预览检查宽窄屏、深浅色、长内容和嵌套布局。
