@@ -120,7 +120,8 @@
 .post-body .article-diagram-items { display: grid; gap: 18px; list-style: none; margin: 0; padding: 0; }
 .post-body .article-diagram-items > li { display: flex; min-width: 0; margin: 0; padding: 0; position: relative; }
 .post-body .article-diagram-arrows { gap: 32px; }
-.article-diagram-arrows > li:not(:last-child)::after { content: '↓'; color: var(--viz-accent); position: absolute; bottom: -29px; left: calc(50% - .5em); font-size: 1.125rem; line-height: 26px; width: 1em; text-align: center; }
+.article-diagram-connector { color: var(--viz-accent); position: absolute; bottom: -29px; left: calc(50% - .5em); font-size: 1.125rem; line-height: 26px; width: 1em; text-align: center; }
+.article-diagram-connector-auto { transform: rotate(90deg); }
 .article-diagram-card { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid var(--viz-border); border-radius: 10px; padding: 16px 18px; background: var(--diagram-surface); }
 .article-diagram-accent { border-color: var(--viz-accent); background: var(--viz-track); background: color-mix(in srgb, var(--viz-accent) 7%, var(--diagram-surface)); }
 .article-diagram-muted { background: var(--viz-track); }
@@ -136,8 +137,10 @@
 .post-body .article-diagram-code code { color: inherit; background: transparent; border: 0; padding: 0; font: inherit; font-family: var(--font-family-monospace, ui-monospace, SFMono-Regular, Menlo, monospace); white-space: inherit; }
 @container diagram-group (min-width: 560px) {
   .article-diagram-row, .article-diagram-grid { grid-template-columns: repeat(var(--diagram-columns), minmax(0, 1fr)); }
-  .article-diagram-row.article-diagram-arrows > li:not(:last-child)::after,
-  .article-diagram-grid.article-diagram-arrows > li:not(:last-child)::after { content: '→'; left: auto; right: -27px; bottom: calc(50% - 13px); }
+  .article-diagram-row > li > .article-diagram-connector,
+  .article-diagram-grid > li > .article-diagram-connector { left: auto; right: -27px; bottom: calc(50% - 13px); }
+  .article-diagram-row > li > .article-diagram-connector-auto,
+  .article-diagram-grid > li > .article-diagram-connector-auto { transform: none; }
 }
 @media print {
   .article-diagram-card, .article-diagram-group:not(.article-diagram-root) { break-inside: avoid; }

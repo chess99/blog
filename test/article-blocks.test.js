@@ -117,7 +117,7 @@ test('diagram 保留嵌套布局、节点顺序、说明与代码，无脚本即
   const d = dom.window.document;
   assert.equal(d.querySelector('figcaption').textContent, '运行系统');
   assert.equal(d.querySelector('.article-diagram-root > ol').children.length, 2);
-  assert.equal(d.querySelector('.article-diagram-root > ol > li').textContent, '入口交互入口桌面端CLI');
+  assert.equal(d.querySelector('.article-diagram-root > ol > li > .article-diagram-card').textContent, '入口交互入口桌面端CLI');
   assert.equal(d.querySelector('.article-diagram-row').style.getPropertyValue('--diagram-columns'), '2');
   assert.equal(d.querySelector('.article-diagram-grid').children.length, 2);
   assert.equal(d.querySelector('.article-diagram-chips').textContent, '桌面端CLI');
@@ -125,6 +125,38 @@ test('diagram 保留嵌套布局、节点顺序、说明与代码，无脚本即
   assert.equal(d.querySelector('.article-viz-note').textContent, '架构关系示意');
   assert.equal(d.querySelectorAll('script, iframe, img, [hidden]').length, 0);
   dom.window.close();
+});
+
+test('diagram 明确保留加号、等号和双向连接，默认箭头单独标记以适配窄屏', () => {
+  const { JSDOM } = require('jsdom');
+  const compile = data => new JSDOM(compileArticleBlocks(`:::diagram[关系]\n${JSON.stringify(data)}\n:::`).markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  const symbols = ['↓', '→', '↕', '↔', '+', '=', '⑂'];
+  const dom = compile({ layout: 'row', arrows: true, connectors: symbols, items: Array.from({ length: 8 }, (_, index) => ({ title: `节点${index}` })) });
+  const connectors = [...dom.window.document.querySelectorAll('.article-diagram-connector')];
+  assert.deepEqual(connectors.map(node => node.textContent), symbols);
+  assert.ok(connectors.every(node => node.getAttribute('aria-hidden') === 'true'));
+  assert.equal(dom.window.document.querySelectorAll('.article-diagram-connector-auto').length, 0);
+  assert.equal(dom.window.document.querySelector('.article-diagram-items > li:last-child > .article-diagram-connector'), null);
+  dom.window.close();
+  for (const layout of ['stack', 'row', 'grid']) {
+    const defaults = compile({ layout, arrows: true, items: [{ title: '前' }, { title: '后' }] });
+    const connector = defaults.window.document.querySelector('.article-diagram-connector');
+    assert.equal(connector.textContent, layout === 'stack' ? '↓' : '→');
+    assert.equal(connector.classList.contains('article-diagram-connector-auto'), layout !== 'stack');
+    defaults.window.close();
+  }
+});
+
+test('diagram 拒绝无箭头、数量错误或包含非白名单字符的 connectors', () => {
+  const source = connectors => `:::diagram[关系]\n${JSON.stringify(connectors)}\n:::`;
+  const items = [{ title: 'A' }, { title: 'B' }];
+  for (const fields of [
+    { connectors: ['+'] }, { arrows: false, connectors: ['+'] },
+    { arrows: true, connectors: '+' }, { arrows: true, connectors: [] },
+    { arrows: true, connectors: ['+', '='] }, { arrows: true, connectors: [null] },
+    { arrows: true, connectors: ['<script>'] }, { arrows: true, connectors: ['⇌'] }
+  ]) assert.throws(() => compileArticleBlocks(source({ layout: 'stack', items, ...fields })), /connectors/);
+  assert.doesNotThrow(() => compileArticleBlocks(source({ layout: 'stack', arrows: true, connectors: [], items: [{ title: '单节点' }] })));
 });
 
 test('diagram 的所有文案字段转义 HTML 与模板指令', () => {

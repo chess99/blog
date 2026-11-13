@@ -99,7 +99,7 @@ function parseDiagram(body) {
     if (depth > 8 || ++count > 160) fail('最多支持8层、160个节点');
     const group = Object.hasOwn(node, 'layout') || Object.hasOwn(node, 'items');
     if (root && !group) fail('根节点必须声明 layout 和 items');
-    const allowed = group ? ['layout', 'items', 'columns', 'arrows', 'note', 'title', 'text'] : ['title', 'text', 'chips', 'code', 'tone', 'badge'];
+    const allowed = group ? ['layout', 'items', 'columns', 'arrows', 'connectors', 'note', 'title', 'text'] : ['title', 'text', 'chips', 'code', 'tone', 'badge'];
     for (const key of Object.keys(node)) if (!allowed.includes(key)) fail(`未知字段：${key}`);
     for (const field of ['title', 'text', 'note', 'badge']) if (Object.hasOwn(node, field)) string(node[field], field);
     if (group) {
@@ -107,6 +107,11 @@ function parseDiagram(body) {
       if (!Array.isArray(node.items) || !node.items.length || node.items.length > 32) fail('items 需要1–32个节点');
       if (Object.hasOwn(node, 'columns') && (!Number.isInteger(node.columns) || node.columns < 1 || node.columns > 4)) fail('columns 必须是1–4整数');
       if (Object.hasOwn(node, 'arrows') && typeof node.arrows !== 'boolean') fail('arrows 必须是布尔值');
+      if (Object.hasOwn(node, 'connectors')) {
+        if (node.arrows !== true) fail('connectors 仅在 arrows:true 时可用');
+        if (!Array.isArray(node.connectors) || node.connectors.length !== node.items.length - 1) fail('connectors 数量必须比 items 少1');
+        if (node.connectors.some(symbol => !['↓', '→', '↕', '↔', '+', '=', '⑂'].includes(symbol))) fail('connectors 包含不支持的连接符');
+      }
       node.items.forEach(item => visit(item, depth + 1));
     } else {
       for (const field of ['chips', 'code']) if (Object.hasOwn(node, field)) {
@@ -126,7 +131,13 @@ function renderDiagramNode(node, root = false) {
   if (node.items) {
     const tag = node.arrows ? 'ol' : 'ul';
     const columns = node.columns || Math.min(node.items.length, 3);
-    return `<div class="article-diagram-group${root ? ' article-diagram-root' : ''}">${heading}<${tag} class="article-diagram-items article-diagram-${node.layout}${node.arrows ? ' article-diagram-arrows' : ''}" role="list" style="--diagram-columns:${columns}">${node.items.map(item => `<li>${renderDiagramNode(item)}</li>`).join('')}</${tag}>${node.note ? `<p class="article-viz-note">${escape(node.note)}</p>` : ''}</div>`;
+    const items = node.items.map((item, index) => {
+      const automaticHorizontal = !node.connectors && node.layout !== 'stack';
+      const symbol = node.connectors ? node.connectors[index] : node.layout === 'stack' ? '↓' : '→';
+      const connector = node.arrows && index < node.items.length - 1 ? `<span class="article-diagram-connector${automaticHorizontal ? ' article-diagram-connector-auto' : ''}" aria-hidden="true">${escape(symbol)}</span>` : '';
+      return `<li>${renderDiagramNode(item)}${connector}</li>`;
+    }).join('');
+    return `<div class="article-diagram-group${root ? ' article-diagram-root' : ''}">${heading}<${tag} class="article-diagram-items article-diagram-${node.layout}${node.arrows ? ' article-diagram-arrows' : ''}" role="list" style="--diagram-columns:${columns}">${items}</${tag}>${node.note ? `<p class="article-viz-note">${escape(node.note)}</p>` : ''}</div>`;
   }
   return `<div class="article-diagram-card article-diagram-${node.tone || 'plain'}">${heading}${node.chips ? `<ul class="article-diagram-chips" role="list">${node.chips.map(chip => `<li>${escape(chip)}</li>`).join('')}</ul>` : ''}${node.code ? `<pre class="article-diagram-code"><code>${escape(node.code.join('\n'))}</code></pre>` : ''}</div>`;
 }
