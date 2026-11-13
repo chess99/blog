@@ -44,7 +44,6 @@
 .post-body .article-citation-label[aria-expanded="true"] { color: var(--text-color, #333); background: color-mix(in srgb, currentColor 18%, transparent); }
 .post-body .article-citation-name { overflow: hidden; text-overflow: ellipsis; }
 .post-body .article-citation-count { flex-shrink: 0; font: inherit; opacity: .72; }
-.post-body img.article-citation-favicon { flex-shrink: 0; display: inline-block; width: 12px; height: 12px; margin: 0; padding: 0; border: 0; border-radius: 2px; object-fit: contain; }
 .post-body .article-citation-popup {
   display: none;
   position: absolute;

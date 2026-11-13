@@ -169,6 +169,51 @@ blockquote p,
   font-family: $font-family-quote;
 }
 
+/* 正文表格使用与内容区一致的底色，避免主题黑灰斑马纹与蓝色暗色背景混用。 */
+.post-body {
+  --table-border-color: #dce3e9;
+  --post-table-header-bg: #f3f6f8;
+  --post-table-hover-bg: #f7f9fb;
+
+  @media (prefers-color-scheme: dark) {
+    --table-border-color: #334553;
+    --post-table-header-bg: #223442;
+    --post-table-hover-bg: #20313f;
+  }
+
+  /* 只选正文表格，保留 .highlight 内部的代码布局与颜色。 */
+  > table,
+  > .table-container > table,
+  .rich-article > table,
+  .rich-article > .table-container > table,
+  .article-table-scroll > table,
+  .article-table-scroll > .table-container > table {
+    --table-row-odd-bg-color: transparent;
+    --table-row-hover-bg-color: var(--post-table-hover-bg);
+    background: var(--content-bg-color);
+
+    th, td {
+      border: 1px solid var(--table-border-color);
+    }
+
+    th {
+      background: var(--post-table-header-bg);
+      font-weight: 600;
+    }
+
+    tbody tr,
+    tbody tr:nth-of-type(odd) {
+      background: transparent;
+    }
+
+    @media (hover: hover) {
+      tbody tr:hover {
+        background: var(--post-table-hover-bg);
+      }
+    }
+  }
+}
+
 /* 代码颜色随页面外观切换，语法高亮沿用 NexT 的主题支持。 */
 .post-body {
   --code-bg: #f5f7f9;
