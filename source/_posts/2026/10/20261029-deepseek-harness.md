@@ -54,7 +54,7 @@ $$
 \boxed{\text{Agent}=\text{Model}+\text{Harness}}
 $$
 
-它很适合理解现代 Agent 的基本构造。<span class="article-citation"><a class="article-citation-label" href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek +1">DeepSeek +1</a><span class="article-citation-popup"><a href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener">DeepSeek Harness｜共探智能上限</a><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md" target="_blank" rel="noopener">DeepSeek Harness 架构文档</a></span></span>
+它很适合理解现代 Agent 的基本构造。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-1" aria-label="查看引用来源：deepseek.com"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">deepseek.com</span><small class="article-citation-count">+1</small></button><span class="article-citation-popup" id="article-source-1"><a href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener">DeepSeek Harness｜共探智能上限</a><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md" target="_blank" rel="noopener">DeepSeek Harness 架构文档</a></span></span>
 
 :::diagram[Model + Harness = Agent]
 {
@@ -62,7 +62,10 @@ $$
   "items": [
     {
       "title": "Model · 大语言模型",
-      "text": "理解、推理、生成内容、提出工具调用"
+      "text": "理解、推理、生成内容、提出工具调用",
+      "surface": "fill",
+      "align": "center",
+      "tone": "plain"
     },
     {
       "title": "Harness · 运行与执行系统",
@@ -76,19 +79,30 @@ $$
         "任务调度",
         "插件管理",
         "用户界面"
-      ]
+      ],
+      "surface": "fill",
+      "align": "center",
+      "tone": "plain",
+      "chipsColumns": 3,
+      "chipsStyle": "filled"
     },
     {
       "title": "Agent · 能执行任务的智能体",
       "text": "观察环境 → 决策 → 执行 → 获取反馈 → 继续工作",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "outline",
+      "align": "center"
     }
   ],
   "arrows": true,
   "connectors": [
     "+",
     "↓"
-  ]
+  ],
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline",
+  "align": "center"
 }
 :::
 
@@ -142,7 +156,7 @@ Plugin 则可以从程序层直接改变 Agent 能拥有什么能力。比如增
 
 ### 1. 看懂它的各个层次
 
-根据官方架构文档，DSH 被拆分为几十个 `@deepseek-ai/*` 包，形成一个多层系统。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md" target="_blank" rel="noopener">DeepSeek Harness 架构文档</a></span></span>
+根据官方架构文档，DSH 被拆分为几十个 `@deepseek-ai/*` 包，形成一个多层系统。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-2" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-2"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md" target="_blank" rel="noopener">DeepSeek Harness 架构文档</a></span></span>
 
 下面是我根据官方实现整理的逻辑图（做了简化）。
 
@@ -152,7 +166,10 @@ Plugin 则可以从程序层直接改变 Agent 能拥有什么能力。比如增
   "items": [
     {
       "title": "交互入口",
-      "text": "桌面端 · Web UI · CLI · SDK · ACP"
+      "text": "桌面端 · Web UI · CLI · SDK · ACP",
+      "surface": "fill",
+      "align": "center",
+      "tone": "plain"
     },
     {
       "title": "Agent 执行层",
@@ -161,7 +178,12 @@ Plugin 则可以从程序层直接改变 Agent 能拥有什么能力。比如增
         "Prompt 组装",
         "模型适配器",
         "工具调度"
-      ]
+      ],
+      "surface": "outline",
+      "align": "center",
+      "tone": "plain",
+      "chipsColumns": 2,
+      "chipsStyle": "filled"
     },
     {
       "title": "能力插件层",
@@ -175,26 +197,43 @@ Plugin 则可以从程序层直接改变 Agent 能拥有什么能力。比如增
         "Sandbox",
         "MCP",
         "UI"
-      ]
+      ],
+      "surface": "outline",
+      "align": "center",
+      "tone": "plain",
+      "chipsColumns": 3,
+      "chipsStyle": "filled"
     },
     {
       "title": "Cordis 框架",
       "text": "Context · Service · Event · Effect · Fiber\n依赖管理 · 作用域 · 生命周期 · 组合配置",
-      "tone": "accent"
+      "tone": "accent",
+      "surface": "outline",
+      "align": "center"
     },
     {
       "layout": "row",
       "items": [
         {
-          "title": "操作系统 / 文件"
+          "title": "操作系统 / 文件",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "LLM API"
+          "title": "LLM API",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "外部服务"
+          "title": "外部服务",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         }
-      ]
+      ],
+      "surface": "none"
     }
   ],
   "arrows": true,
@@ -204,7 +243,11 @@ Plugin 则可以从程序层直接改变 Agent 能拥有什么能力。比如增
     "↕",
     "↕"
   ],
-  "note": "逻辑架构示意。实际实现是插件依赖网络，并非固定逐层调用的流水线。"
+  "note": "逻辑架构示意。实际实现是插件依赖网络，并非固定逐层调用的流水线。",
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline",
+  "align": "center"
 }
 :::
 
@@ -256,7 +299,7 @@ Cordis 的设计对应一篇由北京大学与 DeepSeek-AI 研究人员参与完
 
 [A Programming Paradigm for Spatiotemporal Composability](https://arxiv.org/abs/2608.25512)
 
-论文于 2026 年 8 月 26 日提交，全文 92 页。它尝试从编程语言与形式化方法层面，解释动态插件组合为什么可以可靠工作。<span class="article-citation"><a class="article-citation-label" href="https://arxiv.org/abs/2608.25512" target="_blank" rel="noopener" aria-label="引用来源：arxiv.org">arxiv.org</a><span class="article-citation-popup"><a href="https://arxiv.org/abs/2608.25512" target="_blank" rel="noopener">A Programming Paradigm for Spatiotemporal Composability</a></span></span>
+论文于 2026 年 8 月 26 日提交，全文 92 页。它尝试从编程语言与形式化方法层面，解释动态插件组合为什么可以可靠工作。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-3" aria-label="查看引用来源：arxiv.org"><img class="article-citation-favicon" alt="" src="/images/source-arxiv.png"><span class="article-citation-name">arxiv.org</span></button><span class="article-citation-popup" id="article-source-3"><a href="https://arxiv.org/abs/2608.25512" target="_blank" rel="noopener">A Programming Paradigm for Spatiotemporal Composability</a></span></span>
 
 ### 1. 普通插件架构有什么问题？
 
@@ -318,7 +361,7 @@ export function apply(ctx: Context) {
 3. 插件自己注册的服务和工具被撤销。
 4. 相关资源完成清理。
 
-官方文档还说明，清理函数会按注册的逆序开始执行，但异步清理不保证逐个顺序完成。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/" target="_blank" rel="noopener">插件与生命周期</a></span></span>
+官方文档还说明，清理函数会按注册的逆序开始执行，但异步清理不保证逐个顺序完成。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-4" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-4"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/" target="_blank" rel="noopener">插件与生命周期</a></span></span>
 
 你可以把它理解成：**每个插件都携带一份自己在系统中留下了什么痕迹、如何撤销的账本。**
 
@@ -348,27 +391,39 @@ Cordis 会管理它的生命周期。
   "items": [
     {
       "title": "插件 C 已声明",
-      "badge": "PENDING"
+      "badge": "PENDING",
+      "surface": "fill",
+      "align": "left",
+      "tone": "plain"
     },
     {
       "title": "依赖服务全部就绪",
       "text": "自动加载，执行 apply()",
       "badge": "ACTIVE",
-      "tone": "accent"
+      "tone": "accent",
+      "surface": "fill",
+      "align": "left",
+      "badgePosition": "after"
     },
     {
       "title": "search 服务被卸载",
-      "text": "C 自动失活并清理资源",
-      "chips": [
-        "UNLOADING → DISPOSED"
-      ]
+      "text": "C 自动失活并清理资源\nUNLOADING → DISPOSED",
+      "surface": "fill",
+      "align": "left",
+      "tone": "plain"
     },
     {
       "title": "search 服务重新出现",
-      "text": "依赖恢复，C 重新加载"
+      "text": "依赖恢复，C 重新加载",
+      "surface": "fill",
+      "align": "left",
+      "tone": "accent"
     }
   ],
-  "arrows": true
+  "arrows": true,
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline"
 }
 :::
 
@@ -380,7 +435,7 @@ Cordis 会管理它的生命周期。
 
 `PENDING → LOADING → ACTIVE → UNLOADING → DISPOSED`
 
-加载失败也可能进入 `FAILED`。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/" target="_blank" rel="noopener">插件与生命周期</a></span></span>
+加载失败也可能进入 `FAILED`。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-5" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-5"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/" target="_blank" rel="noopener">插件与生命周期</a></span></span>
 
 ### 4. Context：所有插件通过它认识彼此
 
@@ -410,7 +465,7 @@ Cordis 提供了 `isolate` 机制，可以让不同插件组拥有独立的某�
 
 它们可以同时存在于一套 Harness 中。
 
-**这里的隔离是服务作用域隔离，不等于操作系统级安全隔离。** 别把它和 Docker、虚拟机混为一谈。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/service" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/service" target="_blank" rel="noopener">服务与依赖</a></span></span>
+**这里的隔离是服务作用域隔离，不等于操作系统级安全隔离。** 别把它和 Docker、虚拟机混为一谈。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-6" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-6"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/framework/service" target="_blank" rel="noopener">服务与依赖</a></span></span>
 
 ### 5. Event：插件之间如何相互协作
 
@@ -439,30 +494,45 @@ rm -rf ./build
   "items": [
     {
       "title": "Agent 发出删除命令",
-      "badge": "1"
+      "badge": "1",
+      "surface": "outline",
+      "tone": "plain"
     },
     {
       "title": "插件 A：检查路径是否允许",
-      "badge": "2"
+      "badge": "2",
+      "surface": "outline",
+      "tone": "plain"
     },
     {
       "title": "插件 B：判断是否需要审批",
-      "badge": "3"
+      "badge": "3",
+      "surface": "outline",
+      "tone": "plain"
     },
     {
       "title": "插件 C：记录审计信息",
-      "badge": "4"
+      "badge": "4",
+      "surface": "outline",
+      "tone": "plain"
     },
     {
       "title": "执行 Shell 工具",
-      "badge": "5"
+      "badge": "5",
+      "surface": "outline",
+      "tone": "plain"
     },
     {
       "title": "插件 D：处理与展示结果",
-      "badge": "6"
+      "badge": "6",
+      "surface": "outline",
+      "tone": "plain"
     }
   ],
-  "arrows": true
+  "arrows": true,
+  "showTitle": false,
+  "variant": "numbered",
+  "surface": "outline"
 }
 :::
 
@@ -488,7 +558,7 @@ rm -rf ./build
 
 论文借用了 *effect* 和 *coeffect* 的概念，分别研究组件向环境施加的影响，以及组件依赖环境提供哪些能力。
 
-它还引入上下文转换、逆操作和观察等价性等机制，试图说明：在给定约束下，组件如何交错执行而不意外破坏彼此的行为。<span class="article-citation"><a class="article-citation-label" href="https://arxiv.org/abs/2608.25512" target="_blank" rel="noopener" aria-label="引用来源：arxiv.org">arxiv.org</a><span class="article-citation-popup"><a href="https://arxiv.org/abs/2608.25512" target="_blank" rel="noopener">A Programming Paradigm for Spatiotemporal Composability</a></span></span>
+它还引入上下文转换、逆操作和观察等价性等机制，试图说明：在给定约束下，组件如何交错执行而不意外破坏彼此的行为。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-7" aria-label="查看引用来源：arxiv.org"><img class="article-citation-favicon" alt="" src="/images/source-arxiv.png"><span class="article-citation-name">arxiv.org</span></button><span class="article-citation-popup" id="article-source-7"><a href="https://arxiv.org/abs/2608.25512" target="_blank" rel="noopener">A Programming Paradigm for Spatiotemporal Composability</a></span></span>
 
 这部分很有研究价值，但不能简单理解成“论文证明了 DSH 所有插件都是安全的”。
 
@@ -528,7 +598,10 @@ rm -rf ./build
         "git log --since=1.week",
         "git status",
         "读取 package.json"
-      ]
+      ],
+      "surface": "fill",
+      "tone": "plain",
+      "chipsStyle": "filled"
     },
     {
       "title": "Step 2",
@@ -537,7 +610,10 @@ rm -rf ./build
       "chips": [
         "读取修改文件",
         "运行 npm test"
-      ]
+      ],
+      "surface": "fill",
+      "tone": "plain",
+      "chipsStyle": "filled"
     },
     {
       "title": "Step 3",
@@ -547,7 +623,10 @@ rm -rf ./build
         "读取失败日志",
         "修改代码",
         "重新运行测试"
-      ]
+      ],
+      "surface": "fill",
+      "tone": "plain",
+      "chipsStyle": "filled"
     },
     {
       "title": "Step 4",
@@ -556,16 +635,26 @@ rm -rf ./build
       "chips": [
         "git diff --check",
         "生成最终说明"
-      ]
+      ],
+      "surface": "fill",
+      "tone": "plain",
+      "chipsStyle": "filled"
     },
     {
       "title": "最终回复用户",
       "text": "任务完成，Turn 结束",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "none",
+      "icon": "check",
+      "align": "center"
     }
   ],
-  "text": "1 个用户请求",
-  "arrows": true
+  "arrows": false,
+  "showTitle": false,
+  "variant": "tree",
+  "surface": "outline",
+  "title": "Turn #1：检查博客仓库",
+  "badge": "1 个用户请求"
 }
 :::
 
@@ -583,42 +672,61 @@ rm -rf ./build
   "items": [
     {
       "title": "① 领取输入",
-      "text": "从会话队列取出待处理消息"
+      "text": "从会话队列取出待处理消息",
+      "surface": "none",
+      "tone": "plain"
     },
     {
       "title": "② 确认模型和环境",
-      "text": "锁定本步骤的模型选择，收集运行环境"
+      "text": "锁定本步骤的模型选择，收集运行环境",
+      "surface": "none",
+      "tone": "plain"
     },
     {
       "title": "③ 组装提示词",
-      "text": "系统提示词 + 会话历史 + 当前环境 + 工具 Schema"
+      "text": "系统提示词 + 会话历史 + 当前环境 + 工具 Schema",
+      "surface": "none",
+      "tone": "plain"
     },
     {
       "title": "④ 冻结请求",
-      "text": "生成这一次模型真正看到的内容"
+      "text": "生成这一次模型真正看到的内容",
+      "surface": "none",
+      "tone": "plain"
     },
     {
       "title": "⑤ 流式调用模型",
-      "text": "模型生成文本或工具调用"
+      "text": "模型生成文本或工具调用",
+      "surface": "none",
+      "tone": "plain"
     },
     {
       "title": "⑥ 执行工具",
-      "text": "经过权限检查、执行器、结果处理"
+      "text": "经过权限检查、执行器、结果处理",
+      "surface": "none",
+      "tone": "accent"
     },
     {
       "title": "⑦ 记录结果",
-      "text": "保存消息、工具调用、结果和步骤状态"
+      "text": "保存消息、工具调用、结果和步骤状态",
+      "surface": "none",
+      "tone": "plain"
     },
     {
       "title": "⑧ 决定是否继续",
-      "text": "还有工作就进入下一步，否则结束"
+      "text": "还有工作就进入下一步，否则结束",
+      "surface": "none",
+      "tone": "plain"
     }
   ],
-  "arrows": true
+  "arrows": false,
+  "showTitle": false,
+  "variant": "timeline",
+  "surface": "outline"
 }
 :::
 
-实际实现还包含 `agent/pre-step`、`agent/request`、`llm/stream`、`tools/pre-execute` 等事件钩子。插件可以在这些节点观察、修改、拒绝或扩展操作。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener">DeepSeek Harness Architecture</a></span></span>
+实际实现还包含 `agent/pre-step`、`agent/request`、`llm/stream`、`tools/pre-execute` 等事件钩子。插件可以在这些节点观察、修改、拒绝或扩展操作。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-8" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-8"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener">DeepSeek Harness Architecture</a></span></span>
 
 ### 3. 一个容易忽视的设计：先冻结模型请求，再发送
 
@@ -761,13 +869,22 @@ return results;
       "layout": "stack",
       "items": [
         {
-          "title": "模型"
+          "title": "模型",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "工具 A/B/C"
+          "title": "工具 A/B/C",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "每个工具的原始结果"
+          "title": "每个工具的原始结果",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         }
       ],
       "title": "普通工具调用",
@@ -776,31 +893,47 @@ return results;
         "↕",
         "↕"
       ],
-      "note": "模型需要处理更多中间数据"
+      "note": "模型需要处理更多中间数据",
+      "variant": "panel",
+      "surface": "outline"
     },
     {
       "layout": "stack",
       "items": [
         {
-          "title": "模型生成程序"
+          "title": "模型生成程序",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "程序执行多个工具"
+          "title": "程序执行多个工具",
+          "surface": "fill",
+          "align": "center",
+          "tone": "accent"
         },
         {
-          "title": "过滤 / 汇总结果"
+          "title": "过滤 / 汇总结果",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         }
       ],
       "title": "PTC 程序化调用",
       "arrows": true,
-      "note": "模型只接收必要信息"
+      "note": "模型只接收必要信息",
+      "variant": "panel",
+      "surface": "outline"
     }
   ],
-  "columns": 2
+  "columns": 2,
+  "showTitle": false,
+  "variant": "comparison",
+  "surface": "none"
 }
 :::
 
-官方实现提供 `run_code` 入口和工具 SDK，支持在代码中调用、组合、并发执行已注册工具。它设有并发和执行时限等控制机制。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/core/tools/README.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub +1">GitHub +1</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/core/tools/README.md" target="_blank" rel="noopener">工具系统 README</a><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/ptc-runtime" target="_blank" rel="noopener">PTC 运行时</a></span></span>
+官方实现提供 `run_code` 入口和工具 SDK，支持在代码中调用、组合、并发执行已注册工具。它设有并发和执行时限等控制机制。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-9" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span><small class="article-citation-count">+1</small></button><span class="article-citation-popup" id="article-source-9"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/core/tools/README.md" target="_blank" rel="noopener">工具系统 README</a><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/ptc-runtime" target="_blank" rel="noopener">PTC 运行时</a></span></span>
 
 ### 3. PTC 为什么可能更省钱？
 
@@ -879,7 +1012,7 @@ DSH 的工具链有明确的执行过程：
 返回模型
 ```
 
-其中 `tools/pre-execute`、`tools/execute`、`tools/post-execute` 是独立的可扩展环节。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md" target="_blank" rel="noopener">工具执行流水线</a></span></span>
+其中 `tools/pre-execute`、`tools/execute`、`tools/post-execute` 是独立的可扩展环节。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-10" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-10"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md" target="_blank" rel="noopener">工具执行流水线</a></span></span>
 
 还要理解一个关键的抽象层：**工具接口不一定等于底层执行器。**
 
@@ -891,29 +1024,48 @@ DSH 的工具链有明确的执行过程：
   "items": [
     {
       "title": "模型看到 bash 工具",
-      "text": "输入一条命令，获得输出"
+      "text": "输入一条命令，获得输出",
+      "surface": "fill",
+      "align": "center",
+      "tone": "plain"
     },
     {
       "title": "Shell 服务接口",
       "text": "定义执行语义，不固定执行环境",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "outline",
+      "align": "center"
     },
     {
       "layout": "row",
       "items": [
         {
-          "title": "本机进程"
+          "title": "本机进程",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "Docker / 沙箱"
+          "title": "Docker / 沙箱",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
-          "title": "远程服务器"
+          "title": "远程服务器",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         }
-      ]
+      ],
+      "surface": "none"
     }
   ],
-  "arrows": true
+  "arrows": true,
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline",
+  "align": "center"
 }
 :::
 
@@ -972,35 +1124,54 @@ DSH 的核心会话系统采用**仅追加事件日志（Append-only Event Log�
     {
       "title": "Session Event Log",
       "text": "记录系统实际发生过的事件",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "fill",
+      "align": "center"
     },
     {
       "layout": "grid",
       "items": [
         {
           "title": "模型上下文",
-          "text": "模型当前能看到什么"
+          "text": "模型当前能看到什么",
+          "surface": "fill",
+          "align": "left",
+          "tone": "plain"
         },
         {
           "title": "对话界面",
-          "text": "用户看到的消息"
+          "text": "用户看到的消息",
+          "surface": "fill",
+          "align": "left",
+          "tone": "plain"
         },
         {
           "title": "执行轨迹",
-          "text": "工具、步骤、耗时、错误"
+          "text": "工具、步骤、耗时、错误",
+          "surface": "fill",
+          "align": "left",
+          "tone": "plain"
         },
         {
           "title": "会话恢复",
-          "text": "中断后重建执行状态"
+          "text": "中断后重建执行状态",
+          "surface": "fill",
+          "align": "left",
+          "tone": "plain"
         }
       ],
-      "columns": 2
+      "columns": 2,
+      "surface": "none"
     }
   ],
   "arrows": true,
   "connectors": [
     "⑂"
-  ]
+  ],
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline",
+  "align": "center"
 }
 :::
 
@@ -1008,7 +1179,7 @@ DSH 的核心会话系统采用**仅追加事件日志（Append-only Event Log�
 
 它在金融账本、业务审计、分布式系统等领域也有应用，并不是 Agent 专属技术。
 
-DSH 有个值得注意的细节：模型最终可见的历史，是通过 `deriveMessages()` 从日志投影出来的。系统甚至把没有成为正式模型消息的失败、重试和中断尝试，作为单独事件保存。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/session" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/session" target="_blank" rel="noopener">会话</a></span></span>
+DSH 有个值得注意的细节：模型最终可见的历史，是通过 `deriveMessages()` 从日志投影出来的。系统甚至把没有成为正式模型消息的失败、重试和中断尝试，作为单独事件保存。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-11" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-11"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/session" target="_blank" rel="noopener">会话</a></span></span>
 
 这带来几个能力：
 
@@ -1024,7 +1195,7 @@ DSH 有个值得注意的细节：模型最终可见的历史，是通过 `deriv
 
 官方提供了一个 JSONL 持久化后端，同时把持久化本身也定义为可替换服务。
 
-它采用会话句柄管理读写，并处理单写者所有权、数据刷新、日志恢复等问题。官方还设计了日志损坏或进程中断时的恢复路径。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/persistence" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/persistence" target="_blank" rel="noopener">会话持久化</a></span></span>
+它采用会话句柄管理读写，并处理单写者所有权、数据刷新、日志恢复等问题。官方还设计了日志损坏或进程中断时的恢复路径。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-12" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-12"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/persistence" target="_blank" rel="noopener">会话持久化</a></span></span>
 
 这说明 DSH 没有只把会话当作聊天窗口里的临时字符串。
 
@@ -1080,7 +1251,7 @@ DSH 有个值得注意的细节：模型最终可见的历史，是通过 `deriv
 
 DSH 的实现很有意思：它通过新的事件，**在模型可见的历史中用摘要遮蔽一段旧内容，但原始日志并没有被直接抹掉**。
 
-源码中相应的事件包括 `compaction/start`、`compaction/summary`、`compaction/end`，同时还有历史消息替换操作。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/compaction" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/compaction" target="_blank" rel="noopener">压缩（compaction）</a></span></span>
+源码中相应的事件包括 `compaction/start`、`compaction/summary`、`compaction/end`，同时还有历史消息替换操作。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-13" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-13"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/compaction" target="_blank" rel="noopener">压缩（compaction）</a></span></span>
 
 这相当于：
 
@@ -1102,7 +1273,7 @@ DSH 的实现很有意思：它通过新的事件，**在模型可见的历史�
 | MCP Reference Memory | 本地知识图谱式实体、关系、观察存储 |
 | Engram | 可通过 MCP 接入的外部记忆服务 |
 
-这些属于额外接入的系统，不是所有用户安装 DSH 后就自动拥有一套成熟的、会持续整理个人生活的记忆。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/guide/mcp-memory" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/guide/mcp-memory" target="_blank" rel="noopener">连接第三方记忆 MCP 服务</a></span></span>
+这些属于额外接入的系统，不是所有用户安装 DSH 后就自动拥有一套成熟的、会持续整理个人生活的记忆。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-14" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-14"><a href="https://deepseek-harness.github.io/deepseek-harness/guide/mcp-memory" target="_blank" rel="noopener">连接第三方记忆 MCP 服务</a></span></span>
 
 **即使接上记忆服务，也还有三个独立问题：**
 
@@ -1133,41 +1304,60 @@ DSH 的实现很有意思：它通过新的事件，**在模型可见的历史�
     {
       "title": "主 Agent · 项目负责人",
       "text": "拆分任务、整合结果、决定下一步",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "outline",
+      "align": "center"
     },
     {
       "layout": "row",
       "items": [
         {
           "title": "子 Agent A",
-          "text": "分析性能"
+          "text": "分析性能",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
           "title": "子 Agent B",
-          "text": "检查前端"
+          "text": "检查前端",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         },
         {
           "title": "子 Agent C",
-          "text": "审查 CI"
+          "text": "审查 CI",
+          "surface": "fill",
+          "align": "center",
+          "tone": "plain"
         }
-      ]
+      ],
+      "surface": "none"
     },
     {
       "title": "汇总结果",
-      "text": "交给主 Agent 继续决策"
+      "text": "交给主 Agent 继续决策",
+      "surface": "fill",
+      "align": "center",
+      "tone": "plain"
     }
   ],
   "arrows": true,
   "connectors": [
     "⑂",
     "↕"
-  ]
+  ],
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline",
+  "align": "center"
 }
 :::
 
 DSH 的子 Agent 系统支持不同的执行后端、本地可持续会话、任务结果回传、取消操作，以及部分独立模型或预设选项。
 
-本地子 Agent 有自己的会话历史；它不需要把父 Agent 的全部上下文都复制进去。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/subagent" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/subagent" target="_blank" rel="noopener">子代理</a></span></span>
+本地子 Agent 有自己的会话历史；它不需要把父 Agent 的全部上下文都复制进去。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-15" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-15"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/subagent" target="_blank" rel="noopener">子代理</a></span></span>
 
 这有利于控制上下文长度，也有利于让多个研究任务并行。
 
@@ -1197,7 +1387,7 @@ DSH 的子 Agent 系统支持不同的执行后端、本地可持续会话、任
 交给模型做综合判断
 ```
 
-官方 `packages/workflow/` 已经包含通过程序脚本扇出子任务的能力，并复用 PTC 执行运行时。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/workflow/README.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/workflow/README.md" target="_blank" rel="noopener">Workflow README</a></span></span>
+官方 `packages/workflow/` 已经包含通过程序脚本扇出子任务的能力，并复用 PTC 执行运行时。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-16" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-16"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/workflow/README.md" target="_blank" rel="noopener">Workflow README</a></span></span>
 
 这两层结合起来其实很有潜力：
 
@@ -1211,7 +1401,7 @@ DSH 官方演示中，有这样的例子：
 
 > 每周五 17:00 整理项目记录，生成周报。
 
-它会创建一个持久化的定时任务，到期后把任务内容投递给相关会话。<span class="article-citation"><a class="article-citation-label" href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek">DeepSeek</a><span class="article-citation-popup"><a href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener">DeepSeek Harness｜共探智能上限</a></span></span>
+它会创建一个持久化的定时任务，到期后把任务内容投递给相关会话。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-17" aria-label="查看引用来源：deepseek.com"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">deepseek.com</span></button><span class="article-citation-popup" id="article-source-17"><a href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener">DeepSeek Harness｜共探智能上限</a></span></span>
 
 调度层支持：
 
@@ -1220,7 +1410,7 @@ DSH 官方演示中，有这样的例子：
 - 每日、每周计划；
 - Cron 表达式及指定时区。
 
-这些定时任务的记录独立于某个会话当前是否加载在内存里。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/schedule" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/schedule" target="_blank" rel="noopener">宿主级 Schedule</a></span></span>
+这些定时任务的记录独立于某个会话当前是否加载在内存里。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-18" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-18"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/schedule" target="_blank" rel="noopener">宿主级 Schedule</a></span></span>
 
 但这里有个常见误解：
 
@@ -1234,7 +1424,7 @@ DSH 官方演示中，有这样的例子：
 
 官方展示了一个挺有代表性的例子：用户说“帮我写一个番茄时钟插件”。
 
-Agent 随后读取插件开发资料、编写前端代码、调用插件管理器安装插件，最后验证运行。官方演示记录了完整过程。<span class="article-citation"><a class="article-citation-label" href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek">DeepSeek</a><span class="article-citation-popup"><a href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener">DeepSeek Harness｜共探智能上限</a></span></span>
+Agent 随后读取插件开发资料、编写前端代码、调用插件管理器安装插件，最后验证运行。官方演示记录了完整过程。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-19" aria-label="查看引用来源：deepseek.com"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">deepseek.com</span></button><span class="article-citation-popup" id="article-source-19"><a href="https://www.deepseek.com/en/harness/" target="_blank" rel="noopener">DeepSeek Harness｜共探智能上限</a></span></span>
 
 这意味着系统具备某种**运行时扩展自身功能**的能力。
 
@@ -1286,7 +1476,7 @@ DeepSeek 仓库中的安全声明很直接：
 
 > 它是实验性的开发者预览软件，尚未接受安全审计，不应视为可用于生产环境的安全软件。
 
-这不是我对它安全性的主观猜测，而是项目官方写明的当前状态。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/SAFETY.zh.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/SAFETY.zh.md" target="_blank" rel="noopener">安全声明</a></span></span>
+这不是我对它安全性的主观猜测，而是项目官方写明的当前状态。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-20" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-20"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/SAFETY.zh.md" target="_blank" rel="noopener">安全声明</a></span></span>
 
 为什么？
 
@@ -1312,11 +1502,11 @@ DSH 提供三种主要的文件系统权限模式：
 - macOS：Seatbelt。
 - Windows：ACL 和受限令牌。
 
-而且有的后端只提供 `partial`（部分强制执行），并不保证每种限制都完整实现。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/sandbox" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/sandbox" target="_blank" rel="noopener">进程沙箱</a></span></span>
+而且有的后端只提供 `partial`（部分强制执行），并不保证每种限制都完整实现。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-21" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-21"><a href="https://deepseek-harness.github.io/deepseek-harness/reference/subsystems/sandbox" target="_blank" rel="noopener">进程沙箱</a></span></span>
 
 这里有个尤其值得注意的细节：
 
-**标准 Web 配置的新会话默认倾向 `workspace-write`，但独立的 Python `sdk-minimal` 预设使用 `danger-full-access`，并不挂载同样的审批服务。** <span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub +1">GitHub +1</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md" target="_blank" rel="noopener">CLI 运行参考</a><a href="https://deepseek-harness.github.io/deepseek-harness/guide/python-sdk" target="_blank" rel="noopener">Python SDK 入门</a></span></span>
+**标准 Web 配置的新会话默认倾向 `workspace-write`，但独立的 Python `sdk-minimal` 预设使用 `danger-full-access`，并不挂载同样的审批服务。** <span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-22" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span><small class="article-citation-count">+1</small></button><span class="article-citation-popup" id="article-source-22"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md" target="_blank" rel="noopener">CLI 运行参考</a><a href="https://deepseek-harness.github.io/deepseek-harness/guide/python-sdk" target="_blank" rel="noopener">Python SDK 入门</a></span></span>
 
 这意味着，你把一个 Python SDK 示例直接指向装有重要文件的工作目录，和在一个受限工作区里使用 Web UI，风险并不相同。
 
@@ -1335,7 +1525,7 @@ DSH 提供三种主要的文件系统权限模式：
 - Web UI：**设置 → 通用 → Upload Session Log**。
 - 自定义组合：将对应的 `session-log-deepseek.enabled` 设为 `false`。
 
-这是与另一个遥测系统分开的设置。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md" target="_blank" rel="noopener">CLI 运行参考</a></span></span>
+这是与另一个遥测系统分开的设置。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-23" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-23"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/reference/README.md" target="_blank" rel="noopener">CLI 运行参考</a></span></span>
 
 另一个遥测系统使用 OTel，基础配置默认为 `FEEDBACK_ONLY`：通常在用户主动提交反馈时上传相关日志，而不是普通每条对话都持续上报。它可以单独禁用。
 
@@ -1348,7 +1538,7 @@ DSH 提供三种主要的文件系统权限模式：
 | OTel 遥测 / 反馈 | 诊断和产品反馈 | 默认反馈触发，可单独关闭 |
 | 第三方 MCP / 插件 | 使用外部服务 | 取决于插件自身行为 |
 
-另外，DeepSeek 的 2026 年 9 月隐私政策明确提到，使用官方模型服务时会处理交互日志，也可能在所述条件下将输入输出用于训练和优化，并提供联系退出的途径；自定义模型服务则适用不同的数据处理安排。<span class="article-citation"><a class="article-citation-label" href="https://www.deepseek.com/en/harness/privacy/" target="_blank" rel="noopener" aria-label="引用来源：隐私政策">隐私政策</a><span class="article-citation-popup"><a href="https://www.deepseek.com/en/harness/privacy/" target="_blank" rel="noopener">DeepSeek Harness 隐私政策</a></span></span>
+另外，DeepSeek 的 2026 年 9 月隐私政策明确提到，使用官方模型服务时会处理交互日志，也可能在所述条件下将输入输出用于训练和优化，并提供联系退出的途径；自定义模型服务则适用不同的数据处理安排。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-24" aria-label="查看引用来源：隐私政策"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">隐私政策</span></button><span class="article-citation-popup" id="article-source-24"><a href="https://www.deepseek.com/en/harness/privacy/" target="_blank" rel="noopener">DeepSeek Harness 隐私政策</a></span></span>
 
 所以如果你准备接触私人文件、商业代码或凭据，应该在选择模型和使用模式时就把这些数据流理清。
 
@@ -1379,7 +1569,7 @@ Cordis 的插件卸载与资源清理机制能帮助管理程序生命周期，�
 
 
 
-{% raw %}<div class="article-resource-list"><section class="article-resource-card"><img class="article-resource-image" src="/images/deepseek-harness/original-4.jpg" alt="DeepSeek Harness 桌面版實測：修 Bug、報表、排程，交付紀錄不代表做完" loading="lazy"><span class="article-resource-badge">桌面版</span><strong>桌面版：最快体验产品</strong><p>官方提供 macOS Apple Silicon 和 Windows 64 位版本。可以直接使用图形界面，体验任务执行、文件工作区、模型配置、插件和轨迹查看。</p><a href="https://deepseek.com/harness/" target="_blank" rel="noopener">官方下载页面 ↗</a></section><section class="article-resource-card"><span class="article-resource-badge">CLI + Web</span><strong>npm 版：最快研究运行机制</strong><p>安装 Node.js，运行一条命令即可启动本地 Web UI。适合查看运行日志、尝试不同工具模式和配置。</p><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">GitHub 官方仓库 ↗</a></section><section class="article-resource-card"><span class="article-resource-badge">SDK / 插件</span><strong>源码或 SDK：适合深入研究与二次开发</strong><p>可以修改插件组合、自己添加工具、研究 Cordis，或者从 Python 程序调用 Harness。</p><a href="https://deepseek-harness.github.io/deepseek-harness/guide/python-sdk" target="_blank" rel="noopener">Python SDK 官方教程 ↗</a></section></div>{% endraw %}
+{% raw %}<div class="article-resource-list"><section class="article-resource-card"><div class="article-resource-media"><img class="article-resource-image" src="/images/deepseek-harness/original-4.jpg" alt="DeepSeek Harness 桌面版實測：修 Bug、報表、排程，交付紀錄不代表做完" loading="lazy"></div><div class="article-resource-content"><strong>桌面版：最快体验产品</strong><p>官方提供 macOS Apple Silicon 和 Windows 64 位版本。可以直接使用图形界面，体验任务执行、文件工作区、模型配置、插件和轨迹查看。</p><a href="https://deepseek.com/harness/" target="_blank" rel="noopener">官方下载页面 ↗</a></div></section><section class="article-resource-card"><div class="article-resource-media"><svg class="article-resource-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="m7 9 3 3-3 3m6 0h4"></path></svg><span class="article-resource-badge">CLI + Web</span></div><div class="article-resource-content"><strong>npm 版：最快研究运行机制</strong><p>安装 Node.js，运行一条命令即可启动本地 Web UI。适合查看运行日志、尝试不同工具模式和配置。</p><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">GitHub 官方仓库 ↗</a></div></section><section class="article-resource-card"><div class="article-resource-media"><svg class="article-resource-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-4 5 4 5m10-10 4 5-4 5M14 4l-4 16"></path></svg><span class="article-resource-badge">SDK / 插件</span></div><div class="article-resource-content"><strong>源码或 SDK：适合深入研究与二次开发</strong><p>可以修改插件组合、自己添加工具、研究 Cordis，或者从 Python 程序调用 Harness。</p><a href="https://deepseek-harness.github.io/deepseek-harness/guide/python-sdk" target="_blank" rel="noopener">Python SDK 官方教程 ↗</a></div></section></div>{% endraw %}
 
 ### 2. 最短启动命令
 
@@ -1395,7 +1585,7 @@ npx @deepseek-ai/dsh web
 http://127.0.0.1:3080
 ```
 
-这是官方 README 当前提供的启动方式。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness GitHub 仓库</a></span></span>
+这是官方 README 当前提供的启动方式。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-25" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-25"><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness GitHub 仓库</a></span></span>
 
 想读源码、改插件，则是：
 
@@ -1421,7 +1611,7 @@ pnpm dsh web
 - 自定义 API 网关；
 - 兼容 OpenAI Chat Completions、OpenAI Responses、Anthropic Messages 的接口。
 
-用户可以根据模型能力选择不同推理档位和输入模态。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/guide/providers" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/guide/providers" target="_blank" rel="noopener">配置模型</a></span></span>
+用户可以根据模型能力选择不同推理档位和输入模态。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-26" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-26"><a href="https://deepseek-harness.github.io/deepseek-harness/guide/providers" target="_blank" rel="noopener">配置模型</a></span></span>
 
 如果你自己有能提供兼容 API 的本地推理服务，也可以尝试把它作为自定义提供方；实际能不能顺利执行，还要看该模型和接口对工具调用等功能的支持。
 
@@ -1459,7 +1649,7 @@ export function apply(ctx: Context) {
 pnpm dsh web --patch ./cordis.yml
 ```
 
-这只是最基础的插件；真正扩展工具还需要调用 `ctx.tools.register()` 并定义具体的工具 Schema。<span class="article-citation"><a class="article-citation-label" href="https://deepseek-harness.github.io/deepseek-harness/develop/basic/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek Harness">DeepSeek Harness</a><span class="article-citation-popup"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/basic/" target="_blank" rel="noopener">第一个插件</a></span></span>
+这只是最基础的插件；真正扩展工具还需要调用 `ctx.tools.register()` 并定义具体的工具 Schema。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-27" aria-label="查看引用来源：DeepSeek Harness"><img class="article-citation-favicon" alt="" src="/images/source-deepseek.png"><span class="article-citation-name">DeepSeek Harness</span></button><span class="article-citation-popup" id="article-source-27"><a href="https://deepseek-harness.github.io/deepseek-harness/develop/basic/" target="_blank" rel="noopener">第一个插件</a></span></span>
 
 我建议先掌握这种手写形式，再去玩 Creator Mode 自动生成插件。这样更容易看懂它到底改了哪些东西。
 
@@ -1476,31 +1666,46 @@ DSH 不是简单扫描一个 `plugins/` 目录，然后启动所有插件。
     {
       "title": "Bundle 层",
       "text": "官方基础能力与应用能力",
-      "badge": "1"
+      "badge": "1",
+      "surface": "fill",
+      "align": "left",
+      "tone": "plain"
     },
     {
       "title": "Profile Patch",
       "text": "这个运行模式的自定义配置",
-      "badge": "2"
+      "badge": "2",
+      "surface": "fill",
+      "align": "left",
+      "tone": "plain"
     },
     {
       "title": "Home Patch",
       "text": "这台机器的通用覆盖配置",
-      "badge": "3"
+      "badge": "3",
+      "surface": "fill",
+      "align": "left",
+      "tone": "plain"
     },
     {
       "title": "CLI --patch",
       "text": "这次启动的临时覆盖配置",
       "badge": "4",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "fill",
+      "align": "left"
     }
   ],
   "arrows": true,
-  "note": "越靠后的层优先级越高"
+  "note": "越靠后的层优先级越高",
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "outline",
+  "align": "center"
 }
 :::
 
-官方提供 `web`、`headless`、`sdk`、`sdk-minimal`、`acp` 等 Profile。桌面版还有自己的专用组合。<span class="article-citation"><a class="article-citation-label" href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener" aria-label="引用来源：GitHub">GitHub</a><span class="article-citation-popup"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener">DeepSeek Harness Architecture</a></span></span>
+官方提供 `web`、`headless`、`sdk`、`sdk-minimal`、`acp` 等 Profile。桌面版还有自己的专用组合。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-28" aria-label="查看引用来源：GitHub"><img class="article-citation-favicon" alt="" src="/images/source-github.png"><span class="article-citation-name">GitHub</span></button><span class="article-citation-popup" id="article-source-28"><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md" target="_blank" rel="noopener">DeepSeek Harness Architecture</a></span></span>
 
 可以通过：
 
@@ -1530,7 +1735,7 @@ dsh --profile web --dump-config
 | 输入，缓存未命中 | ¥1 / ¥2 | ¥4.5 / ¥9 |
 | 输出 | ¥4 / ¥8 | ¥13.5 / ¥27 |
 
-<span class="article-citation"><a class="article-citation-label" href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek API Docs">DeepSeek API Docs</a><span class="article-citation-popup"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">模型 &amp; 价格</a></span></span>
+<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-29" aria-label="查看引用来源：DeepSeek API Docs"><img class="article-citation-favicon" alt="" src="/images/source-deepseek-api.png"><span class="article-citation-name">DeepSeek API Docs</span></button><span class="article-citation-popup" id="article-source-29"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">模型 &amp; 价格</a></span></span>
 
 这里有几件容易产生误解的地方：
 
@@ -1540,9 +1745,9 @@ dsh --profile web --dump-config
 
 **第三，PTC 通常有机会减少中间结果的 token 消耗，但也需要模型生成代码。** 不能简单把它理解成固定节省多少百分比。
 
-**第四，网页搜索和抓取可能另外计费。** 官方价格页写明 Search 和 Fetch 每 1,000 次成功请求分别为 ¥5。通过 DSH 等 Agent 使用 DeepSeek API 的相关服务端工具调用，计划从 **2026 年 11 月 1 日** 开始按次收费；截至原文写作时尚未到这个日期。<span class="article-citation"><a class="article-citation-label" href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek API Docs">DeepSeek API Docs</a><span class="article-citation-popup"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">模型 &amp; 价格</a></span></span>
+**第四，网页搜索和抓取可能另外计费。** 官方价格页写明 Search 和 Fetch 每 1,000 次成功请求分别为 ¥5。通过 DSH 等 Agent 使用 DeepSeek API 的相关服务端工具调用，计划从 **2026 年 11 月 1 日** 开始按次收费；截至原文写作时尚未到这个日期。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-30" aria-label="查看引用来源：DeepSeek API Docs"><img class="article-citation-favicon" alt="" src="/images/source-deepseek-api.png"><span class="article-citation-name">DeepSeek API Docs</span></button><span class="article-citation-popup" id="article-source-30"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">模型 &amp; 价格</a></span></span>
 
-顺便一提，目前 API 中 `deepseek-flash` 对应的是 DeepSeek-V4.1-Flash-1017，而 `deepseek-v4-pro` 仍列为可调用模型。前者支持图像输入，后者当前不支持。旧的 V4 Flash 模型名被兼容路由到新版 Flash。<span class="article-citation"><a class="article-citation-label" href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek API Docs">DeepSeek API Docs</a><span class="article-citation-popup"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">模型 &amp; 价格</a></span></span>
+顺便一提，目前 API 中 `deepseek-flash` 对应的是 DeepSeek-V4.1-Flash-1017，而 `deepseek-v4-pro` 仍列为可调用模型。前者支持图像输入，后者当前不支持。旧的 V4 Flash 模型名被兼容路由到新版 Flash。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-31" aria-label="查看引用来源：DeepSeek API Docs"><img class="article-citation-favicon" alt="" src="/images/source-deepseek-api.png"><span class="article-citation-name">DeepSeek API Docs</span></button><span class="article-citation-popup" id="article-source-31"><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">模型 &amp; 价格</a></span></span>
 
 因此真正的成本公式更接近：
 
@@ -1570,7 +1775,7 @@ $$
 | 扩展重点 | Cordis 插件、运行时服务替换 | Skills、渠道、工具和 Gateway | 工具、扩展、自动化和平台接口 | Skills、Hooks、Subagents、MCP |
 | 最有代表性的特色 | Agent Loop 本身也是可替换插件 | 多平台消息接入与持续运行 | 深度软件开发工作流 | 编程工具链与指令控制体系 |
 
-以上是架构与产品重点的对照，不能当作任务完成率排名。OpenClaw、Codex 和 Claude Code 也都有相当丰富的扩展机制。<span class="article-citation"><a class="article-citation-label" href="https://docs.openclaw.ai/help/faq/what-is-openclaw" target="_blank" rel="noopener" aria-label="引用来源：OpenClaw +2">OpenClaw +2</a><span class="article-citation-popup"><a href="https://docs.openclaw.ai/help/faq/what-is-openclaw" target="_blank" rel="noopener">What is OpenClaw?</a><a href="https://developers.openai.com/blog/codex-as-a-platform" target="_blank" rel="noopener">Codex as a platform: build on the open agent harness</a><a href="https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more" target="_blank" rel="noopener">Steering Claude Code: when to use CLAUDE.md, skills, hooks, and subagents</a></span></span>
+以上是架构与产品重点的对照，不能当作任务完成率排名。OpenClaw、Codex 和 Claude Code 也都有相当丰富的扩展机制。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-32" aria-label="查看引用来源：OpenClaw"><img class="article-citation-favicon" alt="" src="/images/source-openclaw.png"><span class="article-citation-name">OpenClaw</span><small class="article-citation-count">+2</small></button><span class="article-citation-popup" id="article-source-32"><a href="https://docs.openclaw.ai/help/faq/what-is-openclaw" target="_blank" rel="noopener">What is OpenClaw?</a><a href="https://developers.openai.com/blog/codex-as-a-platform" target="_blank" rel="noopener">Codex as a platform: build on the open agent harness</a><a href="https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more" target="_blank" rel="noopener">Steering Claude Code: when to use CLAUDE.md, skills, hooks, and subagents</a></span></span>
 
 ### DSH vs OpenClaw
 
@@ -1598,7 +1803,7 @@ DSH 的架构设计更贴近这个目标。
 
 这两者都已经拥有成熟的编程 Agent 运行机制，也都支持多种形式的扩展。
 
-需要澄清的是，开源 Agent Harness 并不是 DSH 独有的卖点。Codex 本身也有开放的 Agent Harness 和平台接口。<span class="article-citation"><a class="article-citation-label" href="https://developers.openai.com/blog/codex-as-a-platform" target="_blank" rel="noopener" aria-label="引用来源：OpenAI Developers">OpenAI Developers</a><span class="article-citation-popup"><a href="https://developers.openai.com/blog/codex-as-a-platform" target="_blank" rel="noopener">Codex as a platform: build on the open agent harness</a></span></span>
+需要澄清的是，开源 Agent Harness 并不是 DSH 独有的卖点。Codex 本身也有开放的 Agent Harness 和平台接口。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-33" aria-label="查看引用来源：OpenAI Developers"><img class="article-citation-favicon" alt="" src="/images/source-openai.png"><span class="article-citation-name">OpenAI Developers</span></button><span class="article-citation-popup" id="article-source-33"><a href="https://developers.openai.com/blog/codex-as-a-platform" target="_blank" rel="noopener">Codex as a platform: build on the open agent harness</a></span></span>
 
 DSH 更特别的是：
 
@@ -1653,7 +1858,7 @@ $$
 
 模型本身没有学会新的知识，但执行系统可以通过搜索、验证、调用程序、委托子任务，使它完成原本仅靠文本生成无法完成的工作。
 
-DeepSeek 官方事实上已经把 DSH 的极简模式用于部分 Code Agent 基准评测。2026 年 7—8 月的模型发布文档注明了相关评测所使用的 Harness、推理档位及其他设置。<span class="article-citation"><a class="article-citation-label" href="https://api-docs.deepseek.com/zh-cn/updates/" target="_blank" rel="noopener" aria-label="引用来源：DeepSeek API Docs +1">DeepSeek API Docs +1</a><span class="article-citation-popup"><a href="https://api-docs.deepseek.com/zh-cn/updates/" target="_blank" rel="noopener">更新日志</a><a href="https://api-docs.deepseek.com/zh-cn/news/news260813/" target="_blank" rel="noopener">DeepSeek-V4-Pro 正式版上线</a></span></span>
+DeepSeek 官方事实上已经把 DSH 的极简模式用于部分 Code Agent 基准评测。2026 年 7—8 月的模型发布文档注明了相关评测所使用的 Harness、推理档位及其他设置。<span class="article-citation"><button type="button" class="article-citation-label" aria-expanded="false" aria-controls="article-source-34" aria-label="查看引用来源：DeepSeek API Docs"><img class="article-citation-favicon" alt="" src="/images/source-deepseek-api.png"><span class="article-citation-name">DeepSeek API Docs</span><small class="article-citation-count">+1</small></button><span class="article-citation-popup" id="article-source-34"><a href="https://api-docs.deepseek.com/zh-cn/updates/" target="_blank" rel="noopener">更新日志</a><a href="https://api-docs.deepseek.com/zh-cn/news/news260813/" target="_blank" rel="noopener">DeepSeek-V4-Pro 正式版上线</a></span></span>
 
 这说明 Harness 已经是模型评估条件的一部分。
 
@@ -1776,20 +1981,29 @@ Agent 后来给自己生成了一个可以联网、可以执行命令的新插�
   "items": [
     {
       "title": "实验 A：Git 仓库巡检",
-      "text": "让 DSH 检查一组测试仓库，报告每个仓库的工作区状态、本地和远端分支关系，以及可能需要同步的项目。\n\n重点观察：它如何选择工具、调用多少次模型、如何解释 Git 输出、如何生成最终报告。\n\n第一次只读检查，不自动 pull、reset 或 push。",
-      "badge": "入门"
+      "badge": "入门",
+      "surface": "outline",
+      "tone": "plain",
+      "richText": "让 DSH 检查一组测试仓库，报告每个仓库的工作区状态、本地和远端分支关系，以及可能需要同步的项目。\n\n**重点观察：**它如何选择工具、调用多少次模型、如何解释 Git 输出、如何生成最终报告。\n\n第一次只读检查，不自动 pull、reset 或 push。"
     },
     {
       "title": "实验 B：编写一个自己的工具插件",
-      "text": "自己提供一个 list_git_repositories 工具，让它直接以结构化 JSON 返回所有仓库的状态，而不需要模型逐个运行 Git 命令。\n\n重点观察：插件加载、ctx.tools 注册、服务依赖、动态卸载，以及工具接口如何改变模型工作流程。",
-      "badge": "进阶"
+      "badge": "进阶",
+      "surface": "outline",
+      "tone": "plain",
+      "richText": "自己提供一个 `list_git_repositories` 工具，让它直接以结构化 JSON 返回所有仓库的状态，而不需要模型逐个运行 Git 命令。\n\n**重点观察：**插件加载、`ctx.tools` 注册、服务依赖、动态卸载，以及工具接口如何改变模型工作流程。"
     },
     {
       "title": "实验 C：Native vs PTC 对照",
-      "text": "对同一组任务，分别使用普通工具模式和 PTC 模式，保持模型、工作区、任务输入尽可能一致。\n\n重点记录：成功率、模型调用次数、工具调用次数、总 token、真实费用、总耗时以及失败原因。",
-      "badge": "深入"
+      "badge": "深入",
+      "surface": "outline",
+      "tone": "plain",
+      "richText": "对同一组任务，分别使用普通工具模式和 PTC 模式，保持模型、工作区、任务输入尽可能一致。\n\n**重点记录：**成功率、模型调用次数、工具调用次数、总 token、真实费用、总耗时以及失败原因。"
     }
-  ]
+  ],
+  "showTitle": false,
+  "variant": "panel",
+  "surface": "none"
 }
 :::
 
@@ -1818,17 +2032,28 @@ Agent 后来给自己生成了一个可以联网、可以执行命令的新插�
     {
       "title": "作为技术研究对象：很值得",
       "text": "Cordis 的时空可组合性、Agent Loop 的事件机制、会话事件溯源、PTC 编排，以及插件动态重组，都有实质性的工程内容。深入读源码能学到不少东西。",
-      "tone": "accent"
+      "tone": "plain",
+      "surface": "none",
+      "icon": "brain"
     },
     {
       "title": "作为现成生产力工具：值得试，但不必立刻替换已有工具",
-      "text": "它目前仍是预览版，安全、兼容性与插件生态存在不确定性。先拿测试项目评估真实任务表现，再决定是否用于长期工作。"
+      "text": "它目前仍是预览版，安全、兼容性与插件生态存在不确定性。先拿测试项目评估真实任务表现，再决定是否用于长期工作。",
+      "surface": "none",
+      "tone": "plain",
+      "icon": "laptop"
     },
     {
       "title": "作为人格化自主 Agent 的基础：潜力很大，但还需要产品层建设",
-      "text": "想让它长期在线、拥有稳定人格、能管理社交账号并主动开展任务，还需要补充记忆、身份、渠道、触发策略和严格权限管理。OpenClaw 目前更贴近这类开箱即用的体验。"
+      "text": "想让它长期在线、拥有稳定人格、能管理社交账号并主动开展任务，还需要补充记忆、身份、渠道、触发策略和严格权限管理。OpenClaw 目前更贴近这类开箱即用的体验。",
+      "surface": "none",
+      "tone": "plain",
+      "icon": "bot"
     }
-  ]
+  ],
+  "showTitle": false,
+  "variant": "list",
+  "surface": "none"
 }
 :::
 
