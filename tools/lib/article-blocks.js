@@ -38,8 +38,8 @@ function parseBlock(kind, body) {
   return { rows, fields };
 }
 
-function frame(kind, title, content, note) {
-  return `<figure class="article-viz article-viz-${kind}"><figcaption class="article-viz-title">${escape(title)}</figcaption>${content}${note ? `<p class="article-viz-note">${escape(note)}</p>` : ''}</figure>`;
+function frame(kind, title, content, note, showTitle = true) {
+  return `<figure class="article-viz article-viz-${kind}"><figcaption class="article-viz-title${showTitle ? '' : ' article-viz-title-hidden'}">${escape(title)}</figcaption>${content}${note ? `<p class="article-viz-note">${escape(note)}</p>` : ''}</figure>`;
 }
 
 function renderFlow(title, { rows, fields }) {
@@ -99,11 +99,18 @@ function parseDiagram(body) {
     if (depth > 8 || ++count > 160) fail('最多支持8层、160个节点');
     const group = Object.hasOwn(node, 'layout') || Object.hasOwn(node, 'items');
     if (root && !group) fail('根节点必须声明 layout 和 items');
-    const allowed = group ? ['layout', 'items', 'columns', 'arrows', 'connectors', 'note', 'title', 'text'] : ['title', 'text', 'chips', 'code', 'tone', 'badge'];
+    const shared = ['surface', 'align', 'badge'];
+    const allowed = group ? ['layout', 'items', 'columns', 'arrows', 'connectors', 'note', 'title', 'text', 'variant', ...shared, ...(root ? ['showTitle'] : [])] : ['title', 'text', 'richText', 'chips', 'code', 'tone', 'chipsColumns', 'chipsStyle', 'icon', 'badgePosition', ...shared];
     for (const key of Object.keys(node)) if (!allowed.includes(key)) fail(`未知字段：${key}`);
-    for (const field of ['title', 'text', 'note', 'badge']) if (Object.hasOwn(node, field)) string(node[field], field);
+    for (const field of ['title', 'text', 'richText', 'note', 'badge']) if (Object.hasOwn(node, field)) string(node[field], field);
+    if (Object.hasOwn(node, 'text') && Object.hasOwn(node, 'richText')) fail('text 与 richText 不能同时设置');
+    if (Object.hasOwn(node, 'surface') && !['none', 'outline', 'fill'].includes(node.surface)) fail('surface 只支持 none、outline、fill');
+    if (Object.hasOwn(node, 'align') && !['left', 'center'].includes(node.align)) fail('align 只支持 left、center');
     if (group) {
       if (!['stack', 'row', 'grid'].includes(node.layout)) fail('layout 只支持 stack、row、grid');
+      if (Object.hasOwn(node, 'variant') && !['panel', 'timeline', 'numbered', 'tree', 'comparison', 'list'].includes(node.variant)) fail('variant 无效');
+      if (['timeline', 'numbered', 'tree', 'list'].includes(node.variant) && node.layout !== 'stack') fail(`${node.variant} 需要 stack 布局`);
+      if (Object.hasOwn(node, 'showTitle') && typeof node.showTitle !== 'boolean') fail('showTitle 必须是布尔值');
       if (!Array.isArray(node.items) || !node.items.length || node.items.length > 32) fail('items 需要1–32个节点');
       if (Object.hasOwn(node, 'columns') && (!Number.isInteger(node.columns) || node.columns < 1 || node.columns > 4)) fail('columns 必须是1–4整数');
       if (Object.hasOwn(node, 'arrows') && typeof node.arrows !== 'boolean') fail('arrows 必须是布尔值');
@@ -119,31 +126,71 @@ function parseDiagram(body) {
         node[field].forEach(value => string(value, field));
       }
       if (Object.hasOwn(node, 'tone') && !['accent', 'muted', 'plain'].includes(node.tone)) fail('tone 只支持 accent、muted、plain');
-      if (!node.title && !node.text && !node.chips && !node.code) fail('叶节点需要 title、text、chips 或 code');
+      if (Object.hasOwn(node, 'chipsColumns') && (!Number.isInteger(node.chipsColumns) || node.chipsColumns < 1 || node.chipsColumns > 4 || !node.chips)) fail('chipsColumns 需要 chips 和1–4整数');
+      if (Object.hasOwn(node, 'chipsStyle') && (!['filled', 'outline'].includes(node.chipsStyle) || !node.chips)) fail('chipsStyle 需要 chips，且只支持 filled、outline');
+      if (Object.hasOwn(node, 'icon') && !['brain', 'laptop', 'bot', 'terminal', 'code', 'check'].includes(node.icon)) fail('icon 不在白名单中');
+      if (Object.hasOwn(node, 'badgePosition') && (!['header', 'after'].includes(node.badgePosition) || !node.badge)) fail('badgePosition 需要 badge，且只支持 header、after');
+      if (!node.title && !node.text && !node.richText && !node.chips && !node.code) fail('叶节点需要 title、text、richText、chips 或 code');
     }
   }
   visit(diagram, 1, true);
   return diagram;
 }
 
-function renderDiagramNode(node, root = false) {
-  const heading = `${node.badge ? `<span class="article-diagram-badge">${escape(node.badge)}</span>` : ''}${node.title ? `<p class="article-diagram-heading"><strong>${escape(node.title)}</strong></p>` : ''}${node.text ? `<p class="article-diagram-text">${escape(node.text)}</p>` : ''}`;
+const diagramIcons = {
+  brain: '<path d="M12 5a3 3 0 1 0-6 .1 4 4 0 0 0-2.5 5.8 4 4 0 0 0 .6 6.6A4 4 0 1 0 12 18V5Zm0 8h4m-4 5h6a2 2 0 0 1 2 2v1M12 8h8M16 8V5a2 2 0 0 1 2-2M9 13a4.5 4.5 0 0 0 3-4"/>',
+  laptop: '<rect x="4" y="4" width="16" height="12" rx="2"/><path d="M2 19h20M9 16l-1 3m7-3 1 3"/>',
+  bot: '<rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 3v4M1 11v4m22-4v4"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M9 16h6"/>',
+  terminal: '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="m7 9 3 3-3 3m6 0h4"/>',
+  code: '<path d="m7 7-4 5 4 5m10-10 4 5-4 5M14 4l-4 16"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m7.5 12 3 3 6-7"/>'
+};
+
+const diagramForkIcon = '<svg class="article-diagram-fork" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="6.5" cy="6" r="2.25"/><circle cx="6.5" cy="18" r="2.25"/><circle cx="17.5" cy="6" r="2.25"/><path d="M6.5 8.25v7.5M17.5 8.25V10a2 2 0 0 1-2 2h-7a2 2 0 0 0-2 2"/></svg>';
+
+function diagramPresentation(node) {
+  return `${node.surface ? ` article-diagram-surface-${node.surface}` : ''}${node.align ? ` article-diagram-align-${node.align}` : ''}`;
+}
+
+// 只识别两种行内标记，其余字符始终转义；不执行 HTML、模板或完整 Markdown。
+function renderDiagramRichText(value) {
+  return value.split(/\n[ \t]*\n/).map(paragraph => {
+    const pattern = /(`[^`\n]+`|\*\*[^*\n]+\*\*)/g;
+    let output = '', offset = 0, match;
+    while ((match = pattern.exec(paragraph))) {
+      output += escape(paragraph.slice(offset, match.index));
+      const code = match[0][0] === '`';
+      output += code ? `<code>${escape(match[0].slice(1, -1))}</code>` : `<strong>${escape(match[0].slice(2, -2))}</strong>`;
+      offset = match.index + match[0].length;
+    }
+    return `<p class="article-diagram-text">${output + escape(paragraph.slice(offset))}</p>`;
+  }).join('');
+}
+
+function renderDiagramNode(node, root = false, numbered = false) {
+  const badge = node.badge && !numbered ? `<span class="article-diagram-badge${node.badgePosition === 'after' ? ' article-diagram-badge-after' : ''}">${escape(node.badge)}</span>` : '';
+  const header = node.title || (badge && node.badgePosition !== 'after') ? `<div class="article-diagram-header">${node.title ? `<p class="article-diagram-heading"><strong>${escape(node.title)}</strong></p>` : ''}${node.badgePosition !== 'after' ? badge : ''}</div>` : '';
+  const heading = `${header}${node.richText ? renderDiagramRichText(node.richText) : node.text ? `<p class="article-diagram-text">${escape(node.text)}</p>` : ''}${node.badgePosition === 'after' ? badge : ''}`;
   if (node.items) {
-    const tag = node.arrows ? 'ol' : 'ul';
+    const tag = node.arrows || ['timeline', 'numbered', 'tree'].includes(node.variant) ? 'ol' : 'ul';
     const columns = node.columns || Math.min(node.items.length, 3);
     const items = node.items.map((item, index) => {
+      const numberedItem = node.variant === 'numbered';
       const automaticHorizontal = !node.connectors && node.layout !== 'stack';
       const symbol = node.connectors ? node.connectors[index] : node.layout === 'stack' ? '↓' : '→';
-      const connector = node.arrows && index < node.items.length - 1 ? `<span class="article-diagram-connector${automaticHorizontal ? ' article-diagram-connector-auto' : ''}" aria-hidden="true">${escape(symbol)}</span>` : '';
-      return `<li>${renderDiagramNode(item)}${connector}</li>`;
+      const connector = node.arrows && index < node.items.length - 1 ? `<span class="article-diagram-connector${automaticHorizontal ? ' article-diagram-connector-auto' : ''}" aria-hidden="true">${symbol === '⑂' ? diagramForkIcon : escape(symbol)}</span>` : '';
+      const marker = numberedItem ? `<span class="article-diagram-marker" aria-hidden="true">${escape(item.badge || index + 1)}</span>` : '';
+      return `<li${item.tone === 'accent' ? ' class="article-diagram-item-accent"' : ''}>${marker}${renderDiagramNode(item, false, numberedItem)}${connector}</li>`;
     }).join('');
-    return `<div class="article-diagram-group${root ? ' article-diagram-root' : ''}">${heading}<${tag} class="article-diagram-items article-diagram-${node.layout}${node.arrows ? ' article-diagram-arrows' : ''}" role="list" style="--diagram-columns:${columns}">${items}</${tag}>${node.note ? `<p class="article-viz-note">${escape(node.note)}</p>` : ''}</div>`;
+    return `<div class="article-diagram-group${root ? ' article-diagram-root' : ''}${node.variant ? ` article-diagram-variant-${node.variant}` : ''}${diagramPresentation(node)}">${heading}<${tag} class="article-diagram-items article-diagram-${node.layout}${node.arrows ? ' article-diagram-arrows' : ''}" role="list" style="--diagram-columns:${columns}">${items}</${tag}>${node.note ? `<p class="article-viz-note">${escape(node.note)}</p>` : ''}</div>`;
   }
-  return `<div class="article-diagram-card article-diagram-${node.tone || 'plain'}">${heading}${node.chips ? `<ul class="article-diagram-chips" role="list">${node.chips.map(chip => `<li>${escape(chip)}</li>`).join('')}</ul>` : ''}${node.code ? `<pre class="article-diagram-code"><code>${escape(node.code.join('\n'))}</code></pre>` : ''}</div>`;
+  const icon = node.icon ? `<span class="article-diagram-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">${diagramIcons[node.icon]}</svg></span>` : '';
+  const chips = node.chips ? `<ul class="article-diagram-chips${node.chipsColumns ? ' article-diagram-chips-grid' : ''}${node.chipsStyle ? ` article-diagram-chips-${node.chipsStyle}` : ''}" role="list"${node.chipsColumns ? ` style="--diagram-chip-columns:${node.chipsColumns}"` : ''}>${node.chips.map(chip => `<li>${escape(chip)}</li>`).join('')}</ul>` : '';
+  return `<div class="article-diagram-card article-diagram-${node.tone || 'plain'}${node.icon ? ' article-diagram-has-icon' : ''}${diagramPresentation(node)}">${icon}<div class="article-diagram-content">${heading}${chips}${node.code ? `<pre class="article-diagram-code"><code>${escape(node.code.join('\n'))}</code></pre>` : ''}</div></div>`;
 }
 
 function renderDiagram(title, diagram) {
-  return frame('diagram', title, renderDiagramNode(diagram, true));
+  return frame('diagram', title, renderDiagramNode(diagram, true), null, diagram.showTitle !== false);
 }
 
 /** 只处理白名单模块；保留代码围栏中的示例，数据错误在构建时报出。 */

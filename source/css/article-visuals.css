@@ -113,34 +113,152 @@
 .post-body .rich-article .highlight .code pre > .line { white-space: pre-wrap; overflow-wrap: anywhere; }
 .post-body .rich-article .highlight .code pre { box-sizing: border-box; max-width: 100%; padding-right: 10px; }
 
-/* 可嵌套的架构、流程与卡片；全部内容在无脚本时仍可阅读。 */
-.post-body .article-viz-diagram { --diagram-surface: var(--content-bg-color, #fff); }
+/* 布局与表现分离：流程、时间线、任务树和卡片可各自保留结构。 */
+.post-body .article-viz-diagram {
+  --diagram-surface: var(--content-bg-color, #fff);
+  --diagram-accent: var(--viz-accent);
+  --diagram-fill: color-mix(in srgb, currentColor 9%, var(--diagram-surface));
+  --diagram-chip-fill: color-mix(in srgb, currentColor 15%, var(--diagram-surface));
+}
+.post-body figure.article-viz > figcaption.article-viz-title-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 .article-diagram-group { box-sizing: border-box; min-width: 0; width: 100%; container: diagram-group / inline-size; }
 .article-diagram-group:not(.article-diagram-root) { border: 1px solid var(--viz-border); border-radius: 10px; padding: 16px; }
 .post-body .article-diagram-items { display: grid; gap: 18px; list-style: none; margin: 0; padding: 0; }
 .post-body .article-diagram-items > li { display: flex; min-width: 0; margin: 0; padding: 0; position: relative; }
 .post-body .article-diagram-arrows { gap: 32px; }
-.article-diagram-connector { color: var(--viz-accent); position: absolute; bottom: -29px; left: calc(50% - .5em); font-size: 1.125rem; line-height: 26px; width: 1em; text-align: center; }
+.article-diagram-connector { color: var(--diagram-connector, var(--viz-accent)); position: absolute; bottom: -29px; left: calc(50% - .5em); font-size: 1rem; line-height: 26px; width: 1em; text-align: center; }
 .article-diagram-connector-auto { transform: rotate(90deg); }
+.article-diagram-connector svg { width: 1em; height: 1em; vertical-align: middle; }
 .article-diagram-card { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid var(--viz-border); border-radius: 10px; padding: 16px 18px; background: var(--diagram-surface); }
-.article-diagram-accent { border-color: var(--viz-accent); background: var(--viz-track); background: color-mix(in srgb, var(--viz-accent) 7%, var(--diagram-surface)); }
+.article-diagram-content { min-width: 0; width: 100%; }
+.article-diagram-accent { border-color: var(--diagram-accent); background: color-mix(in srgb, var(--diagram-accent) 9%, var(--diagram-surface)); }
 .article-diagram-muted { background: var(--viz-track); }
+.article-diagram-header { display: flex; align-items: center; justify-content: space-between; gap: 8px 12px; min-width: 0; margin-bottom: 8px; }
+.post-body .article-diagram-header > .article-diagram-heading { flex: 1; min-width: 0; margin: 0; }
 .post-body .article-diagram-heading { font-size: 1rem; line-height: 1.6; margin: 0 0 8px; overflow-wrap: anywhere; }
-.post-body .article-diagram-heading strong { font-weight: 650; }
-.post-body .article-diagram-text { color: var(--viz-muted); font-size: 1rem; line-height: 1.75; margin: 0 0 12px; white-space: pre-line; overflow-wrap: anywhere; }
-.post-body .article-diagram-heading:last-child, .post-body .article-diagram-text:last-child { margin-bottom: 0; }
-.article-diagram-group > .article-diagram-heading, .article-diagram-group > .article-diagram-text { margin-bottom: 14px; }
-.article-diagram-badge { display: inline-block; color: var(--viz-accent); font-size: .8125rem; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+.post-body .article-diagram-heading strong { font-weight: 600; }
+.post-body .article-diagram-text { color: var(--viz-muted); font-size: .875rem; line-height: 1.7; margin: 0 0 8px; white-space: pre-line; overflow-wrap: anywhere; }
+.post-body .article-diagram-header:last-child,
+.post-body .article-diagram-text:last-child { margin-bottom: 0; }
+.article-diagram-group > .article-diagram-header, .article-diagram-group > .article-diagram-text { margin-bottom: 12px; }
+.article-diagram-badge { display: inline-block; flex: 0 0 auto; max-width: 100%; color: var(--viz-muted); background: var(--diagram-badge-fill, var(--diagram-fill)); border-radius: 20px; padding: 2px 8px; font-size: .75rem; font-weight: 500; line-height: 1.5; overflow-wrap: anywhere; }
+.article-diagram-badge-after { margin-top: 2px; }
 .post-body .article-diagram-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 12px 0 0; padding: 0; }
-.post-body .article-diagram-chips > li { border: 1px solid var(--viz-border); border-radius: 5px; font-size: .875rem; line-height: 1.5; margin: 0; padding: 4px 8px; overflow-wrap: anywhere; }
+.post-body .article-diagram-chips > li { box-sizing: border-box; min-width: 0; border: 1px solid var(--viz-border); border-radius: 5px; font-size: .8125rem; line-height: 1.5; margin: 0; padding: 4px 8px; overflow-wrap: anywhere; }
+.post-body .article-diagram-chips-grid { display: grid; grid-template-columns: repeat(var(--diagram-chip-columns), minmax(0, 1fr)); }
+.post-body .article-diagram-chips-grid > li { text-align: center; padding: 8px; }
+.post-body .article-diagram-chips-filled > li { border-color: transparent; background: var(--diagram-chip-fill); border-radius: 8px; }
+.post-body .article-diagram-chips-outline > li { background: transparent; border-color: var(--viz-border); }
 .post-body pre.article-diagram-code { box-sizing: border-box; color: inherit; background: var(--viz-track); border: 1px solid var(--viz-border); border-radius: 5px; font-size: .875rem; line-height: 1.7; margin: 12px 0 0; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .post-body .article-diagram-code code { color: inherit; background: transparent; border: 0; padding: 0; font: inherit; font-family: var(--font-family-monospace, ui-monospace, SFMono-Regular, Menlo, monospace); white-space: inherit; }
+.article-diagram-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; color: var(--viz-muted); }
+.article-diagram-icon svg { display: block; width: 24px; height: 24px; }
+.article-diagram-has-icon { display: flex; align-items: flex-start; gap: 12px; }
+.article-diagram-align-center { text-align: center; }
+.article-diagram-align-left { text-align: left; }
+.article-diagram-align-center > .article-diagram-content > .article-diagram-header,
+.article-diagram-align-center > .article-diagram-header { justify-content: center; }
+.article-diagram-align-center > .article-diagram-content > .article-diagram-header > .article-diagram-heading,
+.article-diagram-align-center > .article-diagram-header > .article-diagram-heading { flex: 0 1 auto; }
+.article-diagram-align-center > .article-diagram-content > .article-diagram-chips { justify-content: center; }
+.article-diagram-align-center > .article-diagram-content > .article-diagram-text,
+.article-diagram-align-center > .article-diagram-text { text-wrap: balance; }
+.article-diagram-align-center.article-diagram-has-icon { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+/* 面板是容器外框，内部节点可独立选择平面、描边或填充。 */
+.article-diagram-group[class*="article-diagram-variant-"] {
+  --diagram-accent: #10a37f;
+  --diagram-connector: var(--viz-muted);
+  --diagram-fill: color-mix(in srgb, currentColor 3%, var(--diagram-surface));
+  --diagram-badge-fill: color-mix(in srgb, currentColor 9%, var(--diagram-surface));
+}
+.article-diagram-group[class*="article-diagram-variant-"] .article-diagram-accent { border-color: var(--viz-border); }
+.article-diagram-group.article-diagram-variant-panel,
+.article-diagram-group.article-diagram-variant-timeline,
+.article-diagram-group.article-diagram-variant-numbered,
+.article-diagram-group.article-diagram-variant-tree { border: 1px solid var(--viz-border); border-radius: 14px; padding: 12px; }
+.post-body .article-diagram-variant-panel > .article-diagram-items { gap: 8px; }
+.post-body .article-diagram-variant-panel > .article-diagram-arrows { gap: 26px; }
+.article-diagram-variant-panel > .article-diagram-items > li > .article-diagram-connector { bottom: -24px; line-height: 22px; }
+.article-diagram-variant-panel > .article-diagram-items > li > .article-diagram-card { padding: 12px; }
+.article-diagram-variant-panel .article-diagram-card:is(.article-diagram-surface-none, .article-diagram-surface-fill) .article-diagram-heading strong { font-weight: 500; }
+/* 时间线保留左侧连续节奏；重点步骤只高亮竖条。 */
+.post-body .article-diagram-variant-timeline > .article-diagram-items { gap: 4px; }
+.post-body .article-diagram-variant-timeline > .article-diagram-items > li { display: block; padding: 4px 0 4px 16px; }
+.article-diagram-variant-timeline > .article-diagram-items > li::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; border-radius: 4px; background: color-mix(in srgb, currentColor 20%, var(--diagram-surface)); }
+.article-diagram-variant-timeline > .article-diagram-items > li.article-diagram-item-accent::before { background: var(--diagram-accent); }
+.article-diagram-variant-timeline > .article-diagram-items > li > .article-diagram-card { border: 0; border-radius: 0; padding: 0; background: transparent; }
+.article-diagram-variant-timeline > .article-diagram-items > li > .article-diagram-connector { display: none; }
+.post-body .article-diagram-variant-timeline .article-diagram-header { margin-bottom: 4px; }
+.post-body .article-diagram-variant-timeline .article-diagram-heading { font-size: .875rem; line-height: 1.25rem; }
+.post-body .article-diagram-variant-timeline .article-diagram-heading strong { font-weight: 500; }
+.post-body .article-diagram-variant-timeline .article-diagram-text { font-size: .75rem; line-height: 1rem; font-weight: 400; }
+/* 编号与内容分列，箭头严格落在编号列内。 */
+.post-body .article-diagram-variant-numbered > .article-diagram-items { gap: 22px; }
+.post-body .article-diagram-variant-numbered > .article-diagram-items > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: center; gap: 12px; }
+.article-diagram-marker { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--diagram-badge-fill, var(--diagram-fill)); color: var(--viz-muted); font-size: .75rem; line-height: 1rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.article-diagram-variant-numbered > .article-diagram-items > li > .article-diagram-card { padding: 8px 12px; border-radius: 8px; }
+.article-diagram-variant-numbered > .article-diagram-items > li > .article-diagram-connector { left: 6px; bottom: -23px; line-height: 22px; }
+.post-body .article-diagram-variant-numbered .article-diagram-heading,
+.post-body .article-diagram-variant-numbered .article-diagram-text { font-size: .875rem; line-height: 1.25rem; font-weight: 400; }
+.article-diagram-variant-numbered .article-diagram-heading strong { font-weight: 400; }
+/* 任务树的步骤缩进，步骤内部的标题、状态与工具保持各自层次。 */
+.post-body .article-diagram-variant-tree > .article-diagram-items { gap: 12px; }
+.post-body .article-diagram-variant-tree > .article-diagram-items > li:not(:last-child) { margin-left: 12px; }
+.article-diagram-variant-tree > .article-diagram-items > li > .article-diagram-card { padding: 12px; border-radius: 8px; }
+/* 对比面板由各列自行承担外框，避免再套一层总卡片。 */
+.article-diagram-group.article-diagram-variant-comparison { border: 0; padding: 0; }
+.post-body .article-diagram-variant-comparison > .article-diagram-items { gap: 16px; }
+.article-diagram-variant-comparison > .article-diagram-items > li > .article-diagram-group { padding: 12px; border-radius: 14px; }
+/* 结论列表用图标和分隔线组织，不把每段意见画成独立卡片。 */
+.article-diagram-group.article-diagram-variant-list { border: 0; padding: 0; }
+.post-body .article-diagram-variant-list > .article-diagram-items { gap: 0; }
+.post-body .article-diagram-variant-list > .article-diagram-items > li { padding: 16px 0; }
+.article-diagram-variant-list > .article-diagram-items > li + li { border-top: 1px solid var(--viz-border); }
+.article-diagram-variant-list > .article-diagram-items > li > .article-diagram-card { border: 0; border-radius: 0; padding: 0; background: transparent; }
+.article-diagram-variant-list .article-diagram-icon { box-sizing: border-box; width: 40px; height: 40px; border-radius: 10px; background: var(--diagram-fill); }
+/* 显式表面覆盖优先于变体与色调；none 不留下空卡片内边距。 */
+.article-diagram-group.article-diagram-surface-none,
+.post-body .article-diagram-card.article-diagram-surface-none { border: 0; border-radius: 0; padding: 0; background: transparent; }
+.article-diagram-group.article-diagram-surface-outline,
+.article-diagram-card.article-diagram-surface-outline { border: 1px solid var(--viz-border); background: transparent; }
+.article-diagram-group.article-diagram-surface-fill,
+.article-diagram-card.article-diagram-surface-fill { border: 0; background: var(--diagram-fill); }
+.article-diagram-surface-fill.article-diagram-accent { background: color-mix(in srgb, var(--diagram-accent) 10%, var(--diagram-surface)); }
+/* 面板内短内容的无框分组保留并列关系，不改变外层对比面板断点。 */
+@container diagram-group (min-width: 300px) {
+  .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) {
+    grid-template-columns: repeat(var(--diagram-columns), minmax(0, 1fr));
+  }
+  .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-card.article-diagram-surface-fill > .article-diagram-content > .article-diagram-header > .article-diagram-heading { font-size: .875rem; line-height: 1.25rem; }
+  .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-card.article-diagram-surface-fill > .article-diagram-content > .article-diagram-header > .article-diagram-heading strong { font-weight: 500; }
+  .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-connector {
+    left: auto;
+    right: -27px;
+    bottom: calc(50% - 13px);
+  }
+  .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-connector-auto { transform: none; }
+}
 @container diagram-group (min-width: 560px) {
   .article-diagram-row, .article-diagram-grid { grid-template-columns: repeat(var(--diagram-columns), minmax(0, 1fr)); }
   .article-diagram-row > li > .article-diagram-connector,
   .article-diagram-grid > li > .article-diagram-connector { left: auto; right: -27px; bottom: calc(50% - 13px); }
   .article-diagram-row > li > .article-diagram-connector-auto,
   .article-diagram-grid > li > .article-diagram-connector-auto { transform: none; }
+  .article-diagram-variant-panel > .article-diagram-row > li > .article-diagram-connector,
+  .article-diagram-variant-panel > .article-diagram-grid > li > .article-diagram-connector { left: auto; right: -24px; bottom: calc(50% - 11px); }
+}
+@container diagram-group (max-width: 400px) {
+  .article-diagram-header { flex-wrap: wrap; }
+  .article-diagram-header > .article-diagram-badge { max-width: 100%; }
 }
 @media print {
   .article-diagram-card, .article-diagram-group:not(.article-diagram-root) { break-inside: avoid; }

@@ -117,7 +117,7 @@ test('diagram 保留嵌套布局、节点顺序、说明与代码，无脚本即
   const d = dom.window.document;
   assert.equal(d.querySelector('figcaption').textContent, '运行系统');
   assert.equal(d.querySelector('.article-diagram-root > ol').children.length, 2);
-  assert.equal(d.querySelector('.article-diagram-root > ol > li > .article-diagram-card').textContent, '入口交互入口桌面端CLI');
+  assert.equal(d.querySelector('.article-diagram-root > ol > li > .article-diagram-card').textContent, '交互入口入口桌面端CLI');
   assert.equal(d.querySelector('.article-diagram-row').style.getPropertyValue('--diagram-columns'), '2');
   assert.equal(d.querySelector('.article-diagram-grid').children.length, 2);
   assert.equal(d.querySelector('.article-diagram-chips').textContent, '桌面端CLI');
@@ -133,7 +133,11 @@ test('diagram 明确保留加号、等号和双向连接，默认箭头单独标
   const symbols = ['↓', '→', '↕', '↔', '+', '=', '⑂'];
   const dom = compile({ layout: 'row', arrows: true, connectors: symbols, items: Array.from({ length: 8 }, (_, index) => ({ title: `节点${index}` })) });
   const connectors = [...dom.window.document.querySelectorAll('.article-diagram-connector')];
-  assert.deepEqual(connectors.map(node => node.textContent), symbols);
+  assert.deepEqual(connectors.map(node => node.querySelector('svg') ? 'fork' : node.textContent), symbols.map(symbol => symbol === '⑂' ? 'fork' : symbol));
+  const fork = connectors.at(-1).querySelector('svg.article-diagram-fork');
+  assert.equal(fork.querySelectorAll('circle').length, 3);
+  assert.equal(fork.getAttribute('focusable'), 'false');
+  assert.equal(connectors.at(-1).textContent, '');
   assert.ok(connectors.every(node => node.getAttribute('aria-hidden') === 'true'));
   assert.equal(dom.window.document.querySelectorAll('.article-diagram-connector-auto').length, 0);
   assert.equal(dom.window.document.querySelector('.article-diagram-items > li:last-child > .article-diagram-connector'), null);
@@ -215,4 +219,94 @@ test('diagram 示例保留代码围栏，正常模块沿用文章资源加载与
   assert.match(result.content, /^<div class="rich-article">/);
   assert.match(result.content, /href="\/preview\/css\/article-visuals.css"/);
   assert.match(result.content, /src="\/preview\/js\/article-visuals.js"/);
+});
+
+test('面板可隐藏额外图题，保留居中平面内容、三列能力格与独立结果框', () => {
+  const { JSDOM } = require('jsdom');
+  const data = {
+    layout: 'stack', variant: 'panel', align: 'center', showTitle: false, arrows: true, connectors: ['+', '↓'],
+    items: [
+      { title: 'Model', text: '理解与推理', surface: 'none' },
+      { title: 'Harness', surface: 'none', chips: ['工具', '循环', '文件', '权限', '上下文', '会话', '调度', '插件', '界面'], chipsColumns: 3, chipsStyle: 'filled' },
+      { title: 'Agent', surface: 'outline' }
+    ]
+  };
+  const dom = new JSDOM(compileArticleBlocks(`:::diagram[关系图]\n${JSON.stringify(data)}\n:::`).markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  const d = dom.window.document;
+  assert.equal(d.querySelector('figcaption').textContent, '关系图');
+  assert.ok(d.querySelector('figcaption').classList.contains('article-viz-title-hidden'));
+  assert.equal(d.querySelectorAll('.article-diagram-root.article-diagram-variant-panel.article-diagram-align-center').length, 1);
+  assert.equal(d.querySelectorAll('.article-diagram-surface-none').length, 2);
+  assert.equal(d.querySelectorAll('.article-diagram-surface-outline').length, 1);
+  const chips = d.querySelector('.article-diagram-chips-grid.article-diagram-chips-filled');
+  assert.equal(chips.children.length, 9);
+  assert.equal(chips.style.getPropertyValue('--diagram-chip-columns'), '3');
+  dom.window.close();
+});
+
+test('编号流程将编号放在独立前导列，时间线保留步骤顺序与重点状态', () => {
+  const { JSDOM } = require('jsdom');
+  const diagram = data => new JSDOM(compileArticleBlocks(`:::diagram[流程]\n${JSON.stringify(data)}\n:::`).markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  const numbered = diagram({ layout: 'stack', variant: 'numbered', arrows: true, items: [{ title: '检查路径', badge: '1' }, { title: '判断审批', badge: '2' }] });
+  const d = numbered.window.document;
+  assert.equal(d.querySelector('.article-diagram-items > li > .article-diagram-marker').textContent, '1');
+  assert.equal(d.querySelectorAll('.article-diagram-badge').length, 0);
+  assert.equal(d.querySelectorAll('.article-diagram-marker').length, 2);
+  assert.equal(d.querySelector('.article-diagram-items > li > .article-diagram-card .article-diagram-header').textContent, '检查路径');
+  assert.equal(d.querySelectorAll('.article-diagram-connector').length, 1);
+  numbered.window.close();
+  const timeline = diagram({ layout: 'stack', variant: 'timeline', items: [{ title: '领取输入' }, { title: '执行工具', tone: 'accent' }, { title: '保存结果' }] });
+  assert.equal(timeline.window.document.querySelector('.article-diagram-variant-timeline > ol').children.length, 3);
+  assert.equal(timeline.window.document.querySelectorAll('.article-diagram-item-accent').length, 1);
+  assert.equal(timeline.window.document.querySelectorAll('.article-diagram-connector').length, 0);
+  timeline.window.close();
+});
+
+test('标题与状态处于同一标题行，after 状态按正文顺序放在说明之后', () => {
+  const { JSDOM } = require('jsdom');
+  const data = { layout: 'stack', variant: 'tree', title: 'Turn', badge: '1 个请求', items: [
+    { title: 'Step 1', badge: '调用一次', text: '探索环境', surface: 'fill' },
+    { title: '依赖就绪', text: '开始执行', badge: 'ACTIVE', badgePosition: 'after' }
+  ] };
+  const dom = new JSDOM(compileArticleBlocks(`:::diagram[执行]\n${JSON.stringify(data)}\n:::`).markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  const d = dom.window.document;
+  assert.equal(d.querySelector('.article-diagram-root > .article-diagram-header').textContent, 'Turn1 个请求');
+  assert.equal(d.querySelector('.article-diagram-card .article-diagram-header').textContent, 'Step 1调用一次');
+  const after = d.querySelector('.article-diagram-badge-after');
+  assert.equal(after.previousElementSibling.textContent, '开始执行');
+  assert.equal(after.parentElement.querySelector('.article-diagram-header .article-diagram-badge'), null);
+  dom.window.close();
+});
+
+test('图标白名单与限定富文本保留语义，仍拒绝 HTML 和模板注入', () => {
+  const { JSDOM } = require('jsdom');
+  const attack = '<img src=x onerror=attack()>{% endraw %}';
+  const data = { layout: 'stack', variant: 'list', items: [{ title: '观察', icon: 'brain', richText: `**重点观察：** 使用 \`ctx.tools\`。\n\n${attack}` }] };
+  const result = compileArticleBlocks(`:::diagram[说明]\n${JSON.stringify(data)}\n:::`);
+  const dom = new JSDOM(result.markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  const d = dom.window.document;
+  assert.equal(d.querySelectorAll('.article-diagram-icon svg').length, 1);
+  assert.equal(d.querySelector('.article-diagram-icon').getAttribute('aria-hidden'), 'true');
+  assert.equal(d.querySelectorAll('.article-diagram-text').length, 2);
+  assert.equal(d.querySelector('.article-diagram-text strong').textContent, '重点观察：');
+  assert.equal(d.querySelector('.article-diagram-text code').textContent, 'ctx.tools');
+  assert.equal(d.querySelectorAll('img, script, iframe').length, 0);
+  assert.equal(d.querySelector('.article-diagram-text:last-child').textContent, attack);
+  assert.equal((result.markdown.match(/\{% endraw %\}/g) || []).length, 1);
+  dom.window.close();
+});
+
+test('图示表现字段限制值域，不接受任意样式或矛盾格式', () => {
+  const root = { layout: 'stack', items: [{ text: '正文' }] };
+  const source = data => `:::diagram[示意]\n${JSON.stringify(data)}\n:::`;
+  for (const fields of [{ variant: 'arbitrary' }, { showTitle: 'false' }, { surface: 'url(x)' }, { align: 'right' }, { layout: 'row', variant: 'timeline' }]) {
+    assert.throws(() => compileArticleBlocks(source({ ...root, ...fields })), /diagram/);
+  }
+  for (const node of [
+    { text: '正文', surface: 'red' }, { text: '正文', align: 'justify' }, { text: '正文', icon: '<script>' },
+    { text: '正文', showTitle: false }, { text: '正文', chipsColumns: 3 },
+    { chips: ['一'], chipsColumns: 5 }, { chips: ['一'], chipsStyle: 'url(x)' },
+    { text: '正文', badgePosition: 'after' }, { text: '正文', badge: '状态', badgePosition: 'below' },
+    { text: '正文', richText: '**重复正文**' }, { richText: ' ' }, { icon: 'bot' }
+  ]) assert.throws(() => compileArticleBlocks(source({ ...root, items: [node] })), /diagram/);
 });
