@@ -238,6 +238,7 @@
   .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) {
     grid-template-columns: repeat(var(--diagram-columns), minmax(0, 1fr));
   }
+  .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-card.article-diagram-surface-fill { padding: 8px; }
   .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-card.article-diagram-surface-fill > .article-diagram-content > .article-diagram-header > .article-diagram-heading { font-size: .875rem; line-height: 1.25rem; }
   .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-card.article-diagram-surface-fill > .article-diagram-content > .article-diagram-header > .article-diagram-heading strong { font-weight: 500; }
   .article-diagram-variant-panel .article-diagram-group.article-diagram-surface-none:not(.article-diagram-root) > :is(.article-diagram-row, .article-diagram-grid) > li > .article-diagram-connector {
