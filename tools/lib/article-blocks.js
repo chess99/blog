@@ -85,6 +85,56 @@ function renderDecay(title, { fields }, id) {
   return frame('decay', title, `<div data-decay data-half-life="${halfLife}" data-window="${windowHours}">${decaySvg(halfLife, windowHours, false)}${decaySvg(halfLife, windowHours, true)}${summary}${interactive}</div>`, fields.note);
 }
 
+function parseDiagram(body) {
+  let diagram;
+  try { diagram = JSON.parse(body); }
+  catch { throw new Error('diagram 内容必须是有效 JSON'); }
+  let count = 0;
+  const fail = message => { throw new Error(`diagram ${message}`); };
+  const string = (value, field) => {
+    if (typeof value !== 'string' || !value.trim()) fail(`${field} 必须是非空字符串`);
+  };
+  function visit(node, depth, root = false) {
+    if (!node || typeof node !== 'object' || Array.isArray(node)) fail('节点必须是对象');
+    if (depth > 8 || ++count > 160) fail('最多支持8层、160个节点');
+    const group = Object.hasOwn(node, 'layout') || Object.hasOwn(node, 'items');
+    if (root && !group) fail('根节点必须声明 layout 和 items');
+    const allowed = group ? ['layout', 'items', 'columns', 'arrows', 'note', 'title', 'text'] : ['title', 'text', 'chips', 'code', 'tone', 'badge'];
+    for (const key of Object.keys(node)) if (!allowed.includes(key)) fail(`未知字段：${key}`);
+    for (const field of ['title', 'text', 'note', 'badge']) if (Object.hasOwn(node, field)) string(node[field], field);
+    if (group) {
+      if (!['stack', 'row', 'grid'].includes(node.layout)) fail('layout 只支持 stack、row、grid');
+      if (!Array.isArray(node.items) || !node.items.length || node.items.length > 32) fail('items 需要1–32个节点');
+      if (Object.hasOwn(node, 'columns') && (!Number.isInteger(node.columns) || node.columns < 1 || node.columns > 4)) fail('columns 必须是1–4整数');
+      if (Object.hasOwn(node, 'arrows') && typeof node.arrows !== 'boolean') fail('arrows 必须是布尔值');
+      node.items.forEach(item => visit(item, depth + 1));
+    } else {
+      for (const field of ['chips', 'code']) if (Object.hasOwn(node, field)) {
+        if (!Array.isArray(node[field]) || !node[field].length || node[field].length > 32) fail(`${field} 需要1–32个字符串`);
+        node[field].forEach(value => string(value, field));
+      }
+      if (Object.hasOwn(node, 'tone') && !['accent', 'muted', 'plain'].includes(node.tone)) fail('tone 只支持 accent、muted、plain');
+      if (!node.title && !node.text && !node.chips && !node.code) fail('叶节点需要 title、text、chips 或 code');
+    }
+  }
+  visit(diagram, 1, true);
+  return diagram;
+}
+
+function renderDiagramNode(node, root = false) {
+  const heading = `${node.badge ? `<span class="article-diagram-badge">${escape(node.badge)}</span>` : ''}${node.title ? `<p class="article-diagram-heading"><strong>${escape(node.title)}</strong></p>` : ''}${node.text ? `<p class="article-diagram-text">${escape(node.text)}</p>` : ''}`;
+  if (node.items) {
+    const tag = node.arrows ? 'ol' : 'ul';
+    const columns = node.columns || Math.min(node.items.length, 3);
+    return `<div class="article-diagram-group${root ? ' article-diagram-root' : ''}">${heading}<${tag} class="article-diagram-items article-diagram-${node.layout}${node.arrows ? ' article-diagram-arrows' : ''}" role="list" style="--diagram-columns:${columns}">${node.items.map(item => `<li>${renderDiagramNode(item)}</li>`).join('')}</${tag}>${node.note ? `<p class="article-viz-note">${escape(node.note)}</p>` : ''}</div>`;
+  }
+  return `<div class="article-diagram-card article-diagram-${node.tone || 'plain'}">${heading}${node.chips ? `<ul class="article-diagram-chips" role="list">${node.chips.map(chip => `<li>${escape(chip)}</li>`).join('')}</ul>` : ''}${node.code ? `<pre class="article-diagram-code"><code>${escape(node.code.join('\n'))}</code></pre>` : ''}</div>`;
+}
+
+function renderDiagram(title, diagram) {
+  return frame('diagram', title, renderDiagramNode(diagram, true));
+}
+
 /** 只处理白名单模块；保留代码围栏中的示例，数据错误在构建时报出。 */
 function compileArticleBlocks(markdown) {
   const lines = markdown.split('\n');
@@ -99,15 +149,16 @@ function compileArticleBlocks(markdown) {
       else if (boundary[1][0] === fence.char && boundary[1].length >= fence.length && !boundary[2].trim()) fence = null;
       output.push(line); continue;
     }
-    const start = !fence && line.match(/^:::(flow|bars|decay|score)\[([^\]]+)\]\s*$/);
+    const start = !fence && line.match(/^:::(flow|bars|decay|score|diagram)\[([^\]]+)\]\s*$/);
     if (!start) { output.push(line); continue; }
     const kind = start[1];
     let end = i + 1;
     while (end < lines.length && lines[end].trim() !== ':::') end++;
     if (end === lines.length) throw new Error(`${kind} 模块未闭合`);
-    const data = parseBlock(kind, lines.slice(i + 1, end).join('\n'));
+    const body = lines.slice(i + 1, end).join('\n');
+    const data = kind === 'diagram' ? parseDiagram(body) : parseBlock(kind, body);
     const title = start[2];
-    const html = kind === 'flow' ? renderFlow(title, data) : kind === 'bars' ? renderBars(title, data) : kind === 'score' ? renderScore(title, data, `article-score-${count}`) : renderDecay(title, data, `article-decay-${count}`);
+    const html = kind === 'flow' ? renderFlow(title, data) : kind === 'bars' ? renderBars(title, data) : kind === 'score' ? renderScore(title, data, `article-score-${count}`) : kind === 'diagram' ? renderDiagram(title, data) : renderDecay(title, data, `article-decay-${count}`);
     output.push(`\n{% raw %}${html}{% endraw %}\n`);
     count++;
     i = end;

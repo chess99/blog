@@ -112,3 +112,33 @@
 .post-body .rich-article .highlight table { width: 100%; table-layout: fixed; }
 .post-body .rich-article .highlight .code pre > .line { white-space: pre-wrap; overflow-wrap: anywhere; }
 .post-body .rich-article .highlight .code pre { box-sizing: border-box; max-width: 100%; padding-right: 10px; }
+
+/* 可嵌套的架构、流程与卡片；全部内容在无脚本时仍可阅读。 */
+.post-body .article-viz-diagram { --diagram-surface: var(--content-bg-color, #fff); }
+.article-diagram-group { box-sizing: border-box; min-width: 0; width: 100%; container: diagram-group / inline-size; }
+.article-diagram-group:not(.article-diagram-root) { border: 1px solid var(--viz-border); border-radius: 10px; padding: 16px; }
+.post-body .article-diagram-items { display: grid; gap: 18px; list-style: none; margin: 0; padding: 0; }
+.post-body .article-diagram-items > li { display: flex; min-width: 0; margin: 0; padding: 0; position: relative; }
+.post-body .article-diagram-arrows { gap: 32px; }
+.article-diagram-arrows > li:not(:last-child)::after { content: '↓'; color: var(--viz-accent); position: absolute; bottom: -29px; left: calc(50% - .5em); font-size: 1.125rem; line-height: 26px; width: 1em; text-align: center; }
+.article-diagram-card { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid var(--viz-border); border-radius: 10px; padding: 16px 18px; background: var(--diagram-surface); }
+.article-diagram-accent { border-color: var(--viz-accent); background: var(--viz-track); background: color-mix(in srgb, var(--viz-accent) 7%, var(--diagram-surface)); }
+.article-diagram-muted { background: var(--viz-track); }
+.post-body .article-diagram-heading { font-size: 1rem; line-height: 1.6; margin: 0 0 8px; overflow-wrap: anywhere; }
+.post-body .article-diagram-heading strong { font-weight: 650; }
+.post-body .article-diagram-text { color: var(--viz-muted); font-size: 1rem; line-height: 1.75; margin: 0 0 12px; white-space: pre-line; overflow-wrap: anywhere; }
+.post-body .article-diagram-heading:last-child, .post-body .article-diagram-text:last-child { margin-bottom: 0; }
+.article-diagram-group > .article-diagram-heading, .article-diagram-group > .article-diagram-text { margin-bottom: 14px; }
+.article-diagram-badge { display: inline-block; color: var(--viz-accent); font-size: .8125rem; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+.post-body .article-diagram-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 12px 0 0; padding: 0; }
+.post-body .article-diagram-chips > li { border: 1px solid var(--viz-border); border-radius: 5px; font-size: .875rem; line-height: 1.5; margin: 0; padding: 4px 8px; overflow-wrap: anywhere; }
+.post-body pre.article-diagram-code { box-sizing: border-box; color: inherit; background: var(--viz-track); border: 1px solid var(--viz-border); border-radius: 5px; font-size: .875rem; line-height: 1.7; margin: 12px 0 0; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.post-body .article-diagram-code code { color: inherit; background: transparent; border: 0; padding: 0; font: inherit; font-family: var(--font-family-monospace, ui-monospace, SFMono-Regular, Menlo, monospace); white-space: inherit; }
+@container diagram-group (min-width: 560px) {
+  .article-diagram-row, .article-diagram-grid { grid-template-columns: repeat(var(--diagram-columns), minmax(0, 1fr)); }
+  .article-diagram-row.article-diagram-arrows > li:not(:last-child)::after,
+  .article-diagram-grid.article-diagram-arrows > li:not(:last-child)::after { content: '→'; left: auto; right: -27px; bottom: calc(50% - 13px); }
+}
+@media print {
+  .article-diagram-card, .article-diagram-group:not(.article-diagram-root) { break-inside: avoid; }
+}

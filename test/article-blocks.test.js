@@ -96,3 +96,91 @@ test('公共脚本、样式与构建插件不包含文章名和固定业务档�
     assert.doesNotMatch(text, /aihot|T1_5|T1|T2|官方一手|信源等级/i, file);
   }
 });
+
+test('diagram 保留嵌套布局、节点顺序、说明与代码，无脚本即可阅读', () => {
+  const { JSDOM } = require('jsdom');
+  const data = {
+    layout: 'stack', arrows: true, note: '架构关系示意', items: [
+      { title: '交互入口', chips: ['桌面端', 'CLI'], tone: 'accent', badge: '入口' },
+      { layout: 'row', columns: 2, title: '执行层', items: [
+        { title: '模型', text: '生成下一步动作' },
+        { layout: 'grid', columns: 2, text: '运行时能力', items: [
+          { title: '工具', code: ['ctx.tools', 'ctx.sessions'] },
+          { text: '文件与会话', tone: 'muted' }
+        ] }
+      ] }
+    ]
+  };
+  const result = compileArticleBlocks(`:::diagram[运行系统]\n${JSON.stringify(data)}\n:::`);
+  assert.equal(result.count, 1);
+  const dom = new JSDOM(result.markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  const d = dom.window.document;
+  assert.equal(d.querySelector('figcaption').textContent, '运行系统');
+  assert.equal(d.querySelector('.article-diagram-root > ol').children.length, 2);
+  assert.equal(d.querySelector('.article-diagram-root > ol > li').textContent, '入口交互入口桌面端CLI');
+  assert.equal(d.querySelector('.article-diagram-row').style.getPropertyValue('--diagram-columns'), '2');
+  assert.equal(d.querySelector('.article-diagram-grid').children.length, 2);
+  assert.equal(d.querySelector('.article-diagram-chips').textContent, '桌面端CLI');
+  assert.equal(d.querySelector('pre code').textContent, 'ctx.tools\nctx.sessions');
+  assert.equal(d.querySelector('.article-viz-note').textContent, '架构关系示意');
+  assert.equal(d.querySelectorAll('script, iframe, img, [hidden]').length, 0);
+  dom.window.close();
+});
+
+test('diagram 的所有文案字段转义 HTML 与模板指令', () => {
+  const { JSDOM } = require('jsdom');
+  const unsafe = '{% endraw %}<script>attack()</script><img src=x onerror=attack()>';
+  const data = { layout: 'stack', title: unsafe, text: unsafe, note: unsafe, items: [{ title: unsafe, text: unsafe, badge: unsafe, chips: [unsafe], code: [unsafe] }] };
+  const result = compileArticleBlocks(`:::diagram[${unsafe}]\n${JSON.stringify(data)}\n:::`);
+  assert.equal((result.markdown.match(/\{% endraw %\}/g) || []).length, 1);
+  const dom = new JSDOM(result.markdown.replace(/\{% (?:end)?raw %\}/g, ''));
+  assert.equal(dom.window.document.querySelectorAll('script, img').length, 0);
+  assert.equal(dom.window.document.querySelector('code').textContent, unsafe);
+  assert.equal(dom.window.document.querySelector('figcaption').textContent, unsafe);
+  dom.window.close();
+});
+
+test('diagram 对坏 JSON、空节点、错误字段、过深或过大数据在构建时报错', () => {
+  const block = value => `:::diagram[示意]\n${JSON.stringify(value)}\n:::`;
+  const invalid = [
+    null, [], {}, { title: '缺少布局' },
+    { layout: 'unknown', items: [{ text: '内容' }] },
+    { layout: 'stack', items: [] }, { layout: 'stack', items: [null] },
+    { layout: 'stack', items: [{}] }, { layout: 'stack', items: [{ badge: '只有角标' }] },
+    { layout: 'row', columns: 0, items: [{ text: '内容' }] },
+    { layout: 'row', columns: 4.5, items: [{ text: '内容' }] },
+    { layout: 'row', arrows: 'true', items: [{ text: '内容' }] },
+    { layout: 'stack', items: [{ text: ' ' }] },
+    { layout: 'stack', items: [{ text: 7 }] },
+    { layout: 'stack', items: [{ chips: [] }] },
+    { layout: 'stack', items: [{ code: ['ok', false] }] },
+    { layout: 'stack', items: [{ text: '内容', tone: 'alert' }] },
+    { layout: 'stack', items: [{ text: '内容', onclick: 'attack()' }] },
+    { layout: 'stack', items: [{ text: '内容' }], unknown: true }
+  ];
+  let deep = { text: '叶节点' };
+  for (let i = 0; i < 8; i++) deep = { layout: 'stack', items: [deep] };
+  invalid.push(deep, { layout: 'grid', items: Array.from({ length: 6 }, () => ({ layout: 'grid', items: Array.from({ length: 32 }, () => ({ text: '内容' })) })) });
+  for (const data of invalid) assert.throws(() => compileArticleBlocks(block(data)), /diagram/);
+  assert.throws(() => compileArticleBlocks(':::diagram[示意]\nnot json\n:::'), /有效 JSON/);
+  assert.throws(() => compileArticleBlocks(':::diagram[示意]\n{}'), /未闭合/);
+});
+
+test('diagram 示例保留代码围栏，正常模块沿用文章资源加载与子路径', () => {
+  const { runInNewContext } = require('node:vm');
+  const example = ':::diagram[示例]\n{"layout":"stack","items":[{"text":"内容"}]}\n:::';
+  for (const fence of ['```markdown', '~~~~markdown']) {
+    const source = `${fence}\n${example}\n${fence.slice(0, fence.startsWith('`') ? 3 : 4)}`;
+    assert.deepEqual(compileArticleBlocks(source), { markdown: source, count: 0 });
+  }
+  const filters = {};
+  runInNewContext(readFileSync('scripts/article-visuals.js', 'utf8'), {
+    require: () => ({ compileArticleBlocks }),
+    hexo: { extend: { filter: { register: (name, fn) => { filters[name] = fn; } } } }
+  });
+  const post = filters.before_post_render({ content: example });
+  const result = filters.after_post_render.call({ config: { root: '/preview/' } }, post);
+  assert.match(result.content, /^<div class="rich-article">/);
+  assert.match(result.content, /href="\/preview\/css\/article-visuals.css"/);
+  assert.match(result.content, /src="\/preview\/js\/article-visuals.js"/);
+});
